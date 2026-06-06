@@ -8,6 +8,7 @@ An r/place mod for Friday Night Funkin'.
 
 > [!CAUTION]
 > The instructions below are fairly dated. You will likely run into problems if you wanted to follow them.
+> As a rule of thumb, try downgrading library versions until the errors go away.
 
 ## Download & Play
 * [GameBanana](https://gamebanana.com/mods/444552)
