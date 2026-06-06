@@ -1,0 +1,144 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "hey",
+			"fps": 12,
+			"name": "8BF jump",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 24,
+			"anim": "dodge",
+			"loop": false,
+			"name": "8BF jump"
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "idle",
+			"fps": 12,
+			"name": "8BF idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singUP",
+			"fps": 12,
+			"name": "8BF up sing",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singRIGHT",
+			"fps": 12,
+			"name": "8BF right sing",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 12,
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "8BF left sing"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 12,
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "8BF down sing"
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singUPmiss",
+			"fps": 12,
+			"name": "8BF up miss",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "singRIGHTmiss",
+			"fps": 12,
+			"name": "8BF right miss",
+			"indices": []
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 12,
+			"anim": "singLEFTmiss",
+			"loop": false,
+			"name": "8BF left miss"
+		},
+		{
+			"offsets": [0, 0],
+			"indices": [],
+			"fps": 12,
+			"anim": "singDOWNmiss",
+			"loop": false,
+			"name": "8BF down miss"
+		},
+		{
+			"offsets": [0, 0],
+			"loop": true,
+			"fps": 1,
+			"anim": "deathLoop",
+			"indices": [],
+			"name": "8BF death (static)"
+		},
+		{
+			"offsets": [0, 0],
+			"loop": false,
+			"fps": 12,
+			"anim": "deathCancel",
+			"indices": [],
+			"name": "8BF death (static)"
+		},
+		{
+			"offsets": [0, 0],
+			"loop": false,
+			"fps": 12,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "8BF death (static)"
+		},
+		{
+			"loop": false,
+			"offsets": [0, 0],
+			"anim": "deathConfirm",
+			"fps": 12,
+			"name": "8BF jump",
+			"indices": []
+		}
+	],
+	"no_antialiasing": true,
+	"pixel_snap": true,
+	"image": "characters/8BF",
+	"position": [
+		30,
+		500
+	],
+	"healthicon": "8BF-pixel",
+	"flip_x": true,
+	"healthbar_colors": [
+		190,
+		0,
+		57
+	],
+	"camera_position": [
+		-60,
+		0
+	],
+	"sing_duration": 6,
+	"scale": 6
+}

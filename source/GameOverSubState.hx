@@ -10,19 +10,26 @@ import flixel.system.FlxSound;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
+import CoolUtil.PointStruct;
+
 using StringTools;
 
 
 class GameOverSubState extends MusicBeatSubState {
 	public var boyfriend:Boyfriend;
 	public var camGame:FlxCamera;
-	var camFollow:FlxPoint;
-	var camFollowPos:FlxObject;
+	var camFollowPos:PointStruct;
+	var camFollowObj:FlxObject;
 	var deathSound:FlxSound;
 	var totalElapsed:Float;
 	var playingDeathSound:Bool = false;
 
 	var stageSuffix:String = "";
+
+	// @CoolingTool: funkmix
+	var gravity:Float = -(12.5 * 130);
+	var yVelocity:Float = 0;
+	var initialYPosition:Float;
 
 	// @Square789: Do what the main menu did and throw in a new camera
 	// for death achievements
@@ -40,10 +47,11 @@ class GameOverSubState extends MusicBeatSubState {
 	public static var deathSoundEndTime:Float = 2.41;
 	public static var loopSoundBPM:Float = 100;
 	public static var characterName:String = 'bf-dead';
-	public static var deathSoundName:String = 'fnf_loss_sfx';
-	public static var loopSoundName:String = 'gameOver';
-	public static var endSoundName:String = 'gameOverEnd';
-	public static var quitSoundName:String = 'gameOverQuit';
+	public static var deathSoundName:Null<String> = 'fnf_loss_sfx';
+	public static var loopSoundName:Null<String> = 'gameOver';
+	public static var endSoundName:Null<String> = 'gameOverEnd';
+	public static var quitSoundName:Null<String> = 'gameOverQuit';
+	public static var cameraOffset:PointStruct = {x: 0.0, y: 0.0};
 	public static var retrySpriteData: Null<{name:String, x:Int, y:Int}>;
 
 	public static var instance:GameOverSubState;
@@ -65,16 +73,44 @@ class GameOverSubState extends MusicBeatSubState {
 		loopSoundName = 'gameOver';
 		endSoundName = 'gameOverEnd';
 		quitSoundName = 'gameOverQuit';
+		cameraOffset = {x: 0.0, y: 0.0};
 		retrySpriteData = null;
 	}
 
 	public static function selfAssignVariables(char:String, voided:Float) {
 		switch(char) {
+			case 'ross-bf':
+				characterName = 'ross-bf';
+				retrySpriteData = {name: "ross", x: -1, y: -26};
 			case 'flag-bf':
 				characterName = voided >= 1.399 ? 'flag-bf-void-death' : 'flag-bf';
 				deathSoundName = 'fnf_loss_sfx_no_mic';
 				deathSoundEndTime = 1.07;
-				retrySpriteData = {name: "flag", x: 3, y: -16};
+				retrySpriteData = {name: "flag", x:  3, y: -16};
+			case 'flagpico':
+				characterName = 'flagpico';
+				deathSoundName = 'pico-death';
+				// loopSoundName = 'gameOver-flagpico';
+				deathSoundEndTime = 1.07;
+				retrySpriteData = {name: "flag", x:  3, y: -16};
+			case '8BF':
+				characterName = '8BF';
+				deathSoundName = 'fnf_loss_sfx_no_mic';
+				deathSoundEndTime = 1.07;
+				camEasing = FlxEase.circOut;
+				camStartTime = 0;
+				camDuration = deathSoundEndTime - camStartTime + .04;
+				retrySpriteData = {name: "8bf",  x: -7, y:  -5};
+			case 'rainbowdash':
+				characterName = 'rainbowdash-dead';
+				deathSoundName = null;
+				deathSoundEndTime = 1.0;
+				loopSoundName = null;
+				quitSoundName = null;
+				endSoundName = null;
+				camEasing = function(x:Float) {return 1.0;};
+				camStartTime = 0.0;
+				cameraOffset = {x: 370.0, y: -154.0}
 			case 'bf-pixel': // irrelevant just for testing
 				characterName = 'bf-pixel-dead';
 				deathSoundName = 'fnf_loss_sfx-pixel';
@@ -106,7 +142,11 @@ class GameOverSubState extends MusicBeatSubState {
 		boyfriend.y += boyfriend.positionArray[1];
 		add(boyfriend);
 
-		deathSound = FlxG.sound.play(Paths.sound(deathSoundName));
+		initialYPosition = boyfriend.y;
+
+		if (deathSoundName != null) {
+			deathSound = FlxG.sound.play(Paths.sound(deathSoundName));
+		}
 		Conductor.changeBPM(100);
 		FlxG.camera.scroll.set();
 		FlxG.camera.target = null;
@@ -135,11 +175,14 @@ class GameOverSubState extends MusicBeatSubState {
 			container.union(retrySprite.getScreenBounds());
 		}
 
-		camFollow = new FlxPoint(container.x + container.width / 2, container.y + container.height / 2);
+		camFollowPos = {
+			x: container.x + container.width / 2 + cameraOffset.x,
+			y: container.y + container.height / 2 + cameraOffset.y,
+		};
 
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
-		add(camFollowPos);
+		camFollowObj = new FlxObject(0, 0, 1, 1);
+		camFollowObj.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
+		add(camFollowObj);
 
 		#if mobile
 		buttonENTER = new Button(492, 564, 'ENTER');
@@ -193,6 +236,25 @@ class GameOverSubState extends MusicBeatSubState {
 			{
 				coolStartDeath();
 				boyfriend.startedDeath = true;
+				yVelocity = 750;
+			}
+		}
+
+		// @CoolingTool: the values are basically just stolen from funk mix source code
+		if (characterName == "8BF")
+		{
+			if (boyfriend.isOnScreen() || boyfriend.endingDeath){
+				if (boyfriend.startedDeath || boyfriend.endingDeath) {
+					yVelocity += (gravity * elapsed);
+				}
+				boyfriend.y -= yVelocity * elapsed;
+				if (boyfriend.endingDeath && yVelocity < 0.0 && boyfriend.y > initialYPosition) {
+					boyfriend.y = initialYPosition;
+					yVelocity = 0;
+					if (boyfriend.animation.curAnim.name != "idle") {
+						boyfriend.playAnim('idle', true);
+					}
+				}
 			}
 		}
 
@@ -210,31 +272,48 @@ class GameOverSubState extends MusicBeatSubState {
 	}
 
 	function coolStartDeath(?volume:Float = 1):Void {
-		FlxG.sound.playMusic(Paths.music(loopSoundName), volume);
-		Conductor.changeBPM(loopSoundBPM);
+		if (loopSoundName != null) {
+			FlxG.sound.playMusic(Paths.music(loopSoundName), volume);
+			Conductor.changeBPM(loopSoundBPM);
+		} else {
+			Conductor.changeBPM(42.0);
+		}
 	}
 
 	function startCamera(?delay:Float):Void {
 		var options:TweenOptions = {ease: camEasing, startDelay: delay != null ? delay : camStartTime}
-		FlxG.camera.follow(camFollowPos, LOCKON, 1);
-		FlxTween.tween(camFollowPos, {x: camFollow.x, y: camFollow.y}, camDuration, options);
+		FlxG.camera.follow(camFollowObj, LOCKON, 1);
+		FlxTween.tween(camFollowObj, {x: camFollowPos.x, y: camFollowPos.y}, camDuration, options);
 		FlxTween.tween(camGame, {zoom: defaultCamZoom}, camDuration, options);
 	}
 
 	function endBullshit():Void {
-		if (!boyfriend.endingDeath)
-		{
-			boyfriend.endingDeath = true;
-			if (boyfriend.animOffsets.exists('deathConfirm'))
-				boyfriend.playAnim('deathConfirm', true);
-			FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music(endSoundName));
-			new FlxTimer().start(0.7, function(tmr:FlxTimer)
-			{
-				FlxG.camera.fade(FlxColor.BLACK, 2, false, MusicBeatState.resetState);
-			});
-			PlayState.instance.callOnScripts('onGameOverConfirm', [true]);
+		if (boyfriend.endingDeath) {
+			return;
 		}
+
+		boyfriend.endingDeath = true;
+		if (boyfriend.animOffsets.exists('deathConfirm')) {
+			boyfriend.playAnim('deathConfirm', true);
+		}
+
+		FlxG.sound.music.stop();
+		if (endSoundName != null) {
+			FlxG.sound.play(Paths.music(endSoundName));
+		}
+
+		if (boyfriend.curCharacter == "8BF") {
+			if (boyfriend.y < initialYPosition) {
+				yVelocity = 450;
+			} else {
+				yVelocity = Math.sqrt(2 * gravity * (-(boyfriend.y - initialYPosition) - 42));
+			}
+		}
+
+		new FlxTimer().start(0.7, function(tmr:FlxTimer) {
+			FlxG.camera.fade(FlxColor.BLACK, 2, false, MusicBeatState.resetState);
+		});
+		PlayState.instance.callOnScripts('onGameOverConfirm', [true]);
 	}
 
 	// @CoolingTool: death quit animation
@@ -248,7 +327,9 @@ class GameOverSubState extends MusicBeatSubState {
 			else if (boyfriend.animOffsets.exists('deathConfirm'))
 				boyfriend.playAnim('deathConfirm', true);
 
-			FlxG.sound.play(Paths.music(quitSoundName));
+			if (quitSoundName != null) {
+				FlxG.sound.play(Paths.music(quitSoundName));
+			}
 
 			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;

@@ -1,10 +1,12 @@
+
 # Funkin' 4 r/place
 An r/place mod for Friday Night Funkin'.
 
 ## Download & Play
-* itch.io - TBD
-* [GameBanana](https://gamebanana.com/mods/444552)
-* GameJolt - TBD
+(there are no downloads yet so if you see this then SHOO)
+* [itch.io](https://funkin4rplace.itch.io/funkin4rplace)
+* [GameBanana](#)
+* [GameJolt](https://gamejolt.com/games/funkin4rplace/707548)
 
 ## Building
 You must have [the most up-to-date version of Haxe](https://haxe.org/download/) (*not* Haxe 4.1.5!)
@@ -16,7 +18,7 @@ haxelib update lime
 haxelib install openfl
 haxelib update openfl
 haxelib install flixel 5.2.2
-haxelib intstall flixel-addons 3.0.2
+haxelib install flixel-addons 3.0.2
 haxelib run lime setup flixel
 haxelib install newgrounds
 haxelib update newgrounds
@@ -41,7 +43,17 @@ Then:
 * If you're building for Linux, run `lime test linux`
 * If you're building for Windows, keep reading
 
-If you're building for Windows, download [Visual Studio Community 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16) ([try this link if the other one doesn't work](https://my.visualstudio.com/Downloads?q=visual%20studio%202019&wt.mc_id=o~msft~vscom~older-downloads)). While installing, **do not choose any option to install workloads**. 
+
+If you're building for Windows, download 
+~~<sup>[Visual Studio Community 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16) ([try this link if the other one doesn't work](https://my.visualstudio.com/Downloads?q=visual%20studio%202019&wt.mc_id=o~msft~vscom~older-downloads)).~~</sup>
+
+## *Howdy! Microsoft has murdered the previous ways to download **Visual Studio Code 2019***.
+### [*Here is a direct link as an alternative.*](https://aka.ms/vs/17/release/vs_community.exe)
+### Don't worry, it's safe! It's from an official Microsoft Website! You're good!
+
+##
+
+While installing, **do not choose any option to install workloads**. 
 
 Instead, go to the individual components tab and choose the following:
 * MSVC v142 - VS 2019 C++ x64/x86 build tools

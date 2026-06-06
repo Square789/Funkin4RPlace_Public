@@ -32,14 +32,10 @@ import sys.io.File;
 
 import CoolUtil.PointStruct;
 import ChainEffects;
+import Quotes;
 import TextHelper;
 
 using StringTools;
-
-
-// Hallowed be thy name.
-private final STANDARD_FONT:String = "VCR OSD Mono";
-private final STANDARD_FONT_SIZE:Int = 28;
 
 // === Utilities start ===
 
@@ -192,276 +188,21 @@ class SpriteDissipator implements IFlxDestroyable {
 
 // === Utilities end ===
 
-enum QuoteEffectId {CHAIN_EFFECTS; RANDOM_QUOTE_ARG_UPDATE; HEARTBEAT; TWEEN; PLAY_SOUND; FLICKER;}
-
-abstract class QuoteEffectUpdater {
-	private var objs:Array<FlxSprite>;
-
-	public function new(objs:Array<FlxSprite>) {
-		this.objs = objs;
-	}
-
-	public abstract function update(dt:Float):Void;
-}
-
-abstract class QuoteEffect {
-	public abstract function getId():QuoteEffectId;
-
-	public function apply(sprites:Array<FlxSprite>):Array<QuoteEffectUpdater> { return []; }
-
-	/**
-	 * Alters the properties of a quote. If you change it, it should be copied beforehand.
-	 * It is also a bad idea to modify the effects as they are typically being iterated over
-	 * while this method is called.
-	 */
-	public function alterQuote(in_:Quote):Quote { return in_; }
-}
-
-
-class ChainEffectsUpdater extends QuoteEffectUpdater {
-	private var shader:RuntimeShader;
-
-	public function new(objs:Array<FlxSprite>, shader:RuntimeShader) {
-		super(objs);
-		this.shader = shader;
-	}
-
-	public function update(dt:Float) {
-		shader.data.time.value[0] += dt;
-	}
-}
-class ChainEffects extends QuoteEffect {
-	var effects:Array<ChainEffect>;
-	var shaderSource:Null<String>;
-	private var isTimeShader:Bool;
-
-	public function new(effects:Array<ChainEffect>) {
-		this.effects = effects;
-		this.shaderSource = null;
-	}
-
-	final public function getId():QuoteEffectId { return QuoteEffectId.CHAIN_EFFECTS; }
-
-	public override function apply(sprites:Array<FlxSprite>):Array<QuoteEffectUpdater> {
-		// Using the same shader for multiple sprites did not work out as the TextureSize
-		// uniforms were bad. This creates possibly dozens of shaders per credits screen but oh well
-		if (shaderSource == null) {
-			shaderSource = ChainEffectShaderGenerator.buildFragmentSource(effects, true);
-		}
-		var updaters:Array<QuoteEffectUpdater> = [];
-		for (spr in sprites) {
-			var shader = new RuntimeShader(shaderSource);
-			ChainEffectShaderGenerator.setNonHardcodableUniforms(shader, effects);
-			if (Reflect.hasField(shader.data, "time")) {
-				shader.data.time.value = [0.0];
-				updaters.push(new ChainEffectsUpdater(null, shader));
-			}
-			spr.shader = shader;
-		}
-		return updaters;
-	}
-}
-
-typedef HeartbeatQuoteEffectOptions = {intensity:Float, beatTime:Float}
-/**
- * Formula stolen from u/lucasvb in this thread:
- * https://www.reddit.com/r/Physics/comments/30royq/whats_the_equation_of_a_human_heart_beat/
- */
-private function heartbeatEase(x:Float):Float {
-	return (
-		0.1*(Math.exp(-Math.pow(x+0.5, 2) / (2*0.06)) + Math.exp(-Math.pow(x-0.5, 2) / (2*0.06))) +
-		(1.0 - Math.abs(x / 0.15) - x) * Math.exp(-Math.pow(7*x, 2) / 2)
-	);
-}
-class HeartbeatQuoteEffect extends QuoteEffect {
-	var options:HeartbeatQuoteEffectOptions;
-
-	public function new(?options:Null<HeartbeatQuoteEffectOptions>) {
-		this.options = options == null ? {intensity: 1.15, beatTime: 0.4} : options;
-	}
-
-	final public function getId():QuoteEffectId { return QuoteEffectId.HEARTBEAT; }
-
-	public override function apply(sprites:Array<FlxSprite>):Array<QuoteEffectUpdater> {
-		for (spr in sprites) {
-			FlxTween.tween(
-				spr,
-				{"scale.x": options.intensity, "scale.y": options.intensity},
-				options.beatTime,
-				{ease: heartbeatEase, type: LOOPING}
-			);
-		}
-		return [];
-	}
-}
-
-class RandomeQuoteArgUpdateQuoteEffect extends QuoteEffect {
-	var choices:Array<_QuoteArgs>;
-
-	public function new(?choices:Null<Array<_QuoteArgs>>) {
-		this.choices = choices ?? [{}];
-	}
-
-	final public function getId():QuoteEffectId { return QuoteEffectId.RANDOM_QUOTE_ARG_UPDATE; }
-	public override function alterQuote(in_:Quote):Quote {
-		var args = in_.getQuoteArgs();
-		var choice = CoolUtil.randomChoice(choices);
-		for (f in Reflect.fields(choice)) {
-			Reflect.setField(args, f, Reflect.field(choice, f));
-		}
-		return new Quote(args);
-	}
-}
-
-typedef TweenQuoteEffectOptions = {values:Dynamic, ?duration:Float, ?ease:EaseFunction, ?type:FlxTweenType}
-class TweenQuoteEffect extends QuoteEffect {
-	var values:Dynamic;
-	var duration:Float;
-	var ease:EaseFunction;
-	var type:FlxTweenType;
-
-	public function new(options:TweenQuoteEffectOptions) {
-		this.values = options.values;
-		this.duration = options.duration == null ? 1.0 : options.duration;
-		this.ease = options.ease == null ? FlxEase.linear : options.ease;
-		this.type = options.type == null ? FlxTweenType.ONESHOT : options.type;
-	}
-
-	final public function getId():QuoteEffectId { return QuoteEffectId.TWEEN; }
-
-	public override function apply(sprites:Array<FlxSprite>):Array<QuoteEffectUpdater> {
-		for (spr in sprites) {
-			FlxTween.tween(spr, values, duration, {ease: ease, type: type});
-		}
-		return [];
-	}
-}
-
-enum FlickerQuoteEffectUpdaterState {HIDDEN; FLICKER_IN; SHOWN; FLICKER_OUT;}
-typedef RandomizableTime = {?standard:Float, ?randomOffset:{a:Float, b:Float}}
-typedef FlickerQuoteEffectOptions = {
-	var ?initialStates:Null<{c:Array<FlickerQuoteEffectUpdaterState>, ?w:Array<Float>}>;
-	var ?initialTime:Null<RandomizableTime>;
-	var ?hideTime:Null<RandomizableTime>;
-	var ?showTime:Null<RandomizableTime>;
-	var ?transitionTime:Null<RandomizableTime>;
-}
-class FlickerQuoteEffectUpdater extends QuoteEffectUpdater {
-	private var state:FlickerQuoteEffectUpdaterState;
-	private var currentStateTime:Float;
-	private var currentStatePassedTime:Float;
-	private var hideTime:RandomizableTime;
-	private var showTime:RandomizableTime;
-	private var transitionTime:RandomizableTime;
-
-	public function new(objs:Array<FlxSprite>, options:FlickerQuoteEffectOptions) {
-		super(objs);
-
-		this.hideTime = options.hideTime;
-		this.showTime = options.showTime;
-		this.transitionTime = options.transitionTime;
-
-		state = FlxG.random.getObject(options.initialStates.c, options.initialStates.w);
-		var starterStateTime = options.initialTime.standard != null ?
-			options.initialTime.standard :
-			getStateTime(state);
-		var starterOffset = options.initialTime.randomOffset != null ?
-			FlxG.random.float(options.initialTime.randomOffset.a, options.initialTime.randomOffset.b) :
-			0.0;
-		currentStateTime = starterStateTime + starterOffset;
-		currentStatePassedTime = 0.0;
-
-		update(0.0);
-	}
-
-	private inline function getNextState(s:FlickerQuoteEffectUpdaterState):FlickerQuoteEffectUpdaterState {
-		return switch (state) {
-			case HIDDEN: FLICKER_IN; case FLICKER_IN: SHOWN; case SHOWN: FLICKER_OUT; case FLICKER_OUT: HIDDEN;
-		}
-	}
-
-	private inline function getStateTime(s:FlickerQuoteEffectUpdaterState):Float {
-		var struct = switch (state) { case HIDDEN: hideTime; case SHOWN: showTime; case _: transitionTime; }
-		return struct.standard + (
-			struct.randomOffset != null ? FlxG.random.float(struct.randomOffset.a, struct.randomOffset.b) : 0.0
-		);
-	}
-
-	public function update(dt:Float) {
-		currentStatePassedTime += dt;
-		while (currentStatePassedTime > currentStateTime) {
-			currentStatePassedTime -= currentStateTime;
-			state = getNextState(state);
-			currentStateTime = Math.max(0.01, getStateTime(state));
-		}
-		var x:Float = currentStatePassedTime / currentStateTime;
-		var visible = switch (state) {
-			case HIDDEN: false;
-			case SHOWN: true;
-			case FLICKER_IN:  (Math.sin(x * 20) + 4*Math.pow(x, 3) + Math.sin(x * 120)) > 1.0;
-			case FLICKER_OUT: (Math.sin(x * 20) + 4*Math.pow(x, 3) + Math.sin(x * 120)) <= 1.0;
-		}
-		for (text in objs) {
-			text.visible = visible;
-		}
-	}
-}
-class FlickerQuoteEffect extends QuoteEffect {
-	private var options:FlickerQuoteEffectOptions;
-
-	final public function getId():QuoteEffectId { return QuoteEffectId.FLICKER; }
-
-	public function new(?options:Null<FlickerQuoteEffectOptions>) {
-		if (options == null)                          options = {};
-		if (options.initialStates == null)            options.initialStates = {c: [HIDDEN]};
-		if (options.initialTime == null)              options.initialTime = {};
-		if (options.hideTime == null)                 options.hideTime = {};
-		if (options.hideTime.standard == null)        options.hideTime.standard = 2.0;
-		if (options.showTime == null)                 options.showTime = {};
-		if (options.showTime.standard == null)        options.showTime.standard = 2.0;
-		if (options.transitionTime == null)           options.transitionTime = {};
-		if (options.transitionTime.standard == null)  options.transitionTime.standard = 0.5;
-		this.options = options;
-	}
-
-	public override function apply(sprites:Array<FlxSprite>):Array<QuoteEffectUpdater> {
-		return [new FlickerQuoteEffectUpdater(sprites, options)];
-	}
-}
-
-
-enum abstract QuoteLocation(Int) to Int {
-	var QUOTE_FIELD;
-	var BEHIND_NAME;
-}
-
-private class QuoteFieldSlot {
-	private var initialPosition:PointStruct;
-	public var currentPosition:PointStruct;
+private class QuoteFieldQuoteSlot extends QuoteSlot {
 	private var owner:CreditsState;
 
 	public function new(owner:CreditsState) {
-		initialPosition = {x: 0.0, y: 0.0};
-		currentPosition = {x: 0.0, y: 0.0};
+		super();
 		this.owner = owner;
 	}
 
-	public function setInitial(x:Float, y:Float) {
-		initialPosition.x = currentPosition.x = x;
-		initialPosition.y = currentPosition.y = y;
-	}
-
-	public function advance(by:Float):Bool {
+	public override function advance(by:Float):Bool {
 		currentPosition.y += by;
 		currentPosition.x = initialPosition.x - owner.getXDifferenceOnSlope(currentPosition.y - initialPosition.y);
 		return shouldContinue();
 	}
 
-	public function adjustAndAdvance(sprite:FlxSprite):Bool {
-		return advance(sprite.height);
-	}
-
-	public function shouldContinue():Bool {
+	public override function shouldContinue():Bool {
 		return currentPosition.y < FlxG.height;
 	}
 }
@@ -469,15 +210,27 @@ private class QuoteFieldSlot {
 // This slot grows to the right instead and lays stuff out behind the name, treating its
 // position as the lower left instead of the upper left, which is why adjusting only
 // has an effect on it.
-private class BehindNameSlot extends QuoteFieldSlot {
+private class BehindNameQuoteSlot extends QuoteFieldQuoteSlot {
 	public override function advance(by:Float):Bool {
+		currentPosition.x += by;
 		return shouldContinue();
 	}
 
-	public override function adjustAndAdvance(sprite:FlxSprite):Bool {
+	public override function advanceBySprite(sprite:FlxSprite):Bool {
 		sprite.y -= sprite.height;
-		currentPosition.x += sprite.width;
-		return shouldContinue();
+		return advance(sprite.width);
+	}
+
+	public override function advanceByCurrentOffset() {
+		advance(currentQuoteOffset.x);
+	}
+
+	public override function getOffsetMultiplierX():Float {
+		return currentQuoteIgnoreOffsetX ? 1.0 : 0.0;
+	}
+
+	public override function getOffsetMultiplierY():Float {
+		return 1.0;
 	}
 
 	public override function shouldContinue() {
@@ -485,92 +238,9 @@ private class BehindNameSlot extends QuoteFieldSlot {
 	}
 }
 
-typedef QuoteImageInfo = {
-	var name:String;
-	var ?animated:Null<Bool>;
-	var ?frameW:Null<Int>;
-	var ?frameH:Null<Int>;
-	var ?fps:Null<Float>;
-	var ?scale:Null<Float>;
-}
-typedef CompleteImageInfo = {name:String, animated:Bool, frameW:Int, frameH:Int, fps:Float, scale:Float}
-
-typedef _QuoteArgs = {
-	var ?text:Null<String>;
-	var ?image:Null<QuoteImageInfo>;
-	var ?textSize:Null<Int>;
-	var ?bold:Null<Bool>;
-	var ?font:Null<String>;
-	var ?color:Null<FlxColor>;
-	var ?effects:Null<Array<QuoteEffect>>;
-	var ?linebreak:Null<Bool>;
-	var ?postPadding:Null<Int>;
-	var ?location:Null<QuoteLocation>;
-}
-class Quote {
-	public var text(default, null):String;
-	public var image(default, null):Null<CompleteImageInfo>;
-	public var textSize(default, null):Int;
-	public var bold(default, null):Bool;
-	public var font(default, null):String;
-	public var color(default, null):FlxColor;
-	public var effects(default, null):Array<QuoteEffect>;
-	public var linebreak(default, null):Bool;
-	public var postPadding(default, null):Int;
-	public var location(default, null):QuoteLocation;
-
-	public function new(args:_QuoteArgs) {
-		this.text =        args.text ?? "null";
-		this.image =       args.image == null ? null : {
-			name:     args.image.name,
-			animated: args.image.animated ?? false,
-			frameW:   args.image.frameW ?? 0,
-			frameH:   args.image.frameH ?? 0,
-			scale:    args.image.scale ?? 1.0,
-			fps:      args.image.fps ?? 24.0,
-		}
-
-		this.textSize =    args.textSize ?? STANDARD_FONT_SIZE;
-		this.bold =        args.bold ?? false;
-		this.font =        args.font ?? STANDARD_FONT;
-		this.color =       args.color ?? FlxColor.WHITE;
-		this.effects = [];
-		if (args.effects != null) {
-			var seen:Map<QuoteEffectId, Bool> = [for (x in QuoteEffectId.createAll()) x => false];
-			for (e in args.effects) {
-				if (!seen[e.getId()]) {
-					seen[e.getId()] = true;
-					this.effects.push(e);
-				}
-			}
-		}
-
-		this.linebreak =   args.linebreak ?? true;
-		this.postPadding = args.postPadding ?? 16;
-		this.location =    args.location ?? QuoteLocation.QUOTE_FIELD;
-	}
-
-	public function getQuoteArgs():_QuoteArgs {
-		return {
-			text: text, image: image, textSize: textSize, bold: bold,
-			font: font, color: color, linebreak: linebreak, postPadding: postPadding, effects: effects,
-		};
-	}
-
-	public function applyEffectsTo(sprites:Array<FlxSprite>):Array<QuoteEffectUpdater> {
-		return [for (effect in effects) for (u in effect.apply(sprites)) u];
-	}
-
-	/**
-	 * Returns a possibly altered quote, since there's effects that may just do it randomly.
-	 */
-	public function alterQuote() {
-		var x = this;
-		for (e in effects) {
-			x = e.alterQuote(x);
-		}
-		return x;
-	}
+enum abstract CreditsQuoteLocation(Int) from Int to Int {
+	var QUOTE_FIELD;
+	var BEHIND_NAME;
 }
 
 private class NameSpriteProducer {
@@ -606,6 +276,7 @@ private class Role {
 	public static final PROGRAMMER:Role =     new Role("programmer");
 	public static final CHARTER:Role =        new Role("charter");
 	public static final DIRECTOR:Role =       new Role("director");
+	public static final EX_DIRECTOR:Role =    new Role("ex_director", "Ex-Director");
 	public static final VOICE_ACTOR:Role =    new Role("voice_actor");
 	public static final MISCELLANEOUS:Role =  new Role("miscellaneous");
 
@@ -627,7 +298,7 @@ private class Role {
 }
 private final ROLES = [
 	Role.ARTIST, Role.CONCEPT_ARTIST, Role.ANIMATOR, Role.COMPOSER, Role.PROGRAMMER, Role.CHARTER,
-	Role.DIRECTOR, Role.VOICE_ACTOR, Role.MISCELLANEOUS
+	Role.DIRECTOR, Role.EX_DIRECTOR, Role.VOICE_ACTOR, Role.MISCELLANEOUS
 ];
 
 
@@ -674,7 +345,7 @@ private class CreditBlob {
 		roles:Array<Role>,
 		representation:Representation,
 		representationImageName:Null<String>,
-		quotes:Array<_QuoteArgs>,
+		quotes:Array<QuoteArgs>,
 		color:FlxColor,
 		?links:Null<Array<String>>,
 		?offset:Null<PointStruct>,
@@ -685,7 +356,7 @@ private class CreditBlob {
 		this.representation = representation;
 		this.representationImageName = representationImageName;
 
-		var ultimateArgs:Array<_QuoteArgs> = [];
+		var ultimateArgs:Array<QuoteArgs> = [];
 		if (quotes.length < 1) {
 			ultimateArgs = [{text: "null"}];
 		} else if (quotes.length > representation.quoteLimit) {
@@ -750,7 +421,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 		members: [
 			new CreditBlob(
 				"Sir Sins",
-				[Role.DIRECTOR, Role.CHARTER, Role.CONCEPT_ARTIST],
+				[Role.EX_DIRECTOR, Role.CHARTER, Role.CONCEPT_ARTIST],
 				Representation.PORTRAIT,
 				"sir_sins",
 				[
@@ -761,14 +432,14 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 							"I'm Sir Sins, the person who made the original post on Reddit back when r/place " +
 							"happened. Never would've thought it'd come this far, and that the dev team would turn " +
 							"into a massive friend group, but hey, you think I'm complaining?\n\n" +
-							"Mod's nice and all, but I have a far greater appreciation for the people I met on the " +
+							"Mod's nice and all, but I have a far greater apprecitation for the people I met on the " +
 							"way, AKA, the rest of the dev team. Go check their quotes, see what they have to say " +
 							"and enjoy the mod, if you will...\n\n" +
 							"Once the keeper of chaos, always the keeper of chaos. Thanks for playing!"
 						),
 						//// color: FlxColor.PURPLE, // For the hue shifting to work //// nvm looks terrible
 						effects: [
-							new ChainEffects([
+							new ChainEffectsQuoteEffect([
 								new AberrationGlitchEffect({baseIntensity: 2.0, intensityVariance: 3.0, goNegative: false}),
 								new HueShiftEffect({cycleSpeed: 0.5}), //// shifting the aberration however actually looks nice
 							]),
@@ -776,7 +447,27 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 					},
 				],
 				0x9203EE,
-				{x: 59, y: 55}
+				{x: 86, y: 162}
+			),
+			new CreditBlob(
+				"RayTheMaymay",
+				[Role.DIRECTOR, Role.ANIMATOR, Role.ARTIST],
+				Representation.PORTRAIT,
+				"ray",
+				[
+					{text: (
+						"Hey it's me mr funnyman aka RayTheMaymay I do things follow me on twitter\n\n" +
+						"Funny aside, I'm the current director of the mod. I'm really happy to see " +
+						"how far its come, despite the many development issues along the way.\n\n" +
+						"Thank you all for sticking around for so long, I hope it was worth the wait." )},
+					{
+						image: {name: "ray", animated: true, frameW: 16, frameH: 16, fps: 8, scale: 2.0},
+						location: CreditsQuoteLocation.BEHIND_NAME,
+					},
+				],
+				0xDD2222,
+				["https://twitter.com/TheMarioWriter"],
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"DangDoodle",
@@ -789,11 +480,11 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0x17B9F9,
 				["youtube.com/c/DangDoodle", "twitter.com/DangDoodleMusic"],
-				{x: 139, y: 122}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Captain",
-				[Role.DIRECTOR, Role.ARTIST, Role.CHARTER],
+				[Role.EX_DIRECTOR, Role.ARTIST, Role.CHARTER],
 				Representation.PORTRAIT,
 				"captain",
 				[
@@ -806,63 +497,24 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 						"opportunities, and friends, you have given me"
 					)},
 					{image: {name: "captain_signature"}},
-					{text: "[NON-DEMO CONTENT REDACTED] sweeeeps!"},
+					{text: "malder gold sweeeeps!"},
 				],
 				0x5C92FF,
 				[
 					"https://steamcommunity.com/id/Funny_Captain/",
 					"https://www.spriters-resource.com/submitter/CaptainGame17/",
 				],
-				{x: 123, y: 140}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
-				"CoolingTool",
-				[Role.PROGRAMMER],
-				Representation.PORTRAIT,
-				"coolingtool",
-				[
-					{
-						text: "lalalllalalalalalalalalalalalallalalalaallalalalalalaallalalalalalalalalalalalalalala",
-						effects: [new ChainEffects([new ScrollEffect({speed: [256.0, 0.0]})])],
-						linebreak: false,
-					},
-					{text: "https://youtu.be/GYqkKnM2nrA"},
-					{text: "LEGO set 31031 only for $11.99, buy now! (Ages 6-12)"},
-					{text: "duke the java mascot my beloved"},
-					{text: "shoutout to my homeboy ntsc270"},
-					{
-						text: "unpleasant gradient",
-						effects: [new ChainEffects([
-							new HGradientEffect({colors: [0x1FCC2A, 0xFD30F9, 0x99520F]}),
-						])],
-					}
-				],
-				0x9BCA3C,
-				["https://twitter.com/CoolingTool", "https://youtu.be/GYqkKnM2nrA"],
-				{x: 170, y: 415}
-			),
-			new CreditBlob(
-				"Edds",
-				[Role.ARTIST],
-				Representation.PORTRAIT,
-				"edds",
-				[
-					{text: "I took a while making portraits, my bad... lol"},
-					{image: {name: "ben_n_plush_pep"}},
-				],
-				0x9F6498,
-				["https://twitter.com/TiredEdd"],
-				{x: 132, y: 198}
-			),
-			new CreditBlob(
-				"Micah",
+				"MSV",
 				[Role.COMPOSER],
 				Representation.PORTRAIT,
-				"micah",
+				"msv",
 				[{text: "I make certified hood classics"}],
 				0x2468EF,
 				["https://www.youtube.com/@msvi09official"],
-				{x: 140, y: 90}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Pale Artist",
@@ -896,31 +548,16 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0xFFFFFF,
 				["https://twitter.com/Pale_Artist_"],
-				{x: 134, y: 123}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
-				"Scyrulean",
-				[Role.ARTIST, Role.ANIMATOR],
-				Representation.PORTRAIT,
-				"scyrulean",
-				[
-					{
-						text: "A Mischief-Mischief, a Chaos-Chaos...!",
-						effects: [new ChainEffects([new HGradientEffect({colors: [0x009BFF, 0xFFFFFF]})])],
-					},
-				],
-				0x009BFF,
-				null,
-				{x: 54, y: 161}
-			),
-			new CreditBlob(
-				"JBMagination",
+				"Sienna",
 				[Role.COMPOSER, Role.PROGRAMMER],
 				Representation.PORTRAIT,
-				"jbm",
+				"sienna",
 				[{text: "<3", effects: [new HeartbeatQuoteEffect({intensity: 1.35, beatTime: 0.72})]}],
 				0x42E36B,
-				["https://jbmagination.com/"],
+				["https://suprstarrd.com/"],
 				{x: 119, y: 146}
 			),
 			new CreditBlob(
@@ -938,7 +575,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0x504027,
 				null,
-				{x: 120, y: 202}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Parasy",
@@ -962,17 +599,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0xFFA7F0,
 				["https://www.youtube.com/@314Pirasy"],
-				{x: 120, y: 374}
-			),
-			new CreditBlob(
-				"Johntak",
-				[Role.ARTIST],
-				Representation.PORTRAIT,
-				"johntak",
-				[{text: "what if i killed you"}],
-				0xFFAE36,
-				["https://www.youtube.com/watch?v=Wb3UrJjAac4"],
-				{x: 141, y: 277}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Syembol",
@@ -980,12 +607,15 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				Representation.PORTRAIT,
 				"syembol",
 				[
-					{text: "its pronounced symbol not see-yembol or whatever damned pronounciation you guys have"},
-					{text: "Kenny from South Park working on an FNF mod. No questions asked."},
+					{text: "Hello    .", slotControl: ["IGNORE_ADVANCE"]},
+					{color: 0xFF0000FF, text: "      Bro "},
+					{text: "im Syembol. You're probably wondering how i ended up here! Well.... It's a Long Story. Let's just say its like r/Place!"},
+					{text: "Jokes Aside, if Anyone else besides the dev team is seeing this... the mod is done! And released! I hope you had a good time with it. We poured a bunch of Effort into it. lots of Coffee cups drunk and drank. Good times had!"},
+					{text: "Anyways... go find me somewhere else"},
 				],
 				0xFF8920,
-				["https://twitter.com/BolSyem"],
-				{x: 149, y: 259}
+				["https://syembol123awesome.neocities.org/"],
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Square789",
@@ -993,7 +623,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				Representation.PORTRAIT,
 				"square",
 				[
-					{text: "wololo"},
+					{text: "It's done!"},
 					{
 						text: (
 							"Thanks to EpicGamer from the Haxe Discord for crushing an annoying " +
@@ -1003,20 +633,20 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 					{text: "And thank you for playing :D", postPadding: 32},
 					{
 						text: "[SHAMELESS PLU- I MEAN SPONSORED MESSAGE]",
-						effects: [new ChainEffects([new AberrationGlitchEffect(
-							{baseIntensity: 2.0, intensityVariance: 1.0, goNegative: false}
+						effects: [new ChainEffectsQuoteEffect([new AberrationGlitchEffect(
+							{baseIntensity: 2.0, intensityVariance: 2.0, goNegative: false}
 						)])],
 						textSize: 20,
 						postPadding: 0,
 					},
 					{
-						text: "I'm rewriting FNF in Python, coming out Q3 2024 at this rate (Check my Github!)",
-						postPadding: 42,
+						text: "I'm rewriting FNF in Python, coming out Q4 2027 at this rate (Check my Github!)",
+						postPadding: 30,
 					},
 					{
 						text: "",
 						color: 0xFFB2A8A8,
-						effects: [new RandomeQuoteArgUpdateQuoteEffect([
+						effects: [new RandomQuoteArgUpdateQuoteEffect([
 							{text: "Fun fact: This quote is randomly chosen!"},
 							{text: "Fun fact: OpenFL is somewhat stuck on a GLSL version from 2004!"},
 							{text: "Fun fact: Your front door's lock quality is rather substandard!"},
@@ -1027,34 +657,16 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 							{text: "Fun fact: It's strings all the way down!"},
 							{text: "Fun fact: There is nothing you can do about it!"},
 							{text: "Fun fact: FNF code is the best spaghetti i've ever had!"},
-							{
-								text: (
-									"Fun fact: Wer sagt denn, dass ich, wenn ich das hier trink', morgens 'nen " +
-									"Schädel hab'?"
-								),
-							},
-							{text: "Fun fact: Null Object Reference!"},
-							{text: "Fun fact: Segmentation fault!"},
-							{text: "Fun fact: Object reference not set to an instance of an object!"},
-							{text: "Fun fact: Up, up, down, down, left, right, left, right, B, A!"},
 							{text: "Fun fact: You are not immune to propaganda!"},
-							// This is a funny reference, but for people who don't get the funny reference it may
-							// be juuuuust a bit weird so commenting out of doom of death
-							// {text: "Fun fact: When the beat drops, I'm going to fucking kill myself."},
-							{text: "Fun fact: Your casual match is ready!"},
 							{text: "Fun fact: A monad is a monoid in the category of endofunctors!"},
-							{text: "Fun fact: FICSIT does not waste!"},
-							{text: "Fun fact: Objects in mirror are closer than they appear!"},
-							{text: "Fun fact: It's a chronic buildup of my favorite bio-dust!"},
 							{text: "Fun fact: surveillance nanobots in your floorboards pry them out"},
 							{text: "Fun fact: Four plus four plus four is twelve."},
 							{text: "Fun fact: Epstein did not kill himself!"},
-							{text: "Fun fact: thog dont caare"},
-							{text: "Fun fact: You missed your Spanish lesson today.\n\nYou know what happens now."},
-							{text: "Fun fact: I found the source of the ticking! It's a pipe bomb!"},
 							{text: "Fun fact: I'm pretty much out of fun facts."},
 							{text: "Fun fact: The more references i cram in here, the less funny it gets!"},
 							{text: "Fun fact: The Area 51 Snack Bar Sucks"},
+							{text: "Fun fact: These quotes are the result of a lifelong internet addiction!"},
+							{text: "Fun fact: I need professional help!"},
 							{
 								text: (
 									"Fun fact: Only after shoehorning achievement popups into MusicBeatState and " +
@@ -1064,7 +676,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 							},
 							{
 								text: (
-									"Fun fact: I think this menu is a performance nightmare.\n" +
+									"Fun fact: I think this menu is a performance nightmare.\n\n" +
 									"But hey, that slanted text sure makes up for it!"
 								),
 							},
@@ -1074,15 +686,43 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 								text: (
 									"Fun fact: I wrote a hideously overengineered per-achievement data " +
 									"storage, loading and defaulting mechanism with adventurous type validation " +
-									"and access notation and that ended up unused." +
-									"Most definitely for the best."
+									"and access notation and that ended up unused. " +
+									"Most definitely for the best!"
 								),
 							},
-							{text: "Fun fact: This quote has been added only so i had a commit for testing!"},
+							{text: "Fun fact: There is a place in France"},
+							{
+								text: (
+									"Fun fact: If someone didn't already name themselves Square123 on Minecraft all " +
+									"these years ago, I'd have used that. It doesn't roll of the tongue as well, " +
+									"so thanks Square123, whereever you are now!"
+								),
+							},
+							{text: "Fun fact: The sun is a deadly laser."},
+							{text: "Fun fact: [451 Unavailable for legal reasons]"},
+							{
+								text: (
+									"Fun fact: All of this mod's libraries are on the same version as they were on " +
+									"day 1 of development and are very much out of date."
+								),
+							},
 							{text: "Fact: The Fact Sphere is always right!"},
+							{text: "FICSIT does not waste!"},
+							{text: "Objects in mirror are closer than they appear!"},
+							{text: "It's a chronic buildup of my favorite iron dust!"},
+							{text: "Your casual match is ready!"},
+							{text: "thog dont caare"},
+							{text: "You missed your Spanish lesson today.\n\nYou know what happens now."},
+							{text: "I found the source of the ticking! It's a pipe bomb!"},
+							{text: "Wer sagt denn, dass ich, wenn ich das hier trink', morgens 'nen Schädel hab'?"},
+							{text: "Null Object Reference!"},
+							{text: "Segmentation fault!"},
+							{text: "Object reference not set to an instance of an object!"},
+							{text: "Up, up, down, down, left, right, left, right, B, A!"},
 							{text: "You are worth it."},
 							{text: "You have angered the gods!"},
-							{text: "This is our fault!"},
+							{text: "It was like that when i got here!"},
+							{text: "This is our fault"},
 							{text: "You're cute!"},
 							{
 								text: (
@@ -1108,10 +748,9 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 									"the end is never the end is never the end is never the end is never "
 								),
 							},
-							{text: "You make even the devil cry!"},
 							{text: "At least there is Ceda Cedovic!"},
 							{text: "snake_case forever!"},
-							{text: "I like elephants and God likes elephants. Here's a, uh... a realistic elephant."},
+							{text: "I like elephants and God likes elephants. Here's a, uh... a realistic elephant.\n/°)===,\n'´||||"},
 							{text: "410,757,864,530 LINTER WARNINGS!"},
 							{text: "Overengineering extravaganza!"},
 							{
@@ -1137,16 +776,21 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 								),
 							},
 							{text: "Thanks, and have fun!"},
-							{text: "Have i truly become quadliteral?"},
 							{text: "RIP r/gayspiderbrothel!"},
 							{text: "Oh, SHUT UP about the bloody mushrooms already! Move it, team!"},
 							{text: "God, these pretzels suck! How's your day been, buddy?"},
 							{text: "Guys, the thermal drill. Go get it!"},
 							{
 								text: (
+									"What are you talking about? If I didn't believe in what I was doing " +
+									"I'd simply leave and find another job."
+								)
+							},
+							{
+								text: (
 									"I'd just like to interject for a moment. What you're referring to as Linux, " +
 									"is in fact, GNU/Linux, or as I've recently taken to calling it, GNU plus " +
-									"Linux. Linux is not an operating system unto itself, but rather another free" +
+									"Linux. Linux is not an operating system unto itself, but rather another free " +
 									"component of a fully functioning GNU system made useful by the GNU corelibs, " +
 									"shell utilities and vital system components comprising a full OS as defined by " +
 									"POSIX.\n" +
@@ -1166,6 +810,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 							{text: "\"git commit --amend\" my beloved"},
 							{text: "THANK YOU FOR PARTICIPATING\nIN THIS\nENRICHMENT CENTER ACTIVITY!!"},
 							{text: "Program received signal SIGSEGV 0x4007fc13 in _IO_FRESH_MOVES"},
+							{text: "Terms and conditions may apply"},
 							{text: "Hasta la vista! Feliz Navidad! Hasta gazpacho!"},
 							{
 								text: (
@@ -1205,33 +850,59 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 							{text: "\\o/"},
 							{text: ">download desktop app\n>look inside\n>browser"},
 							{text: "Have you tried turning it off and on again?"},
-							{text: "[451 Unavailable for legal reasons]"},
 							{text: "Stealth is an option."},
-							{
-								text: (
-									"Twisting, turning, I am searching high and low\n" +
-									"Locks and keys prevent me from letting go\n" +
-									"Through this maze discover my failing heart\n\n" +
-									"Didya make it out? Please tell me how."
-								),
-								textSize: 26,
-							},
 							{
 								text: "WASSO WASSO WASSUUUP BITCONNEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE",
 								linebreak: false,
 							},
-							{image: {name: "google"}},
 							{text: "Pick up that can."},
 							{text: "enum Bool\n{\n    True,\n    False,\n    FileNotFound\n}"},
 							{text: "Me when there'll be greyscale-and-red-as-only-accent-color art at the function:"},
 							{text: "<3 Sähikäismenninkkäinen <3"},
 							{text: "No, no, i don't really think"},
+							{text: "No Save Scumming\nNo Slow Motion\nNo Frame Advance\nNo Rewind\nNo Memory Display\nNo Code Injection\nNo Pause\nNo Hope\nNo End"},
+							{text: "The Queen of Dragonflies is sleeping and smiling"},
+							{text: 'Beginning your title with "vote up if" is violation of intergalactic law.'},
+							{text: "Big day today, Freeman."},
+							{text: "L00MINARTY COMFIRM!!!!!!!!"},
+							{text: "Collect my compiler warnings"},
+							{text: "The bomb has almost reached the final terminus aHUAAA HAHAHAHAHAHAHAHA"},
+							{text: "Despondent vermin..."},
+							{text: "I'M BACK IN THE FUCKING BUILDING AGAIN?!"},
+							{text: "Outlook not so good.\n\n\n\nSeriously, use Thunderbird instead. Or FairEmail for mobile."},
+							{text: "You know exactly what to do."},
+							{text: "There is no antimemetics division"},
+							{text: "You do not recognize the bodies in the water."},
+							{text: "Hurt me plenty"},
+							{text: "folga wooga imoga womp"},
+							{text: "502 Bad Gateway\n---------------------\nopenresty"},
+							{text: "So rot in me\nSo rot in me\nSo rot in me\nSo rot in me\nI wither, sink\nI wither, sink\nI wither, sink\nI wither, sink"},
+							{text: "Let's just ping everyone all at once."},
+							{text: "ROCK FOR YOU"},
+							{text: "cheers mate if you need anything else just message me or something i don't kno"},
+							{
+								text: "MIND IS SOFTWARE.\n\nBODIES ARE DISPOSABLE.\n\nTHE SYSTEM WILL SET YOU FREE.",
+								effects: [
+									new TypeoutQuoteEffect({
+										commands: [
+											{command: "typeout", overtype: false, count: 17, speed: 48.0},
+											{command: "wait", time: 0.4},
+											{command: "typeout", overtype: false, count: 22, speed: 48.0},
+											{command: "wait", time: 0.4},
+											{command: "typeout", overtype: false, count: 29, speed: 48.0},
+										]}
+									),
+								],
+							},
+							{text: "I been hacked.\nall my pixels gone. this just placed please help me"},
+							{image: {name: "google"}},
+							{image: {name: "wo_hier"}},
 						])],
 					},
 				],
 				0xAA0000,
 				["https://github.com/Square789"],
-				{x: 136, y: 120}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"EmolgaGamer",
@@ -1261,7 +932,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0xFAFF00,
 				["https://reddit.com/user/dz0907"],
-				{x: 83, y: 320}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Lunsar",
@@ -1271,7 +942,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				[{"text": "professional representative from the hyuns dojo community"}],
 				0x0044FF,
 				["https://youtube.com/@Lunsar", "https://twitter.com/LunsarXD"],
-				{x: 138, y: 198}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"remagic",
@@ -1292,41 +963,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 					}
 				],
 				0x00FF00,
-				{x: 144, y: 133}
-			),
-			new CreditBlob(
-				"Kirbo",
-				[Role.DIRECTOR],
-				Representation.PORTRAIT,
-				"kirbo",
-				[
-					{
-						text: (
-							"Follow me on Twitter and support me on Kofi.\n" +
-							"For more of my artwork, follow me on Instagram and Kofi under the same name @StellarKirbo"
-						)
-					},
-					{image: {name: "crackbaby"}},
-				],
-				0x008FF8,
-				["https://twitter.com/StellarKirbo", "https://ko-fi.com/StellarKirbo"],
-				{x: 166, y: 133}
-			),
-			new CreditBlob(
-				"Ray",
-				[Role.ANIMATOR, Role.ARTIST],
-				Representation.PORTRAIT,
-				"ray",
-				[
-					{text: "Hey it's me mr funnyman aka RayTheMaymay I do things follow me on twitter"},
-					{
-						image: {name: "ray", animated: true, frameW: 16, frameH: 16, fps: 8, scale: 2.0},
-						location: QuoteLocation.BEHIND_NAME,
-					},
-				],
-				0xDD2222,
-				["https://twitter.com/TheMarioWriter"],
-				{x: 186, y: 215}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Jospi",
@@ -1346,7 +983,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0xC905FF,
 				["https://www.youtube.com/@JospiMusic"],
-				{x: 81, y: 120}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"ThaumcraftMC",
@@ -1359,7 +996,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0x00FF00,
 				["https://twitter.com/ThaumcraftMC"],
-				{x: 144, y: 140}
+				{x: 86, y: 162}
 			),
 			new CreditBlob(
 				"Maurii",
@@ -1373,7 +1010,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				],
 				0xFF5757,
 				["https://twitter.com/TheMaurii64"],
-				{x: 99, y: 135},
+				{x: 86, y: 162},
 				new MauriiNameSpriteProducer()
 			),
 			new CreditBlob(
@@ -1391,7 +1028,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				[Role.COMPOSER],
 				Representation.ICON,
 				"ronez",
-				[{text: "Helped out with [FUTURE NON-DEMO CONTENT]"}],
+				[{text: "Helped out with Malder Gold"}],
 				0x1B4BBE,
 				["https://www.youtube.com/@Ronezkj15"]
 			),
@@ -1403,6 +1040,24 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				[{text: "Mixing Assistance"}],
 				0x605F5A,
 				["https://twitter.com/gurgney"]
+			),
+			new CreditBlob(
+				"Kide",
+				[Role.ANIMATOR],
+				Representation.ICON,
+				"kidemon",
+				[{text: "Animator"}],
+				0xFF6633,
+				["https://twitter.com/OfficialKidemon"]
+			),
+			new CreditBlob(
+				"SpaceNautica",
+				[Role.CONCEPT_ARTIST],
+				Representation.ICON,
+				"spacenautica",
+				[{text: "Concept Artist for Malder"}],
+				0x6D3293,
+				["https://twitter.com/spacenautica"]
 			),
 			new CreditBlob(
 				"Daniel",
@@ -1464,6 +1119,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 			),
 		],
 	},
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	{
 		name: "Special Thanks",
 		members: [
@@ -1472,7 +1128,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				[Role.COMPOSER],
 				Representation.ICON,
 				"saruky",
-				[{text: "BF Chromatic in [FUTURE NON-DEMO CONTENT]"}],
+				[{text: "BF Chromatic in Enough"}],
 				0x4800FF,
 				["https://linktr.ee/Saruky"],
 			),
@@ -1490,7 +1146,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				[Role.VOICE_ACTOR],
 				Representation.ICON,
 				"esther_christo",
-				[{text: "Monika Chromatic in Consume"}],
+				[{text: "Monika Chromatic"}], //I don't know where this is used, but I don't want to remove credit
 				0xAF5CAC,
 				["https://twitter.com/carimellevo"],
 			),
@@ -1499,34 +1155,16 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				[Role.PROGRAMMER],
 				Representation.ICON,
 				"ninjamuffin99",
-				[{text: "Supported our mission on r/place + [FUTURE NON-DEMO CONTENT]"}],
+				[{text: "Supported our mission on r/place"}],
 				0xCF2D2D,
 				["https://twitter.com/ninja_muffin99"]
-			),
-			new CreditBlob(
-				"Thriftman",
-				[Role.COMPOSER],
-				Representation.ICON,
-				"thriftman",
-				[{text: "[FUTURE NON-DEMO CONTENT]"}],
-				0xBBABF2,
-				["https://thriftman.newgrounds.com"]
-			),
-			new CreditBlob(
-				"Wandaboy",
-				[Role.COMPOSER],
-				Representation.ICON,
-				"wandaboy",
-				[{text: "[FUTURE NON-DEMO CONTENT]"}],
-				0x3944A2,
-				["https://wandaboy.newgrounds.com"]
 			),
 			new CreditBlob(
 				"Flarewire",
 				[Role.MISCELLANEOUS],
 				Representation.ICON,
 				"flarewire",
-				[{text: "Funk Mix BF / 8BF Permission [NOT IN DEMO]"}],
+				[{text: "Funk Mix BF / 8BF Permission"}],
 				0xD13236,
 				["https://www.youtube.com/@Flarewire"]
 			),
@@ -1549,12 +1187,30 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				["https://www.youtube.com/@RubberRoss"]
 			),
 			new CreditBlob(
+				"MagianFellow",
+				[Role.MISCELLANEOUS],
+				Representation.ICON,
+				"magianfellow",
+				[{text: "Original Newgrounds 2019 pixel logo"}],
+				0xFFFFFF,
+				["https://magianfellow.newgrounds.com/"]
+			),
+			new CreditBlob(
+				"The r/place 2022 Atlas / Catalog",
+				[Role.MISCELLANEOUS],
+				Representation.ICON,
+				"placeatlas_catalog",
+				[{text: "Used for Lorebook Images"}],
+				0xFF4500,
+				["https://place-atlas.stefanocoding.me/"]
+			),
+			new CreditBlob(
 				"Indie Alliance",
 				[Role.MISCELLANEOUS],
 				Representation.ICON,
 				"indie_alliance",
 				[{text: "Supported our mission on r/place"}],
-				0xFFFFFF
+				0xFE0000
 			),
 			new CreditBlob(
 				"DJ Grooves",
@@ -1563,6 +1219,58 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 				"djgrooves",
 				[{text: "Assembled the original group DM after Sir Sins made the original post."}],
 				0xFAA218,
+			),
+			// NOTE: CARDHOUSE CODE GALORE THIS NEEDS TO BE IN THE 3RD POSITION ELSE THE LINK PILLAR WILL BE TOO SHORT
+			// AND THE TEXT TOO LONG
+			new CreditBlob(
+				"Various sources",
+				[Role.MISCELLANEOUS],
+				Representation.ICON,
+				"various_sources",
+				[
+					{
+						text: (
+							"Code snippets, help threads and resources that were used or built on for some shaders and effects!\n" +
+							"Stack Overflow & Co.: user128511, Alex B, wondra, Gama11 | shadertoy.net: Rabbid76 | " +
+							"GitHub: mairod, viruseg | u/lucasvb | Inigo Quilez | Shadertoy | Graphtoy | The Book of Shaders")
+						,
+						textSize: 20,
+					},
+				],
+				0x0FB979,
+				[
+					"https://stackoverflow.com/questions/47376499/creating-a-gradient-color-in-fragment-shader",
+					"https://stackoverflow.com/questions/1907565/c-and-python-different-behaviour-of-the-modulo-operation",
+					"https://gamedev.stackexchange.com/questions/125218/linear-gradient-with-angle-formula",
+					"https://stackoverflow.com/questions/48075991/is-there-a-way-to-apply-an-alpha-mask-to-a-flxcamera",
+					"https://www.shadertoy.com/view/7tsXRN",
+					"https://gist.github.com/mairod/a75e7b44f68110e1576d77419d608786",
+					"https://old.reddit.com/r/Physics/comments/30royq/whats_the_equation_of_a_human_heart_beat/cpw81wj/",
+					"https://iquilezles.org/articles/distfunctions2d/",
+					"https://shadertoy.com/",
+					"https://graphtoy.com/",
+					"https://thebookofshaders.com/13/",
+				]
+			),
+			new CreditBlob(
+				"DeonDahlia",
+				[Role.ARTIST],
+				Representation.ICON,
+				"deondahlia",
+				[
+					{text: "Helped with adding Pheonix and Edgeworth to Enough's Background.\n"},
+					{text: "also Moral Support", offset: {x: 0, y: -15}},
+
+				],
+				0x9999FF,
+			),
+			new CreditBlob(
+				"Asheishere",
+				[Role.MISCELLANEOUS],
+				Representation.ICON,
+				"asheishere",
+				[{text: "Moral Support"}],
+				0xFF9933,
 			),
 			new CreditBlob(
 				"The Spectators",
@@ -1582,6 +1290,39 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 			),
 		],
 	},
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	{
+		name: "Former Team",
+		members: [
+			new CreditBlob(
+				"MunchiMango",
+				[Role.PROGRAMMER],
+				Representation.ICON,
+				"munchimango",
+				[{text: "Ex-Coder"}],
+				0xF59F33,
+				["https://www.reddit.com/user/MunchiMango/"]
+			),
+			new CreditBlob(
+				"StellarKirbo",
+				[Role.EX_DIRECTOR],
+				Representation.ICON,
+				"stellarkirbo",
+				[{text: "Ex-Director"}],
+				0x66FF66
+			),
+			new CreditBlob(
+				"CoolingTool",
+				[Role.PROGRAMMER],
+				Representation.ICON,
+				"blank",
+				[{text: ""}],
+				0xFFFFFF
+			),
+		],
+	},
+	//changed icons to blank due to the fact I don't think we're making icons for them
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	{
 		name: "Psych Engine Extra",
 		members: [
@@ -1632,6 +1373,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 			),
 		],
 	},
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	{
 		name: "Psych Engine Team",
 		members: [
@@ -1642,6 +1384,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 			new CreditBlob("bb-panzu", [Role.PROGRAMMER], Representation.ICON, "bb", [{text: "Ex-Programmer of Psych Engine"}], 0x3E813A, ["https://twitter.com/bbsub3"]),
 		],
 	},
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	{
 		name: "Engine Contributors",
 		members: [
@@ -1654,6 +1397,7 @@ private function makeCredits():Array<{name:String, members:Array<CreditBlob>}> {
 			new CreditBlob("Smokey", [Role.PROGRAMMER], Representation.ICON, "smokey", [{text: "Spritemap texture support"}], 0x483D92, ["https://twitter.com/Smokey_5_"]),
 		],
 	},
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
 	{
 		name: "Funkin' Crew",
 		members: [
@@ -2011,136 +1755,34 @@ class CreditsSidebar extends FlxTypedGroup<CreditsSidebarMember> {
 	}
 }
 
-class MeasurerCache implements IFlxDestroyable {
-	// If only haxe had nice-to-use tuples as key or something but hey
-	private var _map:Map<String, Map<Int, ITextMeasurer>>;
-	public function new() {
-		this._map = new Map<String, Map<Int, ITextMeasurer>>();
-	}
-
-	public function get(font:String, size:Int, bold:Bool) {
-		var secondKey:haxe.Int32 = (size & 0xFFFF) | ((bold ? 1 : 0) << 16);
-		_maybeCreateMap(font);
-		if (!_map[font].exists(secondKey)) {
-			_map[font][secondKey] = new TextMeasurer(font, size, bold);
-		}
-		return _map[font][secondKey];
-	}
-
-	private function _maybeCreateMap(font:String) {
-		if (!_map.exists(font)) {
-			_map[font] = new Map<Int, ITextMeasurer>();
-		}
-	}
-
-	public function destroy() {
-		for (m in _map) {
-			for (tm in m) {
-				tm.destroy();
-			}
-			m.clear(); m = null;
-		}
-		_map.clear(); _map = null;
-	}
-}
 
 abstract class RepresentationSpriteGroup extends FlxSpriteGroup {
 	private var owner:CreditsState;
 	private var effectUpdaters:Array<QuoteEffectUpdater>;
-	private var quoteSlots:Array<QuoteFieldSlot>;
+	var quotePlacer:QuotePlacer;
 
 	public function new(owner:CreditsState) {
 		super();
+
 		this.effectUpdaters = [];
 		this.owner = owner;
-		this.quoteSlots = [new QuoteFieldSlot(owner), new BehindNameSlot(owner)];
-	}
 
-	private function addSpritesFromQuote(quote:Quote, space:Float, lineLimit:Int) {
-		var slot = quoteSlots[quote.location];
-		if (!slot.shouldContinue()) {
-			return;
-		}
-
-		quote = quote.alterQuote();
-		var thisQuotesSprites:Array<FlxSprite> = [];
-
-		if (quote.image != null) {
-			var sprite = new FlxSprite(slot.currentPosition.x, slot.currentPosition.y,);
-			if (quote.image.animated) {
-				sprite.loadGraphic(
-					Paths.image('credits/quote_images/${quote.image.name}'),
-					true,
-					quote.image.frameW,
-					quote.image.frameH
-				);
-				sprite.animation.add("main", [for (i in 0...(sprite.frames.numFrames)) i], quote.image.fps, true);
-				sprite.animation.play("main");
-			} else {
-				sprite.loadGraphic(Paths.image('credits/quote_images/${quote.image.name}'));
-			}
-			if (quote.image.scale != 1.0) {
-				sprite.scale.set(quote.image.scale, quote.image.scale);
-				sprite.updateHitbox();
-				sprite.origin.set(0.0, 0.0);
-				sprite.offset.set(0.0, 0.0);
-			}
-
-			slot.adjustAndAdvance(sprite);
-
-			add(sprite);
-			thisQuotesSprites.push(sprite);
-		} else {
-			// Horrid text splitting and layout code follows
-			var lines:Array<String>;
-			if (!quote.linebreak) {
-				lines = [quote.text.trim()];
-			} else {
-				lines = splitTextAndWordIntoLines(
-					quote.text,
-					space,
-					owner.measurerCache.get(quote.font, quote.textSize, quote.bold),
-					lineLimit
-				);
-			}
-
-			for (line in lines) {
-				var text = new FlxText(slot.currentPosition.x, slot.currentPosition.y, 0, line);
-				text.alpha = quote.color.alphaFloat;
-				text.setFormat(quote.font, quote.textSize, quote.color, LEFT);
-				if (quote.bold) {
-					text.addFormat(new FlxTextFormat(null, true));
-				}
-
-				add(text);
-				thisQuotesSprites.push(text);
-
-				if (!slot.adjustAndAdvance(text)) {
-					break;
-				}
-			}
-		}
-		slot.advance(quote.postPadding);
-
-		for (updater in quote.applyEffectsTo(thisQuotesSprites)) {
-			effectUpdaters.push(updater);
-		}
-	}
-
-	private function addSpritesFromQuotes(quotes:Array<Quote>, space:Float, lineLimit:Int = 32) {
-		for (quote in quotes) {
-			addSpritesFromQuote(quote, space, lineLimit);
-		}
+		var quoteSlots:Map<QuoteLocation, QuoteSlot> = [
+			QUOTE_FIELD => new QuoteFieldQuoteSlot(owner),
+			BEHIND_NAME => new BehindNameQuoteSlot(owner),
+		];
+		this.quotePlacer = new QuotePlacer(owner.measurerCache, quoteSlots, "credits/quote_images/");
 	}
 
 	private function addSpritesForName(
-		name:String, producer:NameSpriteProducer, slot:QuoteLocation = QuoteLocation.BEHIND_NAME
+		name:String, producer:NameSpriteProducer, slot:CreditsQuoteLocation = CreditsQuoteLocation.BEHIND_NAME
 	) {
-		var slot = quoteSlots[slot];
+		var slot = quotePlacer.quoteSlots[slot];
 		// var tmp = new FlxSprite(slot.currentPosition.x, slot.currentPosition.y);
-		var nameSprite = producer.makeName(slot.currentPosition.x, slot.currentPosition.y, name);
-		if (slot.adjustAndAdvance(nameSprite)) {
+		if (slot.shouldContinue()) {
+			var nameSprite = producer.makeName(slot.currentPosition.x, slot.currentPosition.y, name);
 			add(nameSprite);
+			slot.advanceBySprite(nameSprite);
 		}
 		// CoolUtil.InflatedPixelSpriteExt.makeInflatedPixelGraphic(tmp, 0xFFFF0000, 256, 2);
 		// add(tmp);
@@ -2178,10 +1820,10 @@ class PortraitRepresentationSpriteGroup extends RepresentationSpriteGroup {
 		portrait.pixelPerfectRender = true;
 		add(portrait);
 
-		quoteSlots[QUOTE_FIELD].setInitial(520, 148);
-		quoteSlots[BEHIND_NAME].setInitial(526, 128);
+		quotePlacer.quoteSlots[QUOTE_FIELD].setInitial(520, 148);
+		quotePlacer.quoteSlots[BEHIND_NAME].setInitial(526, 128);
 		addSpritesForName(person.name, person.nameSpriteProducer);
-		addSpritesFromQuotes(person.quotes, FlxG.width - 520 - 32);
+		this.effectUpdaters = quotePlacer.addSpritesFromQuotes(person.quotes, this, FlxG.width - 520 - 32);
 	}
 
 	// Getting a new index in portrait groups makes no sense, ignore.
@@ -2214,10 +1856,10 @@ class IconRepresentationSpriteGroup extends RepresentationSpriteGroup {
 
 			var textX = 180 + leftStart - owner.getXDifferenceOnSlope(64);
 			var nameX = 180 + leftStart;
-			quoteSlots[QUOTE_FIELD].setInitial(textX, 160 + yHeadstart);
-			quoteSlots[BEHIND_NAME].setInitial(nameX, 144 + yHeadstart);
+			quotePlacer.quoteSlots[QUOTE_FIELD].setInitial(textX, 160 + yHeadstart);
+			quotePlacer.quoteSlots[BEHIND_NAME].setInitial(nameX, 144 + yHeadstart);
 			addSpritesForName(person.name, person.nameSpriteProducer);
-			addSpritesFromQuotes(person.quotes, Math.max(100, FlxG.width - textX - 20), 3);
+			this.effectUpdaters = quotePlacer.addSpritesFromQuotes(person.quotes, this, Math.max(100, FlxG.width - textX - 20), 5);
 		}
 	}
 
@@ -2349,7 +1991,7 @@ class CreditsState extends MusicBeatState {
 
 	var sidebar:CreditsSidebar;
 
-	public var measurerCache:MeasurerCache;
+	public var measurerCache:TextMeasurerCache;
 
 	public var packedCreditGroups:Array<PackedCreditGroup>;
 
@@ -2378,22 +2020,25 @@ class CreditsState extends MusicBeatState {
 		memberIdxToPackedGroupIdx = [];
 		var absIdx = 0;
 		for (cgIdx => group in makeCredits()) {
-			var curRepGroupArray:Array<RepresentationGroup> = [];
-			var curPcg = {name: group.name, reprGroups: curRepGroupArray};
+			var curReprGroups:Array<RepresentationGroup> = [];
 			var membCopy = group.members.copy();
 			// ArraySort.sort(membCopy, (a, b) -> a.representation.priority - b.representation.priority);
 			var memIdx = 0;
 			while (memIdx < membCopy.length) {
 				var representation = membCopy[memIdx].representation;
-				var slc = membCopy.slice(memIdx, memIdx + representation.memberDisplayCount);
-				for (i in 0...slc.length) {
-					memberIdxToPackedGroupIdx.push({pcgIdx: cgIdx, repgIdx: curRepGroupArray.length, memIdx: i});
+				var slc:Array<CreditBlob> = [];
+				for (i in 0...representation.memberDisplayCount) {
+					if ((memIdx >= membCopy.length) || (membCopy[memIdx].representation != representation)) {
+						break;
+					}
+					slc.push(membCopy[memIdx]);
+					memberIdxToPackedGroupIdx.push({pcgIdx: cgIdx, repgIdx: curReprGroups.length, memIdx: i});
+					memIdx += 1;
 				}
-				curRepGroupArray.push({representation: representation, absIdxStart: absIdx, members: slc});
-				memIdx += slc.length;
+				curReprGroups.push({representation: representation, absIdxStart: absIdx, members: slc});
 				absIdx += slc.length;
 			}
-			packedCreditGroups.push(curPcg);
+			packedCreditGroups.push({name: group.name, reprGroups: curReprGroups});
 		}
 
 		var bg = new FlxSprite(0, 0).loadGraphic(Paths.image("credits/background"));
@@ -2414,7 +2059,7 @@ class CreditsState extends MusicBeatState {
 
 		representationSpriteGroupContainer = new FlxGroup(1);
 		representationSpriteGroup = null;
-		measurerCache = new MeasurerCache();
+		measurerCache = new TextMeasurerCache();
 		sidebar = new CreditsSidebar(this);
 
 		var linkOpenerOverlayDimmer = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -2618,7 +2263,8 @@ class CreditsState extends MusicBeatState {
 		linkPillar.setPosition(1152 - LINK_PILLAR_WIDTH - 8 - getXDifferenceOnSlope(linkY), linkY - linkPillar.evenedY);
 
 		var lastY:Float = rolePillar.evenedY;
-		for (i in new RevRange(FlxMath.minInt(3, mem.roles.length - 1), -1)) {
+		var estimatedAvailableSpace = Std.int((rolePillar.evenedY - 4.0) / (32.0 + 4.0));
+		for (i in new RevRange(FlxMath.minInt(estimatedAvailableSpace, mem.roles.length - 1), -1)) {
 			// 1st role tends to be the most important one and people read from top-to-bottom 99%
 			// of the time, so reverse these
 			var role = mem.roles[i];
@@ -2638,7 +2284,7 @@ class CreditsState extends MusicBeatState {
 
 		availableLinks.resize(0);
 		lastY = linkPillar.evenedY;
-		for (i in 0...FlxMath.minInt(3, mem.links.length)) {
+		for (i in 0...FlxMath.minInt(estimatedAvailableSpace, mem.links.length)) {
 			var linkInfo = mem.links[i];
 			var y = lastY - (4.0 + 32.0);
 			lastY = y;

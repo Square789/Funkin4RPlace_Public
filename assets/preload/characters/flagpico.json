@@ -1,0 +1,275 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "singDOWN"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "singLEFT"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singUP",
+			"indices": [],
+			"name": "singUP"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "singRIGHT"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singUPmiss",
+			"indices": [],
+			"name": "missUP"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singRIGHTmiss",
+			"indices": [],
+			"name": "missRIGHT"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singLEFTmiss",
+			"indices": [],
+			"name": "missLEFT"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 20,
+			"anim": "singDOWNmiss",
+			"indices": [],
+			"name": "missDOWN"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "hey",
+			"fps": 10,
+			"name": "singUP",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "deathLoop",
+			"fps": 10,
+			"name": "deathLoop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "hurt",
+			"fps": 10,
+			"name": "hurt",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "scared",
+			"fps": 10,
+			"name": "hurt",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 10,
+			"name": "idle",
+			"indices": []
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "firstDeath",
+			"indices": [],
+			"name": "firstDeath"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "deathCancel",
+			"indices": [],
+			"name": "deathCancel"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "voidfirstDeath",
+			"indices": [],
+			"name": "firstDeath"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": true,
+			"fps": 10,
+			"anim": "voiddeathLoop",
+			"indices": [],
+			"name": "deathLoop"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "voiddeathConfirm",
+			"indices": [],
+			"name": "deathConfirm"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "voiddeathCancel",
+			"indices": [],
+			"name": "deathCancel"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "deathConfirm",
+			"indices": [],
+			"name": "deathConfirm"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "dodge",
+			"indices": [
+				0,
+				1,
+				2
+			],
+			"name": "dodge"
+		},
+		{
+			"offsets": [
+				0,
+				1,
+				2
+			],
+			"loop": false,
+			"fps": 10,
+			"anim": "dodge-end",
+			"indices": [
+				3,
+				4,
+				5,
+				6
+			],
+			"name": "dodge"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/flagpico",
+	"position": [
+		0,
+		-20
+	],
+	"healthicon": "flagpico-pixel",
+	"flip_x": true,
+	"healthbar_colors": [
+		126,
+		237,
+		86
+	],
+	"camera_position": [
+		170,
+		-120
+	],
+	"sing_duration": 6,
+	"scale": 6
+}

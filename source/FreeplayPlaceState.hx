@@ -1,24 +1,44 @@
 
+import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.math.FlxMath;
-import flixel.math.FlxPoint;
 import flixel.text.FlxText;
-import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
-import haxe.ValueException;
-import openfl.display.BitmapData;
 
-import OrganicPixelErasureShader.ManualTexSizeSidePulserOrganicPixelErasureShader;
+import RoundedCornerShader.BetterRoundedCornerShader;
+import RoundedCornerShader.ManualTexSizeInvertedRoundedCornerShader;
 import editors.ChartingState;
 
+using CoolUtil.InflatedPixelSpriteExt;
 using StringTools;
 
 private final HIGHLIGHT_STRIP_PIXEL_SIZE:Float = 4.0;
 private final HIGHLIGHT_STRIP_PIXEL_HEIGHT:Int = 3;
+
+private final SELECTION_ARROW_SPACING:Int = 8;
+
+private final DECO_LINE_WIDTH:Float = 112.0;
+private final DECO_LINE_HEIGHT:Float = 2.0;
+private final DECO_LINE_OFFSET:Float = 12.0;
+
+
+class LabelCarousel extends FlxTypedSpriteGroup<FlxSprite> {
+	private var options:Array<String>;
+	private var currentIndex:Int;
+
+	function new(options:Array<String>) {
+		super();
+
+		this.options = options.copy();
+		this.currentIndex = 0;
+	}
+}
+
+
 
 class FreeplaySongData extends SongData {
 	// global bs
@@ -86,11 +106,34 @@ class FreeplaySongData extends SongData {
 
 private enum MenuSection {
 	SONG;
-	// CANVAS;
-	DIFFICULTY;
 	MIX;
+	DIFFICULTY;
+	// CANVAS;
 }
 
+
+private function centerAroundX(object:FlxObject, x:Float) {
+	object.x = x - (object.width * 0.5);
+}
+
+private function createFooterInfoObjects(
+	keyText:String,
+	otherText:String,
+	x:Float,
+	y:Float,
+	?maxWidth:Float = 0.0
+):Array<FlxSprite> {
+	var rText = new FlxText(0, 0, 0, keyText);
+	rText.setFormat("IBM Plex Sans", 16, RedditColor.FADED);
+	var rBg = new FlxSprite(x, y).makeInflatedPixelGraphic(RedditColor.TEXT_WEAK, rText.width + 4, rText.height + 4);
+	rBg.shader = new BetterRoundedCornerShader(6.0, rText.width + 4, rText.height + 4);
+	rText.setPosition(rBg.x + 2, rBg.y + 2);
+
+	var otherText = new FlxText(rText.x + rText.width + 2, rText.y, otherText);
+	otherText.setFormat("IBM Plex Sans", 16, RedditColor.TEXT);
+
+	return [rBg, rText, otherText];
+}
 
 class FreeplayPlaceState extends MusicBeatState {
 	static private var selectedSongIdx:Int = 0;
@@ -109,16 +152,13 @@ class FreeplayPlaceState extends MusicBeatState {
 	private var songLeftArrow:FlxSprite;
 	private var songRightArrow:FlxSprite;
 	private var scoreText:FlxText;
-	private var difficultySprite:FlxSprite;
+	private var difficultyText:FlxText;
 	private var difficultyLeftArrow:FlxSprite;
 	private var difficultyRightArrow:FlxSprite;
-	private var upperBar:FlxSprite;
-	private var lowerBar:FlxSprite;
-	private var highlightStrip:FlxSprite;
-	private var highlightStripShader:ManualTexSizeSidePulserOrganicPixelErasureShader;
-	private var leInfoText:FlxText;
 
-	private final ELEMENT_ORDER:Array<MenuSection> = [SONG, DIFFICULTY, MIX];
+	private var optionBarCenterX:Float;
+
+	private final ELEMENT_ORDER:Array<MenuSection> = [SONG, MIX, DIFFICULTY];
 
 	public override function create() {
 		displayedSongs = [];
@@ -158,9 +198,17 @@ class FreeplayPlaceState extends MusicBeatState {
 		// ??? Probably useless, keeping it in regardless
 		WeekData.loadTheFirstEnabledMod();
 
-		// Camera setup, required for scenes with more than 1 cam somehow i guess
+		// Some layout vars
+		final PANEL_PADDING = 16;
+		final OFFSCREEN_SHIFT = 12;
+		final PANEL_LEFT_OFFSET = -2;
+		var optBarAndCanvasHoleHeight = Std.int(FlxG.height * 0.85) + OFFSCREEN_SHIFT;
+		var canvasHoleX = Std.int(FlxG.width * 0.3) + PANEL_LEFT_OFFSET;
+		var canvasHoleWidth = FlxG.width - canvasHoleX;
+
+		// Camera setup
 		uiCamera = new FlxCamera();
-		canvasCamera = new FlxCamera();
+		canvasCamera = new FlxCamera(canvasHoleX, -OFFSCREEN_SHIFT, canvasHoleWidth, optBarAndCanvasHoleHeight);
 		canvasCamera.bgColor = 0xff333333;
 		uiCamera.bgColor.alpha = 0x00;
 
@@ -190,28 +238,36 @@ class FreeplayPlaceState extends MusicBeatState {
 		}
 
 		// Populate UI cam
-		upperBar = new FlxSprite(-1, -1).makeGraphic(FlxG.width + 2, Std.int(FlxG.height * 0.23 + 1), 0xFF030303);
-		lowerBar = new FlxSprite(-1).makeGraphic(FlxG.width + 2, Std.int(FlxG.height * /*0.35*/ 0.23 + 1), 0xFF030303);
-		lowerBar.y = FlxG.height - lowerBar.height + 1;
 
-		highlightStrip = new FlxSprite().makeGraphic(
-			1, HIGHLIGHT_STRIP_PIXEL_HEIGHT * Std.int(HIGHLIGHT_STRIP_PIXEL_SIZE), FlxColor.WHITE
-		);
-		highlightStripShader = new ManualTexSizeSidePulserOrganicPixelErasureShader();
-		highlightStripShader.eraser_color.value = [0x00, 0x00, 0x00, 0xFF];
-		highlightStripShader.pixel_dimensions.value = [HIGHLIGHT_STRIP_PIXEL_SIZE, HIGHLIGHT_STRIP_PIXEL_SIZE];
-		highlightStrip.shader = highlightStripShader;
+		// More layout vars
+		var bottomBgPartY = optBarAndCanvasHoleHeight - OFFSCREEN_SHIFT;
+		var optBarWidth = canvasHoleX - PANEL_PADDING * 2 - PANEL_LEFT_OFFSET;
+		var footerY = (optBarAndCanvasHoleHeight - OFFSCREEN_SHIFT) + PANEL_PADDING;
+		var footerWidth = optBarWidth;
+		var footerHeight = FlxG.height - footerY + OFFSCREEN_SHIFT;
+		optionBarCenterX = PANEL_PADDING + PANEL_LEFT_OFFSET + optBarWidth * 0.5;
 
-		mixNameText = new FlxText(0, 6, 0);
-		mixNameText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, RIGHT);
+		var topBg = new FlxSprite(0.0, 0.0).makeInflatedPixelGraphic(RedditColor.MIDNIGHT, canvasHoleX, optBarAndCanvasHoleHeight);
+		var bottomBg = new FlxSprite(0.0, bottomBgPartY).makeInflatedPixelGraphic(RedditColor.MIDNIGHT, FlxG.width, FlxG.height - bottomBgPartY);
+		var canvasHole = new FlxSprite(canvasHoleX, -OFFSCREEN_SHIFT).makeInflatedPixelGraphic(RedditColor.MIDNIGHT, canvasHoleWidth + OFFSCREEN_SHIFT, optBarAndCanvasHoleHeight);
+		var optionBar = new FlxSprite(PANEL_PADDING + PANEL_LEFT_OFFSET, -OFFSCREEN_SHIFT).makeInflatedPixelGraphic(RedditColor.BACKGROUND, optBarWidth, optBarAndCanvasHoleHeight);
+		var footer = new FlxSprite(PANEL_PADDING + PANEL_LEFT_OFFSET, footerY).makeInflatedPixelGraphic(RedditColor.BACKGROUND, footerWidth, footerHeight);
 
-		songNameText = new FlxText(0, 64, 0);
-		songNameText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		canvasHole.shader = new ManualTexSizeInvertedRoundedCornerShader(8.0, canvasHole.width, canvasHole.height, 2.0, RedditColor.SIDEBAR_BORDER);
+		optionBar.shader = new BetterRoundedCornerShader(8.0, optionBar.width, optionBar.height, 1.5, RedditColor.SIDEBAR_BORDER);
+		footer.shader = new BetterRoundedCornerShader(8.0, footer.width, footer.height, 1.5, RedditColor.SIDEBAR_BORDER);
 
-		scoreText = new FlxText(0, songNameText.y + songNameText.size + 8, 0);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.WHITE, RIGHT);
+		songNameText = new FlxText(0, 220, 0);
+		songNameText.setFormat("IBM Plex Sans Bold", 36, RedditColor.TEXT);
 
-		difficultySprite = new FlxSprite();
+		mixNameText = new FlxText(0, 274, 0);
+		mixNameText.setFormat("IBM Plex Sans Bold", 24, RedditColor.TEXT);
+
+		difficultyText = new FlxText(0, 342, 0);
+		difficultyText.setFormat("IBM Plex Sans Bold", 32, RedditColor.TEXT);
+
+		scoreText = new FlxText(0, 420, 0);
+		scoreText.setFormat("IBM Plex Sans", 24, RedditColor.TEXT);
 
 		mixLeftArrow = new FlxSprite();
 		mixRightArrow = new FlxSprite();
@@ -221,31 +277,54 @@ class FreeplayPlaceState extends MusicBeatState {
 		difficultyRightArrow = new FlxSprite();
 		var arrowFrames = Paths.getSparrowAtlas("menu_arrows");
 		for (i in [
-			{o: mixLeftArrow,         name: "long_left",  size: 1.5},
-			{o: mixRightArrow,        name: "long_right", size: 1.5},
-			{o: songLeftArrow,        name: "long_left",  size: 2},
-			{o: songRightArrow,       name: "long_right", size: 2},
-			{o: difficultyLeftArrow,  name: "big_left",   size: 2},
-			{o: difficultyRightArrow, name: "big_right",  size: 2},
+			{o: mixLeftArrow,         name: "smallpointy_left",  size: 0.5},
+			{o: mixRightArrow,        name: "smallpointy_right", size: 0.5},
+			{o: songLeftArrow,        name: "smallpointy_left",  size: 0.5},
+			{o: songRightArrow,       name: "smallpointy_right", size: 0.5},
+			{o: difficultyLeftArrow,  name: "smallpointy_left",  size: 0.5},
+			{o: difficultyRightArrow, name: "smallpointy_right", size: 0.5},
 		]) {
 			i.o.frames = arrowFrames;
 			i.o.frame = arrowFrames.getByName(i.name);
-			i.o.antialiasing = false;
+			i.o.pixelPerfectRender = true;
 			i.o.setGraphicSize(Std.int(i.o.width * i.size));
 			i.o.updateHitbox();
 		}
 
-		leInfoText = new FlxText(0, FlxG.height, FlxG.width);
-		leInfoText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT);
-		leInfoText.text = 'Press CTRL to open the Gameplay Changers Menu\nPress RESET [${controls.getFormattedInputNames(RESET)}] to Reset your Score and Accuracy.';
-		leInfoText.y -= leInfoText.height;
+		var fto0 = createFooterInfoObjects(
+			"CTRL",
+			"to open the Gameplay Changers Menu",
+			30,
+			FlxG.height - 80
+		);
+		var fto1 = createFooterInfoObjects(
+			controls.getFormattedInputNames(RESET),
+			"to reset your Score and Accuracy",
+			30,
+			FlxG.height - 42
+		);
+
+		var songNameTextTopDecoLine = new FlxSprite(0.0, songNameText.y - DECO_LINE_OFFSET - 2)
+			.makeInflatedPixelGraphic(RedditColor.SIDEBAR_BORDER, optBarWidth - 42, DECO_LINE_HEIGHT);
+		centerAroundX(songNameTextTopDecoLine, optionBarCenterX);
+
+		var difficultyTextTopDecoLine = new FlxSprite(0.0, difficultyText.y - DECO_LINE_OFFSET - 2)
+			.makeInflatedPixelGraphic(RedditColor.SIDEBAR_BORDER, optBarWidth - 42, DECO_LINE_HEIGHT);
+		centerAroundX(difficultyTextTopDecoLine, optionBarCenterX);
+
+		var difficultyTextBottomDecoLine = new FlxSprite(0.0, difficultyText.y + difficultyText.height + DECO_LINE_OFFSET)
+			.makeInflatedPixelGraphic(RedditColor.SIDEBAR_BORDER, optBarWidth - 42, DECO_LINE_HEIGHT);
+		centerAroundX(difficultyTextBottomDecoLine, optionBarCenterX);
 
 		c = [uiCamera];
 		for (uiItem in [
-			upperBar, lowerBar, leInfoText, mixNameText, songNameText, scoreText, difficultySprite,
+			topBg, bottomBg, canvasHole,
+			optionBar, mixNameText, songNameText, scoreText, difficultyText,
 			songLeftArrow, songRightArrow, difficultyLeftArrow, difficultyRightArrow,
-			mixLeftArrow, mixRightArrow, highlightStrip
-		]) {
+			mixLeftArrow, mixRightArrow,
+			songNameTextTopDecoLine, difficultyTextTopDecoLine, difficultyTextBottomDecoLine,
+			footer
+		].concat(fto0).concat(fto1)) {
 			uiItem.cameras = c;
 			add(uiItem);
 		}
@@ -253,6 +332,7 @@ class FreeplayPlaceState extends MusicBeatState {
 		super.create();
 		readdOrSetAchievementNotificationBoxCamera(uiCamera);
 
+		changeActiveElement(0);
 		changeSelectedSong(0);
 	}
 
@@ -278,8 +358,6 @@ class FreeplayPlaceState extends MusicBeatState {
 		if (diffX < 1.5 && diffY < 1.5) {
 			canvasCamera.snapToTarget();
 		}
-
-		highlightStripShader.update(dt);
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'), 0.7);
@@ -364,8 +442,19 @@ class FreeplayPlaceState extends MusicBeatState {
 		}
 	}
 
+	function getTextForActiveElement():FlxText {
+		return switch (ELEMENT_ORDER[activeElementIdx]) {
+			case SONG:       songNameText;
+			case DIFFICULTY: difficultyText;
+			case MIX:        mixNameText;
+		}
+	}
+
 	public function changeActiveElement(by:Int) {
 		var currentSong = displayedSongs[selectedSongIdx];
+
+		getTextForActiveElement().color = RedditColor.TEXT;
+
 		activeElementIdx = CoolUtil.wrapModulo(activeElementIdx + by, ELEMENT_ORDER.length);
 		if (by != 0) {
 			var selectionOk = false;
@@ -381,7 +470,8 @@ class FreeplayPlaceState extends MusicBeatState {
 				activeElementIdx = CoolUtil.wrapModulo(activeElementIdx + FlxMath.signOf(by), ELEMENT_ORDER.length);
 			}
 		}
-		repositionHighlightStrip();
+
+		getTextForActiveElement().color = RedditColor.CHUNGERINE;
 	}
 
 	public function changeSelectedSong(by:Int) {
@@ -390,10 +480,14 @@ class FreeplayPlaceState extends MusicBeatState {
 		var newSong = displayedSongs[selectedSongIdx];
 
 		songNameText.text = newSong.defaultMeta.displayName;
-		songNameText.screenCenter(X);
+		centerAroundX(songNameText, optionBarCenterX);
+		repositionSongArrows();
 
 		newSong.mixId = selectedMixIdx;
 		retainOldDifficulty(by, 0);
+
+		final FOCUS_OFFSET_X = -30.0;
+		final FOCUS_OFFSET_Y = -20.0;
 
 		// Sic camera onto new location
 		var eases = [FlxEase.quintOut, FlxEase.quintIn];
@@ -401,28 +495,43 @@ class FreeplayPlaceState extends MusicBeatState {
 		var duration = Math.max(1, FlxMath.vectorLength(cameraTarget.x - newSong.placePos.x, cameraTarget.y - newSong.placePos.y) / 500);
 		FlxTween.cancelTweensOf(cameraTarget);
 		FlxTween.cancelTweensOf(canvasCamera);
-		FlxTween.tween(cameraTarget, {x: newSong.placePos.x, y: newSong.placePos.y}, duration, {ease: eases[0]});
-		FlxTween.tween(canvasCamera, {zoom: newSong.placeZoom}, duration, {ease: eases[1]});
+		var z = newSong.placeZoom;
+		FlxTween.tween(
+			cameraTarget,
+			{x: newSong.placePos.x + (1/z) * FOCUS_OFFSET_X, y: newSong.placePos.y + (1/z) * FOCUS_OFFSET_Y},
+			duration,
+			{ease: eases[0]}
+		);
+		FlxTween.tween(canvasCamera, {zoom: z}, duration, {ease: eases[1]});
 
-		// Recolor highlight to the song's color
-		highlightStrip.color = newSong.color;
+		// TODO: Maybe recolor something else to the song's color
 
-		repositionSongArrows();
+		availableMixesChanged();
 		changeSelectedMix(0);
+	}
+
+	private function availableDifficultiesChanged() {
+		var diffs = displayedSongs[selectedSongIdx].difficulties;
+		if (diffs.length == 0) {
+			difficultyText.color = RedditColor.TEXT_WEAK;
+			difficultyLeftArrow.visible = false;
+			difficultyRightArrow.visible = false;
+
+		} else {
+			difficultyText.color = RedditColor.TEXT;
+			difficultyLeftArrow.visible = true;
+			difficultyRightArrow.visible = true;
+		}
 	}
 
 	public function changeSelectedDifficulty(by:Int) {
 		var currentSong = displayedSongs[selectedSongIdx];
 		var diffs = currentSong.difficulties;
-		var brandNewDifficulty:String;
-		var hasDiffs = diffs.length > 0;
-		difficultySprite.visible = hasDiffs;
-		difficultyLeftArrow.visible = hasDiffs;
-		difficultyRightArrow.visible = hasDiffs;
-		if (hasDiffs) {
+		if (diffs.length > 0) {
 			selectedDifficultyIdx = CoolUtil.wrapModulo(selectedDifficultyIdx + by, diffs.length);
-			brandNewDifficulty = diffs[selectedDifficultyIdx].toLowerCase().replace(' ', '-');
-			difficultySprite.loadGraphic(Paths.image('menudifficulties/$brandNewDifficulty'));
+			difficultyText.text = diffs[selectedDifficultyIdx];
+		} else {
+			difficultyText.text = "???";
 		}
 
 		repositionDifficultySection();
@@ -440,38 +549,39 @@ class FreeplayPlaceState extends MusicBeatState {
 			ratingStr = ratingStr.substr(0, ratingStr.length - 2) + '.' + ratingStr.substr(ratingStr.length - 2, 2);
 		}
 		scoreText.text = '$score ($ratingStr%)';
-		scoreText.screenCenter(X);
+		centerAroundX(scoreText, optionBarCenterX);
 		#end
-		repositionHighlightStrip();
+	}
+
+	private function availableMixesChanged() {
+		if (displayedSongs[selectedSongIdx].availableMixes.length > 1) {
+			mixNameText.color = RedditColor.TEXT;
+			mixLeftArrow.visible = true;
+			mixRightArrow.visible = true;
+		} else {
+			mixNameText.color = RedditColor.TEXT_WEAK;
+			mixLeftArrow.visible = false;
+			mixRightArrow.visible = false;
+		}
 	}
 
 	public function changeSelectedMix(by:Int) {
 		var currentSong = displayedSongs[selectedSongIdx];
 		var mixes = currentSong.availableMixes;
 
+		selectedMixIdx = currentSong.mixId += by;
+
+		var newMix:String = mixes[selectedMixIdx];
+		var mixDisplayName:String = newMix;
+
+		mixNameText.text = mixDisplayName;
+		centerAroundX(mixNameText, optionBarCenterX);
 		if (mixes.length > 1) {
-			selectedMixIdx = currentSong.mixId += by;
-
-			var newMix:String = mixes[currentSong.mixId];
-			var mixDisplayName:String = newMix;
-
-			retainOldDifficulty(0, by);
-
-			mixNameText.visible = true;
-			mixLeftArrow.visible = true;
-			mixRightArrow.visible = true;
-
-			mixNameText.text = mixDisplayName;
-			mixNameText.screenCenter(X);
 			repositionMixArrows();
-
-			repositionHighlightStrip();
-		} else {
-			mixNameText.visible = false;
-			mixLeftArrow.visible = false;
-			mixRightArrow.visible = false;
 		}
 
+		availableDifficultiesChanged();
+		retainOldDifficulty(0, by);
 		changeSelectedDifficulty(0);
 	}
 
@@ -493,51 +603,27 @@ class FreeplayPlaceState extends MusicBeatState {
 			x = FlxMath.maxInt(0, currentSong.difficulties.indexOf(CoolUtil.defaultDifficulty));
 		}
 		selectedDifficultyIdx = x;
-	} 
+	}
 
 	private function repositionSongArrows() {
-		songLeftArrow.x = songNameText.x - songLeftArrow.width - 5;
-		songLeftArrow.y = songNameText.y + (songNameText.size - songLeftArrow.height) / 2;
-		songRightArrow.x = songNameText.x + songNameText.width + 5;
-		songRightArrow.y = songNameText.y + (songNameText.size - songRightArrow.height) / 2;
+		songLeftArrow.x = songNameText.x - songLeftArrow.width - SELECTION_ARROW_SPACING;
+		songLeftArrow.y = songNameText.y + (songNameText.height - songLeftArrow.height) / 2;
+		songRightArrow.x = songNameText.x + songNameText.width + SELECTION_ARROW_SPACING + 1;
+		songRightArrow.y = songNameText.y + (songNameText.height - songRightArrow.height) / 2;
 	}
 
 	private function repositionMixArrows() {
-		mixLeftArrow.x = mixNameText.x - mixLeftArrow.width - 5;
-		mixLeftArrow.y = mixNameText.y + (mixNameText.size - mixLeftArrow.height) / 2;
-		mixRightArrow.x = mixNameText.x + mixNameText.width + 5;
-		mixRightArrow.y = mixNameText.y + (mixNameText.size - mixRightArrow.height) / 2;
+		mixLeftArrow.x = mixNameText.x - mixLeftArrow.width - SELECTION_ARROW_SPACING;
+		mixLeftArrow.y = mixNameText.y + (mixNameText.height - mixLeftArrow.height) / 2;
+		mixRightArrow.x = mixNameText.x + mixNameText.width + SELECTION_ARROW_SPACING + 1;
+		mixRightArrow.y = mixNameText.y + (mixNameText.height - mixRightArrow.height) / 2;
 	}
 
 	private function repositionDifficultySection() {
-		difficultySprite.screenCenter(X);
-		difficultySprite.y = lowerBar.y + (lowerBar.height - difficultySprite.height) / 2;
-		difficultyLeftArrow.x = difficultySprite.x - difficultyLeftArrow.width - 5;
-		difficultyLeftArrow.y = difficultySprite.y + (difficultySprite.height - difficultyLeftArrow.height) / 2;
-		difficultyRightArrow.x = difficultySprite.x + difficultySprite.width + 5;
-		difficultyRightArrow.y = difficultySprite.y + (difficultySprite.height - difficultyRightArrow.height) / 2;
-	}
-
-	private function repositionHighlightStrip() {
-		var newStripWidth:Float;
-		switch (ELEMENT_ORDER[activeElementIdx]) {
-		case SONG:
-			newStripWidth = songRightArrow.x + songRightArrow.width - songLeftArrow.x;
-			highlightStrip.y = scoreText.y + scoreText.size + 8;
-			highlightStrip.x = songLeftArrow.x;
-		case DIFFICULTY:
-			newStripWidth = difficultyRightArrow.x + difficultyRightArrow.width - difficultyLeftArrow.x;
-			highlightStrip.y = difficultySprite.y + difficultySprite.height + 16;
-			highlightStrip.x = difficultyLeftArrow.x;
-		case MIX:
-			newStripWidth = mixRightArrow.x + mixRightArrow.width - mixLeftArrow.x;
-			highlightStrip.y = mixNameText.y + mixNameText.size + 8;
-			highlightStrip.x = mixLeftArrow.x;
-		}
-		var trueStripWidth:Int = Std.int(Math.ceil(newStripWidth / HIGHLIGHT_STRIP_PIXEL_SIZE) * HIGHLIGHT_STRIP_PIXEL_SIZE);
-		highlightStrip.setGraphicSize(trueStripWidth, highlightStrip.graphic.bitmap.height);
-		highlightStrip.updateHitbox();
-		highlightStrip.x -= Math.floor((trueStripWidth - newStripWidth) / 2.0);
-		highlightStripShader.manual_texture_size.value = [highlightStrip.width, highlightStrip.height];
+		centerAroundX(difficultyText, optionBarCenterX);
+		difficultyLeftArrow.x = difficultyText.x - difficultyLeftArrow.width - SELECTION_ARROW_SPACING;
+		difficultyLeftArrow.y = difficultyText.y + (difficultyText.height - difficultyLeftArrow.height) / 2;
+		difficultyRightArrow.x = difficultyText.x + difficultyText.width + SELECTION_ARROW_SPACING + 1;
+		difficultyRightArrow.y = difficultyText.y + (difficultyText.height - difficultyRightArrow.height) / 2;
 	}
 }

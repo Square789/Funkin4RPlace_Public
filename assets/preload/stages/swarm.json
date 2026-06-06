@@ -1,0 +1,19 @@
+{
+	"directory": "shared",
+	"defaultZoom": 4.0,
+	"opponentZoom": 3,
+
+	
+	"pixelCoords": true,
+
+	"boyfriend": [120, -8],
+	"girlfriend": [0, 0],
+	"opponent": [-170, 45],
+	"hide_girlfriend": true,
+	
+	"camera_boyfriend": [-10, -30],
+	"camera_opponent": [30, -24],
+	"camera_girlfriend": [-40, -30],
+	"camera_speed": 1.5,
+	"camera_ease": "smootherStepOut"
+}

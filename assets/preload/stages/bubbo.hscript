@@ -1,0 +1,5 @@
+function onCreatePost() {
+	if (["flag-bf", "8BF", "ross-bf"].contains(boyfriend.curCharacter)) {
+		PlayState.instance.setupPixelErasureShader();
+	}
+}

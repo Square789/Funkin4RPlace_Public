@@ -1,0 +1,101 @@
+{ "frames": {
+   "ranni-bopleft0": {
+    "frame": { "x": 337, "y": 0, "w": 168, "h": 195 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 4, "y": 2, "w": 168, "h": 195 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopleft1": {
+    "frame": { "x": 336, "y": 390, "w": 167, "h": 191 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 6, "w": 167, "h": 191 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopleft2": {
+    "frame": { "x": 168, "y": 390, "w": 168, "h": 192 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 1, "y": 5, "w": 168, "h": 192 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopleft3": {
+    "frame": { "x": 169, "y": 196, "w": 168, "h": 194 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 3, "w": 168, "h": 194 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopleft4": {
+    "frame": { "x": 0, "y": 0, "w": 169, "h": 197 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 0, "w": 169, "h": 197 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopright5": {
+    "frame": { "x": 337, "y": 195, "w": 168, "h": 195 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 10, "y": 2, "w": 168, "h": 195 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopright6": {
+    "frame": { "x": 0, "y": 390, "w": 168, "h": 193 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 4, "w": 168, "h": 193 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopright7": {
+    "frame": { "x": 0, "y": 197, "w": 169, "h": 193 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 12, "y": 4, "w": 169, "h": 193 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopright8": {
+    "frame": { "x": 169, "y": 0, "w": 168, "h": 196 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 9, "y": 1, "w": 168, "h": 196 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   },
+   "ranni-bopright9": {
+    "frame": { "x": 0, "y": 0, "w": 169, "h": 197 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 6, "y": 0, "w": 169, "h": 197 },
+    "sourceSize": { "w": 181, "h": 197 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.17-x64",
+  "image": "rannibench.png",
+  "format": "RGBA8888",
+  "size": { "w": 505, "h": 583 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "ranni-bopleft", "from": 0, "to": 4, "direction": "forward", "color": "#000000ff" },
+   { "name": "ranni-bopright", "from": 5, "to": 9, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "body", "opacity": 255, "blendMode": "normal" },
+   { "name": "head", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

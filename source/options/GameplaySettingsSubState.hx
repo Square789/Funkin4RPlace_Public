@@ -33,8 +33,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Opponent Notes',
-			'If unchecked, opponent notes get hidden.',
+		var option:Option = new Option('Opponent Notes (Middlescroll)',
+			'If unchecked, opponent notes get hidden.\nOnly has an effect if middlescroll is active.',
 			'opponentStrums',
 			'bool',
 			true);
@@ -164,6 +164,19 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			true
 			);
+		addOption(option);
+
+		var option:Option = new Option('Control Garbage Collector',
+			(
+				"[EXPERIMENTAL] Disable the GC during sections where input is (presumably) needed to reduce frame drops. " +
+				"WARNING: Bugs may leave the GC disabled for an unbounded amount of time, leading to eventual OOM. " +
+				"WARNING: Assumes slowly rising memory usage. NOTE: GC is shortly reenabled after 2000 frames of inactivity. " +
+				"NOTE: GC will still run in some situations regardless. It's beyond my paygrade of 0 to find out why."
+			),
+			"controlGC",
+			"bool",
+			true
+		);
 		addOption(option);
 
 		super();

@@ -1,0 +1,13001 @@
+{
+	"song": {
+		"player1": "rainbowdash",
+		"skinModifierOpponent": "place",
+		"notes": [
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						13600,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						13800,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						12800,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						13100,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						13400,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						14000,
+						2,
+						300,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						14400,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						14700,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						15000,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						15200,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						15600,
+						2,
+						300,
+						"",
+						[
+							0
+						]
+					],
+					[
+						15400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						17000,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						16600,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						16800,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						16000,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						16300,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						17200,
+						2,
+						300,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						17600,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						17900,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						18600,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						18800,
+						2,
+						300,
+						"",
+						[
+							0
+						]
+					],
+					[
+						18200,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						18400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						19200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						19500,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						19800,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						20000,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						20200,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						20400,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						20800,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						21100,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						21400,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						21600,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						22000,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						21800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						22400,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						22700,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						23000,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						23200,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						23400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						23600,
+						2,
+						300,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						24000,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						24300,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						24600,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						24800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						25000,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						25200,
+						2,
+						300,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						25600,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						25900,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						26200,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						26400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						26600,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						26800,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						27000,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						27200,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						27500,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						27800,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						28000,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						28200,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						28400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						28600,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						28700,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						29000,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						29300,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						29800,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						30000,
+						2,
+						300,
+						"",
+						[
+							0
+						]
+					],
+					[
+						28800,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						29400,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						29600,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						29100,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						30400,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						30700,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						31000,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						31200,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						31400,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						31600,
+						2,
+						300,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						32000,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						32300,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						32600,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						32800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						33000,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						33200,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						33400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						33600,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						33900,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						34200,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						34400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						34600,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						34800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						35000,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						35100,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						35400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						35700,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						36200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						36400,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						35200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						35800,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						36000,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						35500,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						36800,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						37100,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						37400,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						37600,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						37800,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						38000,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						38400,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						38775,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						38962.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						38587.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						39150,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						39337.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						39525,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						39712.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": true,
+				"bpm": 160
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						40087.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						40275,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						40462.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						40650,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						39900,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						40837.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						40931.25,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41025,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41212.5,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						41400,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41493.75,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41681.25,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42525,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41962.5,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42150,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42243.75,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42431.25,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42712.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42337.5,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41775,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						41587.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						43462.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43650,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						44025,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						44212.5,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43556.25,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42900,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43181.25,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43275,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						42993.75,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43087.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43837.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						43931.25,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						44400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						44775,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						44962.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						44587.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						45150,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						45337.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						45525,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						45712.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						44400,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						44681.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						44962.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						45150,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						45431.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						45712.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						46087.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						46275,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						46462.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						46650,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						45900,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						46837.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						46931.25,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						45900,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						46181.25,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						46462.5,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						46650,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						46931.25,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						47212.5,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						47212.5,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						47025,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						47400,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						47493.75,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						47681.25,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48525,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						47962.5,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48150,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						47775,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						47402.34375,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						47681.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						47962.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						48150,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						48431.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						48712.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						47587.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48243.75,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48337.5,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48431.25,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48712.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						49087.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49462.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49650,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						50025,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49556.25,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48900,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						49181.25,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						49462.5,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						49650,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						49931.25,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						50212.5,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						48900,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						48993.75,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49181.25,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49275,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49837.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						49931.25,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						50212.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						50400,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						50681.25,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						50962.5,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						51150,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						51431.25,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						51712.5,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						50400,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						50493.75,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						50587.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						50681.25,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						50775,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						50962.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						51150,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						51337.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						51525,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						51712.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						51900,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						52181.25,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						52462.5,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						52650,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						52931.25,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						53212.5,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						51900,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						51993.75,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52087.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52181.25,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52275,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52368.75,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52462.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52556.25,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52650,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						52837.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						53025,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						53212.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						53400,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						53681.25,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						53962.5,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						54150,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						54431.25,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						54712.5,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						53400,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						53587.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						53775,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						53962.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						54150,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						54337.5,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						54525,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						54712.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						54900,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						55181.25,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						55462.5,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						55650,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						55931.25,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						56212.5,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						54900,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						55087.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						55275,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						55462.5,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						55650,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						55837.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						56025,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						56212.5,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						56400,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						56681.25,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						56962.5,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						57150,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						57431.25,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						57712.5,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						56400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						56493.75,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						56587.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						56681.25,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						56775,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						56962.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						57150,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						57337.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						57712.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						57525,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						57900,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						58181.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						58462.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						59212.5,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						58931.25,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						58650,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						57900,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						57993.75,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58087.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58181.25,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58368.75,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58275,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58650,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						59025,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58837.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						59212.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58462.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						58556.25,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						59400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						59587.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						59775,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						59962.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						60150,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						60525,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						60337.5,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						60712.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						59400,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						59681.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						59962.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						60150,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						60431.25,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						60712.5,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						60900,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						61087.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						61275,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						61462.5,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						61650,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						61837.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						62025,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						62212.5,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						60900,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						61181.25,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						61462.5,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						61650,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						61931.25,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						62212.5,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [
+					[
+						62400,
+						2,
+						281.25,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						65700,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66300,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66450,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66525,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						65400,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						65550,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66150,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						65775,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						65850,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66000,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 200,
+				"changeBPM": true
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						66600,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66675,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66750,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66825,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						66900,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67050,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67200,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67275,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67350,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67425,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67500,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67650,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67725,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						67800,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						67950,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						68100,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						68250,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						68400,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						68550,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						68700,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						68850,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						69000,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69075,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69150,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69225,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69300,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69375,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69450,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69525,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69600,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69675,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69750,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69825,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69900,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						69975,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						70050,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						70125,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						71175,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70200,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						70200,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70350,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70500,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70650,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70950,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71100,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71250,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71325,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70575,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						70800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						71400,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71475,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71550,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71625,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71700,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72000,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72075,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72150,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72225,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72300,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72450,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72525,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						71850,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						72600,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72750,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						72900,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73350,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73500,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73050,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73650,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						73800,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73875,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						73950,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74025,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74100,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74175,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74250,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74325,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74400,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74475,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74550,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74625,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74700,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74775,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74850,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						74925,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						75000,
+						7,
+						300,
+						"",
+						[
+							1
+						]
+					],
+					[
+						75300,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						75450,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						75000,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						75150,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						75600,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						75900,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						76050,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						75750,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						76200,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						76350,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						76500,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						76650,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						76800,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						76950,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						77100,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						77250,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						77400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						77550,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						77700,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						77850,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78000,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78150,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78300,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78450,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						78600,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78675,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78750,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79200,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79350,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79500,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79650,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79575,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79725,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						78900,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79050,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						79800,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79875,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						79950,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80025,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80100,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80250,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80325,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80400,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80475,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80550,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80625,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80700,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80775,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80850,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80925,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						80175,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						81000,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81075,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81150,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81225,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81300,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81375,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81525,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81675,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81600,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81825,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81900,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81975,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82050,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82125,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81450,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						81750,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						82200,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82350,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83250,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82500,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82575,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82650,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83025,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82950,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83100,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						82800,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						83400,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83475,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83550,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83625,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83700,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83775,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83850,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						83925,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84000,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84075,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84150,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84225,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84300,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84375,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84450,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84525,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						84600,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84675,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84750,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84825,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84900,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84975,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						84600,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						84825,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						85200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						85050,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						85650,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						85425,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						85050,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85125,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85200,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85275,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85350,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85425,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85500,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85575,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85650,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85725,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						85800,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85950,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						86100,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						86400,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						86550,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						86700,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						86850,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						85800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						86025,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						86850,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						86250,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						86400,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						86625,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						86250,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						87000,
+						1,
+						150,
+						"",
+						[
+							0
+						]
+					],
+					[
+						87225,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						87450,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						87600,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						87750,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						87000,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						87225,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						87450,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						87600,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						87825,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88050,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						87900,
+						0,
+						225,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						88650,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88200,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88200,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88425,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88650,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88800,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						89025,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88350,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88575,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88950,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						88350,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88425,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88575,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88800,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88875,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						88950,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89025,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89100,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89175,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89250,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89325,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89175,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						89250,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						89325,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						89400,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89400,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						89625,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						89850,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						90000,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						90225,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						90450,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						90000,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						90300,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						89700,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						90600,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						90825,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91050,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91200,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91425,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91650,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						90600,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						90675,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						90750,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						90825,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						90900,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						90975,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91050,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91125,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91350,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91425,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91500,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91575,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91650,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91725,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91200,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						91275,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						92025,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						92250,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						92625,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						92850,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91800,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						92100,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						92400,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						92700,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						92175,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						92775,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						92400,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						92550,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91950,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						91800,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						93000,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						93300,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						93600,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						93900,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						93075,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93000,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93150,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93225,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93375,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93450,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93600,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93750,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93825,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						93900,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94050,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						94200,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94350,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94500,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94650,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94950,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						95100,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						95250,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						94200,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						95400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						95550,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						95700,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						95850,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						96000,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						96150,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						96300,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						96450,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						96600,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						96750,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						96900,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97050,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97200,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97350,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97500,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97650,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						98400,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						98550,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						98700,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						98850,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						98775,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						98925,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97800,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97875,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						97950,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						98100,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						99000,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99075,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99150,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99225,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99375,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99300,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99450,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99525,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99600,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99675,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99750,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99825,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99900,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						99975,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100050,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100125,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						100200,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100275,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100350,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100425,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100500,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100575,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100650,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100725,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100875,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100950,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101025,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						100800,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101100,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101175,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101250,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101325,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						101400,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101775,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101850,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102000,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101550,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						101700,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102150,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102225,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102300,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102450,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						102750,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102825,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102600,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102675,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102900,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						102975,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103050,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103125,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103200,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103275,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103350,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103500,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103575,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103425,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103650,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103725,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						104025,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104250,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104325,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104400,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104100,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104175,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104475,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104550,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103800,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						104025,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						104250,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						104400,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						104625,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						104850,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						104700,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104850,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104925,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103800,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103875,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						103950,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104775,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						104625,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						105300,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						105450,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						105600,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						105750,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						105900,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						106050,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						105000,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						105225,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						105450,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						105600,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						105825,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						106050,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						105150,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						105000,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						106200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						106425,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						106650,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						106800,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						106950,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						107100,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						106200,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						106425,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						106650,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						106800,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107025,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107250,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						107400,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						107625,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108375,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108450,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108525,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108150,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107550,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						107850,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						107775,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108000,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108075,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108150,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108225,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108300,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						107775,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107400,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107550,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107625,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						107850,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						108000,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						108225,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						108375,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						108450,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						108525,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						108600,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108900,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						109200,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						109500,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						108600,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						108825,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						109050,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						109200,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						109425,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						109650,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						109800,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						109875,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						109950,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110025,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110100,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110175,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110250,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110325,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110400,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110475,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110550,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110625,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110700,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110775,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110850,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						110925,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						109800,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						110025,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						110250,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						110400,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						110625,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						110850,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						111000,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						111300,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						111600,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						111900,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						111000,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						111225,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						111450,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						111600,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						111825,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112050,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [
+					[
+						112200,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						112500,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						112800,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						113100,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						112800,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						113250,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						113100,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112200,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112425,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112350,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112575,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112650,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						112950,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						113025,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						113400,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						113625,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						113850,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						114000,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						114150,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						114300,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						114450,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						113400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						113625,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						113850,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						114000,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						114150,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						114300,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						114450,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"sectionNotes": [
+					[
+						114600,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						114825,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115050,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115200,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115350,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115500,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115650,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						114600,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						114825,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						115050,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						115200,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						115350,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						115500,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						115650,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						115800,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115950,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116025,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116175,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116250,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116400,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116550,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116625,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						116775,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						115800,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						115950,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116025,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116175,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116250,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116400,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116550,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116625,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116775,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116850,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						116850,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						117000,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117150,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117225,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117375,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117450,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117600,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117750,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118125,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117975,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118050,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117825,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117900,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						117000,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117150,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117225,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117375,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117450,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117600,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117750,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117825,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						118050,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117900,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						117975,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						118200,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						118200,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118425,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118650,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118800,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118950,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						119100,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						119250,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						118425,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						118800,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						119100,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						118650,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						118950,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						119250,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						119400,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						119625,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						119850,
+						2,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120000,
+						0,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120150,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120300,
+						3,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120450,
+						1,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						119625,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						119850,
+						6,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120000,
+						4,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120150,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						119400,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120300,
+						7,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120450,
+						5,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						120600,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120750,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120825,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120975,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						121050,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						121200,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						121350,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						121500,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						120600,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120750,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120825,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						120975,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						121050,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						121200,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						121350,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						121500,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						121800,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						121950,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						122025,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						122175,
+						5,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						122250,
+						6,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						121800,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						121950,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						122025,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						122175,
+						1,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						122250,
+						3,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						122400,
+						2,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						122700,
+						0,
+						0,
+						"",
+						[
+							1
+						]
+					],
+					[
+						122700,
+						4,
+						0,
+						"",
+						[
+							0
+						]
+					],
+					[
+						122400,
+						7,
+						0,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [
+					[
+						123000,
+						5,
+						225,
+						"",
+						[
+							1
+						]
+					],
+					[
+						123000,
+						1,
+						1125,
+						"",
+						[
+							0
+						]
+					]
+				],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": false,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"changeKeys": false,
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"sectionNotes": [],
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"opponentKeys": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"denominator": 4,
+				"gfSection": false,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"opponentKeys": 4,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"changeKeys": false,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"playerKeys": 4,
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"bpm": 150,
+				"changeBPM": false
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"numerator": 4,
+				"altAnim": false,
+				"timeSignature": [
+					4,
+					4
+				],
+				"mustHitSection": true,
+				"lengthInSteps": 16,
+				"sectionNotes": [],
+				"gfSection": false,
+				"denominator": 4,
+				"changeBPM": false,
+				"bpm": 150
+			},
+			{
+				"changeSignature": false,
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"sectionNotes": [],
+				"bpm": 150,
+				"timeSignature": [
+					4,
+					4
+				],
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"changeSignature": false,
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"sectionNotes": [],
+				"bpm": 150,
+				"timeSignature": [
+					4,
+					4
+				],
+				"changeBPM": false,
+				"mustHitSection": true
+			}
+		],
+		"player2": "malder-guy",
+		"uiSkin": "place",
+		"player3": null,
+		"skinModifier": "place",
+		"meta": {
+			"composers": [
+				"Micah",
+				"Ronez"
+			],
+			"iconHiddenUntilPlayed": false,
+			"displayName": "Malder (Gold)",
+			"freeplayDifficulties": null
+		},
+		"song": "Malder Gold",
+		"playerKeyAmount": 4,
+		"validScore": true,
+		"denominator": 4,
+		"speed": 2.4,
+		"gfVersion": "rannibench",
+		"events": [
+			[
+				9740,
+				[
+					[
+						"Play Animation",
+						"hey",
+						"0"
+					]
+				]
+			],
+			[
+				10085,
+				[
+					[
+						"Play Animation",
+						"hey",
+						"0"
+					]
+				]
+			],
+			[
+				10200,
+				[
+					[
+						"Play Animation",
+						"hey",
+						"0"
+					]
+				]
+			],
+			[
+				62456.25,
+				[
+					[
+						"Play Animation",
+						"hey",
+						"0"
+					]
+				]
+			]
+		],
+		"numerator": 4,
+		"opponentKeyAmount": 4,
+		"timeSignature": [
+			4,
+			4
+		],
+		"displayName": "Malder Gold",
+		"charterNames": [
+			"Syembol"
+		],
+		"uiSkinOpponent": "place",
+		"needsVoices": true,
+		"stage": "malder",
+		"freeplaySongData": {
+			"name": "Malder",
+			"presentedOpponent": "xqc",
+			"color": -8315233,
+			"placePos": {
+				"x": 1652,
+				"y": 248
+			},
+			"placeZoom": 6,
+			"availableMixes": [
+				"Original",
+				"Gold"
+			],
+			"weekIndex": 1,
+			"folder": "",
+			"mixId": 1,
+			"songName": null,
+			"meta": null,
+			"defaultMeta": null,
+			"difficulties": null,
+			"avaliableMixSongNames": [
+				"Malder",
+				"Malder Gold"
+			],
+			"availableMixMetas": [
+				{
+					"iconHiddenUntilPlayed": true,
+					"composers": [
+						"Micah",
+						"Ronez"
+					],
+					"displayName": "Malder"
+				},
+				{
+					"composers": [
+						"Micah",
+						"Ronez"
+					],
+					"iconHiddenUntilPlayed": false,
+					"displayName": "Malder Gold",
+					"freeplayDifficulties": null
+				}
+			],
+			"availableMixDifficulties": [
+				[
+					"Normal",
+					"Hard",
+					"Mania"
+				],
+				[
+					"Normal",
+					"Hard",
+					"Mania"
+				]
+			]
+		},
+		"bpm": 150
+	}
+}

@@ -12,6 +12,11 @@ class SongData {
 	public var color:FlxColor;
 	public var placePos:PointStruct;
 	public var placeZoom:Float;
+
+	/**
+	 * Contains each of the song's variations/mixes as a string, unformatted.
+	 * Will at least be of length 1 and contain "Original".
+	 */
 	public var availableMixes:Array<String>;
 
 	public static final DEFAULT_MIX = 'Original';

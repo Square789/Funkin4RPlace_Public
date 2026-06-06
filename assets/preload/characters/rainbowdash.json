@@ -1,0 +1,21 @@
+{
+    "characters": [
+        {
+            "name": "rainbowdash-frontwing",
+            "position": [0, 0]
+        },
+		{
+            "name": "rainbowdash-body",
+            "position": [0, 0]
+        },
+        {
+            "name": "rainbowdash-backwing",
+            "position": [0, 0]
+        }
+    ],
+    "position": [-53, 50],
+    "camera_position": [130, 0],
+    "healthicon": "rd-pixel",
+    "healthbar_colors": [81, 233, 244],
+    "reversed_layers": true
+}

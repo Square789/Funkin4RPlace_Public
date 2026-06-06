@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="noteSplashes.png">
+	<!-- pain -->
+	<SubTexture name="note splash left 10000" x="0" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 10001" x="24" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 10002" x="48" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 10003" x="72" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 10004" x="96" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 20000" x="0" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 20001" x="24" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 20002" x="48" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 20003" x="72" y="0" width="24" height="24"/>
+	<SubTexture name="note splash left 20004" x="96" y="0" width="24" height="24"/>
+	
+	<SubTexture name="note splash down 10000" x="0" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 10001" x="24" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 10002" x="48" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 10003" x="72" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 10004" x="96" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 20000" x="0" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 20001" x="24" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 20002" x="48" y="24" width="24" height="24"/>
+	<SubTexture name="note splash down 20003" x="72" y="24" width="24" height="24"/>
+  <SubTexture name="note splash down 20004" x="96" y="24" width="24" height="24"/>
+
+	<SubTexture name="note splash up 10000" x="0" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 10001" x="24" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 10002" x="48" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 10003" x="72" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 10004" x="96" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 20000" x="0" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 20001" x="24" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 20002" x="48" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 20003" x="72" y="48" width="24" height="24"/>
+	<SubTexture name="note splash up 20003" x="96" y="48" width="24" height="24"/>
+	
+	<SubTexture name="note splash right 10000" x="0" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 10001" x="24" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 10002" x="48" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 10003" x="72" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 10004" x="96" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 20000" x="0" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 20001" x="24" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 20002" x="48" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 20003" x="72" y="72" width="24" height="24"/>
+	<SubTexture name="note splash right 20004" x="96" y="72" width="24" height="24"/>
+</TextureAtlas>

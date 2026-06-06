@@ -1,0 +1,221 @@
+{ "frames": {
+   "RossTankman Idle0000": {
+    "frame": { "x": 0, "y": 183, "w": 48, "h": 63 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 25, "y": 23, "w": 48, "h": 63 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman Idle0001": {
+    "frame": { "x": 108, "y": 134, "w": 48, "h": 64 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 25, "y": 22, "w": 48, "h": 64 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman Idle0002": {
+    "frame": { "x": 183, "y": 67, "w": 49, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 25, "y": 21, "w": 49, "h": 65 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman Idle0003": {
+    "frame": { "x": 107, "y": 69, "w": 49, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 25, "y": 21, "w": 49, "h": 65 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singLeft0000": {
+    "frame": { "x": 0, "y": 0, "w": 66, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 9, "y": 20, "w": 66, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singLeft0001": {
+    "frame": { "x": 66, "y": 0, "w": 62, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 20, "w": 62, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singLeft0002": {
+    "frame": { "x": 66, "y": 0, "w": 62, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 20, "w": 62, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singLeft0003": {
+    "frame": { "x": 66, "y": 0, "w": 62, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 13, "y": 20, "w": 62, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singDown0000": {
+    "frame": { "x": 154, "y": 198, "w": 61, "h": 47 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 39, "w": 61, "h": 47 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singDown0001": {
+    "frame": { "x": 0, "y": 132, "w": 61, "h": 51 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 35, "w": 61, "h": 51 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singDown0002": {
+    "frame": { "x": 0, "y": 132, "w": 61, "h": 51 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 35, "w": 61, "h": 51 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singDown0003": {
+    "frame": { "x": 0, "y": 132, "w": 61, "h": 51 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 19, "y": 35, "w": 61, "h": 51 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singUp0000": {
+    "frame": { "x": 128, "y": 0, "w": 55, "h": 69 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 23, "y": 17, "w": 55, "h": 69 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singUp0001": {
+    "frame": { "x": 183, "y": 0, "w": 54, "h": 67 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 24, "y": 19, "w": 54, "h": 67 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singUp0002": {
+    "frame": { "x": 183, "y": 0, "w": 54, "h": 67 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 24, "y": 19, "w": 54, "h": 67 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singUp0003": {
+    "frame": { "x": 183, "y": 0, "w": 54, "h": 67 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 24, "y": 19, "w": 54, "h": 67 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singRight0000": {
+    "frame": { "x": 54, "y": 66, "w": 53, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 30, "y": 20, "w": 53, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singRight0001": {
+    "frame": { "x": 0, "y": 66, "w": 54, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 28, "y": 21, "w": 54, "h": 65 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singRight0002": {
+    "frame": { "x": 0, "y": 66, "w": 54, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 28, "y": 21, "w": 54, "h": 65 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman singRight0003": {
+    "frame": { "x": 0, "y": 66, "w": 54, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 28, "y": 21, "w": 54, "h": 65 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman eventUgh0000": {
+    "frame": { "x": 108, "y": 198, "w": 46, "h": 65 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 26, "y": 21, "w": 46, "h": 65 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman eventUgh0001": {
+    "frame": { "x": 156, "y": 132, "w": 47, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 26, "y": 20, "w": 47, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman eventUgh0002": {
+    "frame": { "x": 203, "y": 132, "w": 47, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 26, "y": 20, "w": 47, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   },
+   "RossTankman eventUgh0003": {
+    "frame": { "x": 61, "y": 134, "w": 47, "h": 66 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 26, "y": 20, "w": 47, "h": 66 },
+    "sourceSize": { "w": 100, "h": 100 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.8.1-dev",
+  "image": "RossTankman.png",
+  "format": "RGBA8888",
+  "size": { "w": 250, "h": 263 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "RossTankman Idle", "from": 0, "to": 3, "direction": "forward", "color": "#000000ff" },
+   { "name": "RossTankman singLeft", "from": 4, "to": 7, "direction": "forward", "color": "#000000ff" },
+   { "name": "RossTankman singDown", "from": 8, "to": 11, "direction": "forward", "color": "#000000ff" },
+   { "name": "RossTankman singUp", "from": 12, "to": 15, "direction": "forward", "color": "#000000ff" },
+   { "name": "RossTankman singRight", "from": 16, "to": 19, "direction": "forward", "color": "#000000ff" },
+   { "name": "RossTankman eventUgh", "from": 20, "to": 23, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Body", "opacity": 255, "blendMode": "normal" },
+   { "name": "Back arm", "opacity": 255, "blendMode": "normal" },
+   { "name": "Front Arm", "opacity": 255, "blendMode": "normal" },
+   { "name": "Head", "opacity": 255, "blendMode": "normal" },
+   { "name": "Front Hand", "opacity": 255, "blendMode": "normal" },
+   { "name": "Back hand", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

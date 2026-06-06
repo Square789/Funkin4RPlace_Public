@@ -83,7 +83,37 @@ class ChartingState extends MusicBeatState
 		['Screen Shake', "Value 1: Camera shake\nValue 2: HUD shake\n\nEvery value works as the following example: \"1, 0.05\".\nThe first number (1) is the duration.\nThe second number (0.05) is the intensity."],
 		['Change Character', "Value 1: Character Group, Character Number to change\n(split with comma)\n(Character Groups: 0 = BF, 1 = Dad, 2 = GF)\nValue 2: New character's name"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
-		['Set Property', "Value 1: Variable name\nValue 2: New value"]
+		[
+			'Chatbox Control',
+			(
+				"Value 1 (A): The message spewer to modify and its\n" +
+				"  desired chance value, separated by any of '#:;>'.\n" +
+				"  preload/data/twitch_chat/messages.json contains\n" +
+				"  all available spewer names.\n" +
+				"  The default spewer chance is 1000.\n" +
+				"Value 1 (B): \"!STORE\", \"!RESTORE\", \"!CLEAR\"\n" +
+				"Value 2: Zero-based indices of affected chatboxes,\n" +
+				"  separated by commas. Leave blank to affect all.\n" +
+				"  (For !STORE, only the first index has meaning.)"
+			),
+		],
+		['Set Property', "Value 1: Variable name\nValue 2: New value"],
+		[
+			'Modify Healthbar Icons',
+			(
+				"Value 1: \"!ADD\", \"!REMOVE\", \"!REMOVEAT\"\n" +
+				"Value 2: the targeted side (1 or 2), a character ID\n" +
+				"and optionally an insertion index separated by\n" +
+				"commas. (\"1,bf\", \"1,gf,0\")\n" +
+				"Index defaults to the end if not given.\n" +
+				"!REMOVE ignores the index and remove at most one\n" +
+				"icon by its character's name. (\"1,bf\")\n" +
+				"!REMOVEAT removes the icon at the specified index\n" +
+				"and does not take a name. (\"2,0\")\n" +
+				"Counterintuitively, the last icon is the frontmost one.\n" +
+				"It is unwise to remove all icons.\n"
+			),
+		],
 	];
 
 	var _file:FileReference;

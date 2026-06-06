@@ -31,8 +31,8 @@ class SkinData {
         UISkin => "uiskins",
     ];
     public static var pixelSkins:Map<SkinDataType, Array<String>> = [
-        Noteskin => ['pixel', 'place'],
-        UISkin => ['pixel', 'place'],
+        Noteskin => ['week6', 'pixel', 'place'],
+        UISkin => ['week6', 'pixel', 'place'],
     ];
     // hybrid skins
     public static var pixelSkinOverrides:Map<SkinDataType, Map<String, Array<String>>> = [

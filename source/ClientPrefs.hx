@@ -73,6 +73,7 @@ class ClientPrefs {
 	public static var safeFrames:Float = 10;
 	public static var noteSkin:String = 'Default';
 	public static var uiSkin:String = 'Default'; // unused
+	public static var controlGC:Bool = true;
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -262,6 +263,7 @@ class ClientPrefs {
 		FlxG.save.data.badWindow = badWindow;
 		FlxG.save.data.safeFrames = safeFrames;
 		FlxG.save.data.noteSkin = noteSkin;
+		FlxG.save.data.controlGC = controlGC;
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
@@ -376,6 +378,9 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.noteSkin != null) {
 			noteSkin = FlxG.save.data.noteSkin;
+		}
+		if (FlxG.save.data.controlGC != null) {
+			controlGC = FlxG.save.data.controlGC;
 		}
 		if(FlxG.save.data.controllerMode != null) {
 			controllerMode = FlxG.save.data.controllerMode;

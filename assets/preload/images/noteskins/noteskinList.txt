@@ -1,6 +1,8 @@
 Default
-White-Outline
+Single-Outline
 Polygonal
 Lavalamp
-Glassball
+Glass
+Orb
 789
+Base-Game

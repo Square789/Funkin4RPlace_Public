@@ -1,0 +1,34 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 10,
+			"anim": "idle",
+			"loop": true,
+			"name": "VoidKingBody idle"
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/VoidKingBody",
+	"position": [
+		0,
+		0
+	],
+	"healthicon": "bf-pixel",
+	"flip_x": false,
+	"healthbar_colors": [
+		3,
+		3,
+		3
+	],
+	"camera_position": [
+		0,
+		0
+	],
+	"sing_duration": 4,
+	"scale": 6
+}

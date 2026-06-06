@@ -1,0 +1,425 @@
+[
+	[
+		{"text": "PROLOGUE", "textSize": 40, "postPadding": 25, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+
+		{"text": "Howdy! Welcome to the Lorebook, a book containing details on exactly how this mod came to be, the history of the people who made it and about the characters in the mod, written (primarily) by Project Funk's leader,", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Sir Sins.", "offset": {"x": 0, "y": -16}, "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Enjoy reading!", "textSize": 20, "offset": {"x": 0, "y": 120}, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "sir_sins", "scale": 0.75}, "offset": {"x": 60, "y": 35}},
+		{"text": "Pictured: Sir Sins", "offset": {"x": 110, "y": -65}, "textSize": 14, "color": [82, 82, 82], "widthOverride": 260.0, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "Primary Author of This Book.", "offset": {"x": 80, "y": -46}, "textSize": 14, "color": [82, 82, 82], "widthOverride": 260.0}
+	],
+	[
+		{"text": "ORIGINS", "textSize": 40, "postPadding": 25, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+
+		{"text": "Everything began in April of 2022, with the return of r/place.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "This would lead into a Reddit user by the name of DJGrooves forming a small group chat and contacting me with a desire to recruit me into the effort.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Soon enough, a discord was formed, and more people piled in, until we had a force of roughly 250 people, with me and several others at its helm.", "textSize": 18, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "Initially, we had contacted the titular Indie Alliance and requested to construct a Boyfriend on the Hollow Knight bench, but there was simply no room to do so.", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "We would settle on an area and construct a small Boyfriend health icon against a background of four striped arrow colours in the upper right corner of the canvas,", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "though it would later be destroyed and replaced by BersGamer in a hostile takeover near the event's end.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "Of particular note during the server's existence was NinjaMuffin's joining of the server for a brief period of time and requesting us to build a Bubbo in Puerto Rico.", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "We never succeeded in that effort, but it was honoured in this mod, at the least.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Ultimately, our cause would, in spirit, be fulfilled by RubberRoss with his own Boyfriend FNF in the lower middle of the canvas, its design provided to him by us, which would end up lasting until the event's end.", "textSize": 18, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "After the event ended, as FNF fans tend to do, we would aspire to create an FNF mod based on the events.", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "With a short recruitment period and the creation of a new server,", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Funkin 4 r/place would begin.", "offset": {"x": 0, "y": -16}, "textSize": 18, "color": [3, 3, 3]},
+
+		{"text": "A lot has happened since that time, as the development server turned into a friend group, eventually leading into the creation of another server.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "The fact that this mod came out at all is a miracle, but a few of us would simply never allow this mod to meet its end.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "CHARACTERS", "textSize": 40, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+		{"text": "8BF", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 155, "y": 0}},
+		{"image": {"name": "polaroids/8BF", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "The first Boyfriend, intended to be on the Hollow Knight bench.", "textSize": 18, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "FlagBF", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 128, "y": 25}},
+		{"image": {"name": "polaroids/FlagBF", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "The second Boyfriend, and the one closest to Project Funk.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Lived for roughly half of r/place's lifespan before being replaced by BersGaming.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "RossBF", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 129, "y": 25}},
+		{"image": {"name": "polaroids/RossBF", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "The third Boyfriend, Created by RubberRoss.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Lived to see the Whiteout and the end of r/place.", "textSize": 18, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "Tankman", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 118, "y": 25}},
+		{"image": {"name": "polaroids/Tankman", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "RossBF's neighbor on the canvas, Tankman, created by RubberRoss.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Similarly lived to see the Whiteout and the end of r/place.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "FlagGF", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 128, "y": 25}},
+		{"image": {"name": "polaroids/FlagGF", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "FlagBF's own Girlfriend. She was never on the canvas, but every Boyfriend needs a Girlfriend, don't they?", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "Makes you wonder if 8BF and RossBF have Girlfriends...", "textSize": 18, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "FlagPico", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 108, "y": 25}},
+		{"image": {"name": "polaroids/FlagPico", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "Because of course he's here.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "FlagNene and FlagDarnell exist too, but they don't show up in this mod.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "\"Void Cluster\"", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 52, "y": 25}},
+		{"image": {"name": "polaroids/void_cluster", "scale": 1}, "offset": {"x": 87, "y": -18}},
+		{"text": "The very first major attempt by the Swarm to take over the canvas, originating from the Canadian Flag.", "textSize": 18, "offset": {"x": 0, "y": -16}, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "\"Void Phantom\"", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 52, "y": 25}},
+		{"image": {"name": "polaroids/void_phantom", "scale": 1}, "offset": {"x": 88, "y": -18}},
+		{"text": "The second major attempt by the Swarm to take over the canvas, dominating the top right of the canvas before being no-diffed by a large lemon.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "polaroids/void_king2", "scale": 1}, "offset": {"x": -50, "y": -32}, "slotControl": ["IGNORE_ADVANCE", "NO_AUTO_PAGEBREAK"]},
+		{"text": "\"Void King\"", "textSize": 30, "color": [252, 252, 252], "offset": {"x": 84, "y": 25}, "slotControl": ["PAGEBREAK"]},
+
+		{"text": "The final major attempt by the Swarm to take over the canvas,", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "although some may wonder if this final attempt was an attempt at destruction, or a united desire to “create” something, after all.", "textSize": 18, "offset": {"x": 0, "y": -15}, "color": [3, 3, 3]},
+		{"text": "Got slapped in the face shortly before the Whiteout occurred.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "Anoo", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 146, "y": 25}},
+		{"image": {"name": "polaroids/anoo", "scale": 1}, "offset": {"x": 56, "y": -42}},
+		{"text": "Mascot of the r/FridayNightFunkin Subreddit, paying a visit by The Edge for a short rap battle.", "offset": {"x": 0, "y": -53}, "textSize": 18, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"text": "Bubbo", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 140, "y": 25}},
+		{"image": {"name": "polaroids/Bubbo", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "Incredible Music composer.", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "He has Invaded Puerto Rico by request of NinjaMuffin", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": -16}}
+	],
+	[
+		{"text": "XQC", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 146, "y": 25}},
+		{"image": {"name": "polaroids/xqc", "animated": true, "frameW": 128, "frameH": 128, "fps": 12, "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "Popular Twitch streamer, most known for his reign in the first Overwatch.", "textSize": 13, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "Made an attempt to annihilate the MLP Mural by dropping a giant meteor upon it, unbeknownst to the fact that it was ALLEGEDLY botted.", "textSize": 13, "color": [3, 3, 3], "offset": {"x": 0, "y": -15}},
+		{"text": "Followed and supported by his chat, serving as his manpower throughout the r/place event,", "textSize": 13, "color": [3, 3, 3]},
+		{"text": "including their “Purple Void”.", "textSize": 13, "color": [3, 3, 3], "offset": {"x": 0, "y": -15}, "slotControl": ["PAGEBREAK"]},
+		
+		{"text": "Rainbow Dash", "textSize": 30, "color": [3, 3, 3], "offset": {"x": 70, "y": 25}},
+		{"image": {"name": "polaroids/RD", "scale": 1}, "offset": {"x": 120, "y": 0}},
+		{"text": "Resident of Equestria and representative of the Element of Loyalty.", "textSize": 14, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "She seems to not be too fond of a meteor being dropped upon the Pony Crystals and all of her friends.", "textSize": 14, "color": [3, 3, 3], "offset": {"x": 0, "y": -15}},
+		{"text": "Her battle with xQc would be legendary, if not for the fact this is an FNF mod, so they have to rap instead.", "textSize": 14, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "CONCEPTS + FUN STUFF", "textSize": 40, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+		{"text": "If you would like to get a better look at any of the things in this section, I implore you to go into the files and check them out for yourself!\n\nThey should be under", "textSize": 22, "color": [3, 3, 3]},
+		{"text": "assets/images/lorebook/other", "textSize": 18, "color": [3, 3, 3]},
+		{"text": "\nThank you!", "textSize": 22, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/fun/promo_art", "scale": 0.25}, "offset": {"x": 40, "y": 25}},
+		{"text": "fun/promo_art", "offset": {"x": 40, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Promotional art, by Bruno and Captain.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/titlescreen_concept1", "scale": 0.50}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/titlescreen_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Concept art for the mod's Title Screen, by Captain.", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "The background was reused for the options menu.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/concept_art/week-selection_concept1", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/week-selection_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Concept art for the week selection screen, by Emolga/DZ.", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "Most aspects were kept in the final menus.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/swarm_concept1", "scale": 0.30}, "offset": {"x": 20, "y": 25}},
+		{"text": "concept_art/swarm_concept1", "offset": {"x": 20, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Concept art for the week selection screen, by Emolga/DZ.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "Most aspects were kept in the final menus.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"image": {"name": "other/concept_art/swarm_concept2", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/swarm_concept2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Second concept art for Swarm, by Sir Sins.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "Cleaned up and clarified for easier adaptation. Due to time constraints, not all characters shown here were able to be included in the final background.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/enough_concept1", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/enough_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Background concept for Enough and the Void King, by Sir Sins.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+	
+		{"image": {"name": "other/concept_art/malder_concept1", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/malder_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Original concept art for Malder, by Emolga/DZ.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "Very different from the final background, but features similar cameos overall.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/malder_concept2", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/malder_concept2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Second concept art for Malder, by Sir Sins.", "textSize": 14, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/concept_art/malder_concept3", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/malder_concept3", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Third and final concept art for Malder, by Sir Sins.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "The in-game background was based upon this version, and includes all characters seen here.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/malder_concept4", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/malder_concept4", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Early concept for Malder's background, by Spacenautica.", "textSize": 14, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/concept_art/malder_concept5", "scale": 0.4}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/malder_concept5", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Earlier concept for possible layout in Malder, by RaytheMaymay.", "textSize": 14, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/bubbo_concept1", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/bubbo_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Original concept art for Bubbo, by Emolga/DZ.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "In the end, we took a different approach, so this concept became unused.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"image": {"name": "other/concept_art/cluster_concept1", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/cluster_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Void 1 pose concepts, by Sir Sins.", "textSize": 14, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/rd_concept1", "scale": 0.65}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/rd_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Rainbow Dash pose concepts, by Sir Sins.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"image": {"name": "other/concept_art/xqc_concept1", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/xqc_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "xQc pose concepts, by Sir Sins.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/concept_art/fp_concept1", "scale": 0.45}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/fp_concept1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Original FlagPico pose concepts, by Sir Sins.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/concept_art/fp_concept2", "scale": 0.50}, "offset": {"x": 25, "y": 25}},
+		{"text": "concept_art/fp_concept2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Second FlagPico pose concepts, by Sir Sins.", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "Features an early FlagPico sprite in the center.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "(before I had a full reference)", "offset": {"x": 0, "y": -15}, "textSize": 14, "color": [82, 82, 82]}
+	],
+	[
+		{"text": "NEXT UP:\nEarly Stuff", "textSize": 40, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}}
+	],
+	[
+		{"image": {"name": "other/early/flagbf1", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/flagbf1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"image": {"name": "other/early/flagbf2", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/flagbf2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["PAGEBREAK"]},
+
+		{"text": "Early FlagBF design, mid-creation. By RaytheMaymay.", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "This design was initially meant to be FOR the canvas, where he'd sit near the Indie Alliance bench, but was ultimately scrapped and reworked into the final FlagBF we know today.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/early/flagbf_death1", "scale": 1}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/flagbf_death1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Unused BERS Game Over, by RayTheMaymay.", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "Based on BERS' takeover from the canvas, but more literal instead of a recolor of FlagBF.", "textSize": 14, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"image": {"name": "other/early/gameover1", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/gameover1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Concept scribble for a possible game over screen, by RaytheMaymay.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/early/flaggf1", "scale": 0.25}, "offset": {"x": 0, "y": 25}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "early/flaggf1", "offset": {"x": 0, "y": 0}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["IGNORE_ADVANCE"]},
+		
+		{"image": {"name": "other/early/flaggf3", "scale": 0.35}, "offset": {"x":  220, "y": 0}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "early/flaggf3", "offset": {"x": 220, "y": 0}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["IGNORE_ADVANCE"]},
+
+		{"image": {"name": "other/early/flaggf2", "scale": 0.28}, "offset": {"x": 64, "y": 113}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "early/flaggf2", "offset": {"x": 64, "y": 275}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["IGNORE_ADVANCE"]},
+
+		
+		{"text": "Early FlagGF design and sketches, by Pale Artist and [Uncredited by Request].", "textSize": 14, "color": [3, 3, 3], "offset": {"x": 0, "y": 296}},
+		{"text": "The final FlagGF design was a mix of Pale's and [Uncredited by Request]'s. A ref sheet was never made, as she is not the most present in the mod.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "(maybe that could change…?)", "textSize": 14, "color": [82, 82, 82], "offset": {"x": 0, "y": -15}},
+
+
+		{"image": {"name": "I'mKillingRayForThis", "scale": 1}, "offset": {"x": -8, "y": 180}, "slotControl": ["IGNORE_ADVANCE", "NO_AUTO_PAGEBREAK"]},
+		{"image": {"name": "other/early/flaggf4", "scale": 0.5}, "offset": {"x": 25, "y": 35}},
+		{"text": "early/flaggf4", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "FlagGF mid-progress, by RaytheMaymay.", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 15}},
+		{"text": "“I FUCKING LOVE spriting high heels", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 19}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "IT MAKES ME WANNA brings me so much joy” - RaytheMaymay", "textSize": 18, "color": [3, 3, 3], "offset": {"x": 0, "y": 76}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "spriting high", "textSize": 16, "color": [252, 252, 252], "offset": {"x": 184, "y": 19}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "\nheels", "textSize": 16, "color": [252, 252, 252], "offset": {"x": 5, "y": 19}, "slotControl": ["IGNORE_ADVANCE","IGNORE_OFFSET_X"]},
+		{"text": "brings me so", "textSize": 16, "color": [252, 252, 252], "offset": {"x": 204, "y": 74}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "\nmuch joy", "textSize": 16, "color": [252, 252, 252], "offset": {"x": 2, "y": 76}, "slotControl": ["IGNORE_ADVANCE"]},
+
+		{"text": "I fucking love working on this shit all day with 0 motivation to do so so I'm just kinda throwing myself at it whilst staring at a VSCode window for basically the entire day whilst getting NOTHING done I love f4rp so much", "textSize": 1, "color": [3, 3, 3], "offset": {"x":  999999, "y": 0}, "slotControl": ["IGNORE_ADVANCE"]}
+	],
+	[
+		{"image": {"name": "other/early/flagpico1", "scale": 0.35}, "offset": {"x": 0, "y": 25}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "early/flagpico1", "offset": {"x": 0, "y": 0}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["IGNORE_ADVANCE"]},
+		
+		{"image": {"name": "other/early/flagpico2", "scale": 0.4}, "offset": {"x":  200, "y": 97}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "early/flagpico2", "offset": {"x": 200, "y": 72}, "textSize": 14, "color": [82, 82, 82], "slotControl": ["IGNORE_ADVANCE"]},
+
+		
+		{"text": "Early FlagPico design concepts, by Pale Artist and Bruno respectively.", "textSize": 16, "color": [3, 3, 3], "offset": {"x": 0, "y": 220}},
+		{"text": "“Little known fact, despite not showing up on the canvas, a pico flag WAS made internally with plans to be put next to the newgrounds logo… but of course, that was scrapped, and the mural that spawned RossBF was made instead”  - RaytheMaymay", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/early/flagpico3", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/flagpico3", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Full FlagPico Reference, by PaleArtist", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "(this is that reference)", "textSize": 14, "color": [82, 82, 82], "offset": {"x": 0, "y": -15}}
+	],
+	[
+		{"image": {"name": "other/early/phantom2", "scale": 1}, "offset": {"x": 25, "y": 25}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "early/phantom2", "offset": {"x": 25, "y": 325}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Early Void Phantom, by Syembol.", "textSize": 14, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/early/consume1", "scale": 0.3}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/consume1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "In progress Consume background.", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "by [Uncredited by Request].", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/early/rainbow_dash", "scale": 0.45}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/rainbow_dash", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Early Rainbow Dash asset, by Pale Artist.", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "Was ultimately scrapped for the sake of stylistic consistency and efficiency.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/early/x_rd", "scale": 0.60}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/x_rd", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Early sprite sketches for XQC and Rainbow Dash, by Spacenautica.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "Due to slow team progress, work was shifted to others, resulting in these sketches being unused.", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/early/xqc1", "scale": 0.35}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/xqc1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"image": {"name": "other/early/xqc2", "scale": 0.25}, "offset": {"x": 25, "y": 0}},
+		{"text": "early/xqc2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+
+		{"text": "Early pose concepts for XQC, by Spacenautica.", "textSize": 16, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+		{"text": "Scrapped due to a change in perspective for the visuals of the song.", "textSize": 18, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/early/boundary_unlock1", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "early/boundary_unlock1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Concept for unlocking the Boundary song, by RaytheMaymay.", "textSize": 16, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}, "slotControl": ["PAGEBREAK"]},
+		
+		{"text": "NEXT UP:\nFunnies", "textSize": 40, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}}
+	],
+	[
+		{"image": {"name": "other/fun/8bf-polaroid", "scale": 0.5}, "offset": {"x": 120, "y": 25}},
+		{"text": "fun/8bf-polaroid", "offset": {"x": 120, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Scrapped Idea for Lorebook Character Stills, Nuked Due to Scope.\nby [Uncredited by Request].", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "“I really wanted there to be polaroid images in the lorebook of the characters for their blurbs,\nAlthough I only realized part way through making this how tough that'd be...\nSo this is probably going to be the only one I'm doing lol”", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "(I also forgot he was on the canvas at all)", "textSize": 14, "color": [82, 82, 82], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/fun/flagbf_ref", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/flagbf_ref", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "FlagBF ref sheet, by RayTheMaymay with suggestions from the rest of the team.", "textSize": 12, "color": [3, 3, 3]},
+		{"text": "“After I noticed that FlagBF might need to be drawn at non-pixelart resolutions from time to time, I took the chance to give him a proper stylization for that.", "textSize": 12, "color": [3, 3, 3]},
+		{"text": "Some fun details were also asserted around this time, such as that FlagBF has no ears (only eardrums), his mouth only shows up when needed, and much more stuff I said for gits and shiggles (this has been documented on the fnf mod wiki)” - Ray", "textSize": 12, "color": [3, 3, 3], "offset": {"x": 0, "y": -15}, "slotControl": ["PAGEBREAK"]}
+	
+	],
+	[
+		{"image": {"name": "other/fun/flagbf_point", "scale": 1}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/flagbf_point", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "“That's him, officer” - RaytheMaymay", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+	
+		{"image": {"name": "other/fun/flagbf_table", "scale": 0.4}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/flagbf_table", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "“How about another joke, FlagBF” - RaytheMaymay", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/fun/qsides-flagbf1", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/qsides-flagbf1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "‘Q-Sides’ FlagBF from a dream had by RaytheMaymay, sketch also by Ray.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		{"text": "“had a cool dream today where someone made ‘Q-Side’ F4RP and FlagBF looked like this roughly", "textSize": 16, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+		{"text": "his color scheme was white and gray and his note poses had him shooting the guns in random directions", "textSize": 16, "color": [3, 3, 3]},
+		{"text": "but what matched the note colors wasn't his skin, it was the gunshots whick is kinda cool i think” - RaytheMaymay", "textSize": 16, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/fun/dsides_flags", "scale": 0.22}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/dsides_flags", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"image": {"name": "other/fun/dsides_flaggf", "scale": 0.22}, "offset": {"x": 25, "y": 0}},
+		{"text": "fun/dsides_flaggf", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "D-Sides FlagBF and FlagGF concepts, by Pale Artist.", "textSize": 16, "color": [3, 3, 3], "slotControl": ["IGNORE_ADVANCE", "NO_AUTO_PAGEBREAK", "PAGEBREAK"]},
+
+		{"image": {"name": "other/fun/dsides_flaggf2", "scale": 0.25}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/dsides_flaggf2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "D-Sides FlagGF finalized design by Pale Artist.", "textSize": 14, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/fun/flagsky", "scale": 0.45}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/fun/flagsky", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Random FlagSky concept made for fun, by Parasy.", "textSize": 12, "color": [3, 3, 3]},
+		{"text": "Stayed around as a joke character despite not really looking like Sky anymore past a certain point.", "textSize": 12, "color": [3, 3, 3]},
+
+		{"image": {"name": "other/fun/flagskies", "scale": 0.45}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/fun/flagskies", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "More lore-accurate FlagSkies as a followup to the first one.", "textSize": 12, "color": [3, 3, 3]},
+		{"text": "Also by Parasy", "textSize": 12, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/fun/dev_icon", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "fun/dev_icon", "offset": {"x": 25, "y": -15}, "textSize": 16, "color": [82, 82, 82]},
+		{"text": "F4RP dev server icon, by RaytheMaymay.", "textSize": 14, "color": [3, 3, 3]},
+		{"text": "Ended up being the inspiration for the final version of the mod's logo.", "textSize": 14, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"text": "NEXT UP:\nFanart", "textSize": 40, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}}
+	],
+[
+		{"image": {"name": "other/fanart/neonanicle1", "scale": 0.3}, "offset": {"x": 50, "y": 25}},
+		{"text": "By Neonanicle", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/neonanicle1", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "“The funky shorties trio” - Neonanicle", "offset": {"x": 0, "y": 0}, "textSize": 16, "color": [3, 3, 3], "slotControl": ["NO_AUTO_PAGEBREAK"]},
+		{"text": "“Peak…” - RaytheMaymay", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/fanart/neonanicle2", "scale": 0.5}, "offset": {"x": 25, "y": 25}},
+		{"text": "By Neonanicle", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/neonanicle2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "“I was in the middle of making Bf on Spray Paint then got voided” - Neonanicle”", "offset": {"x": 0, "y": 0}, "textSize": 16, "color": [3, 3, 3], "slotControl": ["NO_AUTO_PAGEBREAK"]},
+		{"text": "“Voided version not included because the void killed my grandma, okay?” - RaytheMaymay", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/fanart/neonanicle3", "scale": 0.72}, "offset": {"x": 50, "y": 25}},
+		{"text": "By Neonanicle", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/neonanicle3", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+
+		{"text": "“Me when I dropped a masterpiece that surely won't be included to Funkin'4r/place gallery when the full mod releases because I might get a little too hype and could cause destruction” - Neonanicle", "textSize": 16, "offset": {"x": 0, "y": 25}, "color": [3, 3, 3]},
+		{"text": "“Sorry guys i think destruction is imminent” - RaytheMaymay", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]}
+	],
+	[
+		{"image": {"name": "other/fanart/saplinging1", "scale": 0.6}, "offset": {"x": 25, "y": 25}},
+		{"text": "By Saplinging", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/saplinging1", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Made on Christmas", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/fanart/saplinging2", "scale": 0.6}, "offset": {"x": 25, "y": 25}},
+		{"text": "By Saplinging", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/saplinging2", "offset": {"x": 25, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "Made on New Years", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]},
+		{"text": "“I forgot what his shirt looked like it's been genuine years since I've touched fnf” - Saplingling", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]}
+	],
+		[
+		{"image": {"name": "other/fanart/saplinging3", "scale": 0.4}, "offset": {"x": 25, "y": 25}},
+		{"text": "By Saplinging", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/saplinging3", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "“it's been like 3 years since I looked at his design, drawn pixel art and him in general but yeah” - Sapling", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]},
+		{"text": "“Thanks for being a fan this long!” - RaytheMaymay", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+		
+		{"image": {"name": "other/fanart/deondahlia1", "scale": 0.35}, "offset": {"x": 50, "y": 25}},
+		{"text": "By DeonDahlia", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "fanart/deondahlia1", "offset": {"x": 50, "y": -15}, "textSize": 14, "color": [82, 82, 82]},
+		{"text": "“The he” - DeonDahlia", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]},
+		{"text": "“<3” - RaytheMaymay", "textSize": 16, "offset": {"x": 0, "y": 0}, "color": [3, 3, 3]}
+	],
+	[
+		{"text": "EPILOGUE", "textSize": 40, "postPadding": 25, "color": [3, 3, 3], "offset": {"x": 0, "y": 25}},
+
+		{"text": "If you're reading this, you've reached the end of the Lorebook. From this distant writer, I must extend my thanks for taking the time to indulge in our “funky” little ideas.", "textSize": 19, "color": [3, 3, 3]},
+		{"text": "Truthfully, this mod probably doesn't do the best job of representing r/place as a whole, but we hope you've enjoyed this small piece of what was once a very large and legendary pie.", "textSize": 19, "color": [3, 3, 3], "slotControl": ["PAGEBREAK"]},
+
+		{"image": {"name": "other/ThankYouSoMuchForToPlayingOurGame", "scale": 0.75}, "offset": {"x": 50, "y": 135}, "slotControl": ["IGNORE_ADVANCE"]},
+		{"text": "Thanks for", "textSize": 35, "color": [3, 3, 3], "offset": {"x": 76, "y": 25}},
+		{"text": "playing", "textSize": 35, "color": [3, 3, 3], "offset": {"x": 108, "y": -20}, "slotControl": ["IGNORE_OFFSET_Y"]},
+		{"text": "Funkin 4 r/place!", "textSize": 35, "color": [3, 3, 3], "offset": {"x": 5, "y": -35}}
+		
+
+	]
+]

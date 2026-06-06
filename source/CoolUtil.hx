@@ -4,6 +4,7 @@ import haxe.ValueException;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.FlxGraphic;
+import flixel.math.FlxMath;
 import flixel.util.FlxColor;
 import lime.app.Application;
 import lime.graphics.Image;
@@ -79,6 +80,10 @@ class CoolUtil
 
 	inline public static function boundTo(value:Float, min:Float, max:Float):Float {
 		return Math.max(min, Math.min(max, value));
+	}
+
+	inline public static function boundInt(value:Int, min:Int, max:Int):Int {
+		return (value < min ? min : (value > max ? max : value));
 	}
 
 	public static function coolTextFile(path:String)
@@ -268,6 +273,35 @@ class CoolUtil
 			return null;
 		}
 		return arr[FlxG.random.int(0, arr.length - 1)];
+	}
+
+	public static function maxInIntArray(arr:Array<Int>):Int {
+		if (arr.length == 0) {
+			throw new ValueException("max from empty array");
+		}
+		var _max = arr[0];
+		for (i in arr) {
+			if (i > _max) {
+				_max = i;
+			}
+		}
+		return _max;
+	}
+
+	public static function maxInArray<T>(arr:Array<T>, valfunc:T->Int):Null<T> {
+		if (arr.length == 0) {
+			throw new ValueException("max from empty array");
+		}
+		var _max = FlxMath.MIN_VALUE_INT;
+		var _maxv:Null<T> = arr[0];
+		for (i in arr) {
+			var v = valfunc(i);
+			if (v > _max) {
+				_max = v;
+				_maxv = i;
+			}
+		}
+		return _maxv;
 	}
 
 	/**

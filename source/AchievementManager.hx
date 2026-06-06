@@ -53,6 +53,7 @@ enum AchievementOperation {
 enum AchievementCriterium {
 	MISSES(op:AchievementOperation, v:Int);
 	DIFFICULTY(op:AchievementOperation, v:Int);
+	STORY_MODE_DIFFICULTY(op:AchievementOperation, v:Int);
 	IN_STORY_MODE;
 	PLAYING_AS_OPPONENT;
 	SONG_NAME(op:AchievementOperation, v:String);
@@ -80,6 +81,8 @@ private function isCriteriumFulfilled(criterium:AchievementCriterium):Bool {
 		return _intCompare(op, PlayState.instance.songMisses, v);
 	case DIFFICULTY(op, v):
 		return _intCompare(op, PlayState.storyDifficulty, v);
+	case STORY_MODE_DIFFICULTY(op, v):
+		return _intCompare(op, PlayState.lowestDifficultyThisStoryRun, v);
 	case IN_STORY_MODE:
 		return PlayState.isStoryMode;
 	case PLAYING_AS_OPPONENT:
@@ -274,6 +277,7 @@ typedef PersistenceInfo = {
 typedef AchievementLayerInfo = {
 	name:String,
 	desc:String,
+	sound:String,
 };
 
 
@@ -384,6 +388,7 @@ class Achievement {
 			{
 				name: layerNames[layerNames.length == 1 ? 0 : i],
 				desc: layerDescs[layerDescs.length == 1 ? 0 : i],
+				sound: "confirmMenu",
 			}
 		];
 		return new Achievement(
@@ -452,6 +457,7 @@ class SimpleAchievement extends Achievement {
 					{
 						name: displayNames[displayNames.length == criteria.length ? i : 0],
 						desc: descriptions[descriptions.length == criteria.length ? i : 0],
+						sound: "confirmMenu",
 					}
 			],
 			checkOnEvents,
@@ -479,7 +485,7 @@ class KonamiCodeAchievement extends Achievement {
 	private var keybuffer:Array<FlxKey>;
 
 	public function new(id:String, displayName:String, description:String) {
-		super(id, 1, [{name: displayName, desc: description}], [KEY_PRESSED], AchievementElement.ALL);
+		super(id, 1, [{name: displayName, desc: description, sound: "confirmMenu"}], [KEY_PRESSED], AchievementElement.ALL);
 		keybuffer = [];
 	}
 
@@ -515,12 +521,18 @@ class AchievementRegistryEntry {
 	}
 
 	/**
-	 * Returns the layer info of the currently unlocked layer, or the 1st one if
+	 * Returns the layer info at `layerIndex` if `layerIndex` is given.
+	 * Remember to subtract 1 from `unlockProgress` to get a proper layer index!
+	 * Otherwise, returns the layer info of the currently unlocked layer, or the 1st one if
 	 * the achievement is locked.
 	 * May return `null` when the unlockProgress is broken but at that point you have
 	 * different problems.
 	 */
-	public function getLayerInfo():AchievementLayerInfo {
+	public function getLayerInfo(layerIndex:Int = -1):Null<AchievementLayerInfo> {
+		if (layerIndex != -1) {
+			return achievement.layerInfo[layerIndex];
+		}
+
 		if (unlockProgress == 0) {
 			return achievement.layerInfo[0];
 		}
@@ -546,9 +558,13 @@ private function getDefaultAchievements():Array<Achievement> {
 	var defaultAchievements:Array<Achievement> = [];
 
 	for (arr in [
+		["Enveloped", "swarm"],
 		["Dissatisfied", "consume"],
+		["Place's end", "enough"],
+		["SIX PIXELS", "malder"],
 		["Invader", "bubbo"],
 		["Spectator", "boundary"],
+		// ["New neighbors", "real-estate"],
 	]) {
 		var achName = arr[0];
 		var songName = arr[1];
@@ -572,27 +588,39 @@ private function getDefaultAchievements():Array<Achievement> {
 		));
 	}
 
-	defaultAchievements.push(Achievement.makeCompact(
-		"completionist_demo",
-		["A Place in Our Hearts"],
-		["Beat each song", "Beat each song on Mania"],
+	defaultAchievements.push(new SimpleAchievement(
+		"week1",
+		["Null and Void"],
+		[for (d in ["Normal", "Hard", "Mania"]) 'Beat the VOID WEEK on $d'],
+		[WEEK_WON],
+		[[WEEK_NAME(EQ, "void"), STORY_MODE_DIFFICULTY(GTE, 0)], [STORY_MODE_DIFFICULTY(GTE, 1)], [STORY_MODE_DIFFICULTY(GTE, 2)]]
+	));
+	// Smoking that AchievementCriterium.PLAYING_AS_OPPONENT pack
+	// rest in piss you won't be missed
+	// defaultAchievements.push(new SimpleAchievement(
+	// 	"week1_op",
+	// 	["The Dark Side"],
+	// 	["Beat the VOID WEEK while playing as the opponent."],
+	// 	[WEEK_WON],
+	// 	[[WEEK_NAME(EQ, "void"), PLAYING_AS_OPPONENT]]
+	// ));
+	defaultAchievements.push(new Achievement(
+		"freeplay_complete",
+		3,
+		[for (d in ["Normal", "Hard", "Mania"])
+			{name: 'Snooping as Usual, I See?', desc: 'Beat "MALDER", "BUBBO" and "BOUNDARY" on $d', sound: "confirmMenu"}],
 		[ACHIEVEMENTS_ADVANCED],
 		null,
 		(_, __, ___) -> {
-			var unlocked:Bool = true;
-			var maniaUnlocked:Bool = true;
-			var e = AchievementManager.getAchievements(["consume", "bubbo", "boundary"]);
-			for (entry in e) {
-				if (entry.unlockProgress == 0) {
-					maniaUnlocked = false;
-					unlocked = false;
-					break;
-				}
-				if (entry.unlockProgress < 3) {
-					maniaUnlocked = false;
-				}
+			var e = AchievementManager.getAchievements(["malder", "bubbo", "boundary"]);
+			if (e.length != 3) {
+				throw new ValueException("Bad achievement registry array length, expected three.");
 			}
-			return maniaUnlocked ? 2 : (unlocked ? 1 : 0);
+			var minProgress = 9999;
+			for (entry in e) {
+				minProgress = FlxMath.minInt(minProgress, entry.unlockProgress);
+			}
+			return FlxMath.minInt(minProgress, 3);
 		}
 	));
 
@@ -610,23 +638,133 @@ private function getDefaultAchievements():Array<Achievement> {
 		}
 	));
 
+	defaultAchievements.push(Achievement.makeCompact(
+		"all_consuming",
+		["All-Consuming"],
+		["Beat the void week with the color brightness of all notes set to -100"],
+		[WEEK_WON],
+		null,
+		(_, __, ___) -> {
+			if (!isCriteriumFulfilled(WEEK_NAME(EQ, "void"))) {
+				return 0;
+			}
+			// NOTE: Hardcode a key amount of 4 here. Maybe try removing this multi-key leftover
+			// code altogether
+			for (i in 0...4) {
+				if (ClientPrefs.arrowHSV[3][i][2] > -100) {
+					return 0;
+				}
+			}
+			return 1;
+		}
+	));
+
+	// Welp, none of that i guess.
+	// defaultAchievements.push(new Achievement(
+	// 	"amogus",
+	// 	1,
+	// 	[{name: "Amogus", desc: "Click every Crewmate in the stages"}],
+	// 	[AMOGER_CLICKED],
+	// 	null,
+	// 	function (pad:PersistentAchievementData, _, id_:Dynamic):Int {
+	// 		var id = cast(id_, Int);
+	// 		if (id < 0 || id >= AMOGER_COUNT) {
+	// 			return 0;
+	// 		}
+
+	// 		var amogersLeft = pad.sub(1).getInt();
+	// 		var amogerSlot = pad.sub(0).sub(id);
+	// 		if (!amogerSlot.getBool()) {
+	// 			amogerSlot.setBool(true);
+	// 			amogersLeft -= 1;
+	// 		}
+	// 		return pad.sub(1).setInt(amogersLeft) == 0 ? 1 : 0;
+	// 	},
+	// 	{
+	// 		shape: TUPLE(2, [ARRAY(AMOGER_COUNT, BOOL), INT]),
+	// 		defaultProviderFunc: () -> {
+	// 			var r:Array<Dynamic>;
+	// 			r = [[for (_ in 0...AMOGER_COUNT) false], 32];
+	// 			return r;
+	// 		},
+	// 		verifierFunc: (pad:PersistentAchievementData) -> {
+	// 			var x = pad.sub(1).getInt();
+	// 			return x >= 0 && x <= 32;
+	// 		},
+	// 	}
+	// ));
+
+	defaultAchievements.push(Achievement.makeCompact(
+		"look_ma_one_hand",
+		["Single-handed Smackdown"],
+		["Beat the Void Week using only WASD or only the Arrow Keys"],
+		[WEEK_WON],
+		null,
+		(_, __, ___) -> {
+			var pressedKeys:Array<FlxKey> = [for (k in PlayState.pressedKeysThisStoryRun.keys()) k];
+			for (allowed in SHS_MAPS) {
+				var mapValid = true;
+				for (key in pressedKeys) {
+					if (!allowed.exists(key)) {
+						mapValid = false;
+						break;
+					}
+				}
+				if (mapValid) {
+					return 1;
+				}
+			}
+			return 0;
+		}
+	));
+
+	defaultAchievements.push(Achievement.makeCompact(
+		"completionist",
+		["A Place in Our Hearts"],
+		["Unlock every (standard) achievement", "Unlock every (standard) achievement on its highest tier"],
+		[ACHIEVEMENTS_ADVANCED],
+		null,
+		(_, __, ___) -> {
+			var platinum:Bool = true;
+			var gold:Bool = true;
+			var e = AchievementManager.getAchievements([
+				"week1", "swarm", "consume", "enough", "malder", "bubbo", "boundary", "freeplay_complete", "voided", "all_consuming", "look_ma_one_hand"
+			]);
+			for (entry in e) {
+				if (!entry.isUnlocked()) {
+					platinum = false;
+				}
+				if (entry.isLocked()) {
+					gold = false;
+				}
+			}
+			return platinum ? 2 : (gold ? 1 : 0);
+		}
+	));
+
 	defaultAchievements = defaultAchievements.concat([
 		// NOTE: These achievements do not trigger on any events and need to be explicitly advanced
 		// due to their unique and localized unlock situation
 		Achievement.makeCompact(
 			"reddit_mod", ["Reddit Mod"], ["Press 7 or 8"], [], AchievementElement.ALL
 		),
+		// Achievement.makeCompact(
+		// 	"tbd", ["Insert"], ["Find Someone"], [], AchievementElement.ALL
+		// ),
 		Achievement.makeCompact(
-			"nick_load", ["Evil Master Plan"], ["See the rare Nickfriend loading screen"], [], AchievementElement.ALL
+			"special_load", ["Evil Master Plan"], ["See the rare loading screen"], [], AchievementElement.ALL
 		),
 		Achievement.makeCompact(
 			"yippee", ["Yippee!!"], ["Click on the 'Yippee' creature in the Consume background"], [], AchievementElement.ALL
+		),
+		new Achievement(
+			"l_statue", 1, [{name: "[GREEN] Prizes", desc: "Get the Secret Plaque in the Swarm background\n[FREEPLAY ONLY]", sound: "luj"}], [], AchievementElement.ALL
 		),
 		// ===== //
 		new Achievement(
 			"friday_night_play",
 			1,
-			[{name: "Freaky on a Friday Night", desc: "Play on a Friday... Night"}],
+			[{name: "Freaky on a Friday Night", desc: "Play on a Friday... Night", sound: "confirmMenu"}],
 			[GAME_STARTED],
 			AchievementElement.ALL,
 			function (_, __, ___) {
@@ -637,9 +775,9 @@ private function getDefaultAchievements():Array<Achievement> {
 		new Achievement(
 			"replayer",
 			1,
-			[{name: "Replayer", desc: "Boot up the mod a few times"}],
+			[{name: "Replayer", desc: "Boot up the mod a few times", sound: "confirmMenu"}],
 			[GAME_STARTED],
-			AchievementElement.ALL,
+			AchievementElement.DESC | AchievementElement.ICON,
 			function (data:PersistentAchievementData, _, __) {
 				return data.setInt(data.getInt() + 1) > 3 ? 1 : 0;
 			},

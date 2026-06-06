@@ -1,0 +1,146 @@
+{
+	"song": {
+		"events": [
+			[
+				6982.75862068965,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				29137.9310344828,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				31465.5172413793,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				62586.2068965518,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				86034.4827586206,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				88189.6551724137,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"enter",
+						""
+					]
+				]
+			],
+			[
+				96522.988505747,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"materialize",
+						""
+					]
+				]
+			],
+			[
+				96548.1321839079,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"join",
+						""
+					]
+				]
+			],
+			[
+				98965.5172413792,
+				[
+					[
+						"Modify Healthbar Icons",
+						"!ADD",
+						"1,tankman-pixel,0"
+					]
+				]
+			],
+			[
+				102068.965517241,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"leave",
+						""
+					]
+				]
+			],
+			[
+				102844.827586207,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				113275.862068965,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				161724.137931034,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				167327.586206896,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			]
+		]
+	}
+}

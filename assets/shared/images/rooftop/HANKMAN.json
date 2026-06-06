@@ -1,0 +1,51 @@
+{ "frames": {
+   "Hanky0": {
+    "frame": { "x": 0, "y": 0, "w": 48, "h": 44 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 44 },
+    "sourceSize": { "w": 48, "h": 44 },
+    "duration": 100
+   },
+   "Hanky1": {
+    "frame": { "x": 48, "y": 0, "w": 48, "h": 44 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 44 },
+    "sourceSize": { "w": 48, "h": 44 },
+    "duration": 100
+   },
+   "Hanky2": {
+    "frame": { "x": 96, "y": 0, "w": 48, "h": 44 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 44 },
+    "sourceSize": { "w": 48, "h": 44 },
+    "duration": 100
+   },
+   "Hanky3": {
+    "frame": { "x": 144, "y": 0, "w": 48, "h": 44 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 48, "h": 44 },
+    "sourceSize": { "w": 48, "h": 44 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "http://www.aseprite.org/",
+  "version": "1.x-dev",
+  "image": "HANKMAN.png",
+  "format": "RGBA8888",
+  "size": { "w": 192, "h": 44 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "Hanky", "from": 0, "to": 3, "direction": "forward" }
+  ],
+  "layers": [
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

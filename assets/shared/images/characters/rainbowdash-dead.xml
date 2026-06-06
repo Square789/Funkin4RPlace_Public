@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="rd-dead.png">
+	<!-- Created with Adobe Animate version 24.0.0.305 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="confirm0000" x="529" y="1146" width="263" height="228"/>
+	<SubTexture name="confirm0001" x="1" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0002" x="265" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0003" x="1585" y="917" width="263" height="228"/>
+	<SubTexture name="confirm0004" x="529" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0005" x="1057" y="917" width="263" height="228"/>
+	<SubTexture name="confirm0006" x="793" y="917" width="263" height="228"/>
+	<SubTexture name="confirm0007" x="793" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0008" x="1057" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0009" x="1" y="917" width="263" height="228"/>
+	<SubTexture name="confirm0010" x="1321" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0011" x="1585" y="1" width="263" height="228"/>
+	<SubTexture name="confirm0012" x="1" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0013" x="265" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0014" x="529" y="688" width="263" height="228"/>
+	<SubTexture name="confirm0015" x="529" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0016" x="793" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0017" x="1585" y="459" width="263" height="228"/>
+	<SubTexture name="confirm0018" x="1321" y="459" width="263" height="228"/>
+	<SubTexture name="confirm0019" x="1057" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0020" x="793" y="459" width="263" height="228"/>
+	<SubTexture name="confirm0021" x="1321" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0022" x="1585" y="230" width="263" height="228"/>
+	<SubTexture name="confirm0023" x="1" y="459" width="263" height="228"/>
+	<SubTexture name="die0000" x="1" y="459" width="263" height="228"/>
+	<SubTexture name="die0001" x="265" y="459" width="263" height="228"/>
+	<SubTexture name="die0002" x="529" y="459" width="263" height="228"/>
+	<SubTexture name="die0003" x="793" y="459" width="263" height="228"/>
+	<SubTexture name="die0004" x="1057" y="459" width="263" height="228"/>
+	<SubTexture name="die0005" x="1321" y="459" width="263" height="228"/>
+	<SubTexture name="die0006" x="1585" y="459" width="263" height="228"/>
+	<SubTexture name="die0007" x="1" y="688" width="263" height="228"/>
+	<SubTexture name="die0008" x="265" y="688" width="263" height="228"/>
+	<SubTexture name="die0009" x="529" y="688" width="263" height="228"/>
+	<SubTexture name="die0010" x="793" y="688" width="263" height="228"/>
+	<SubTexture name="die0011" x="1057" y="688" width="263" height="228"/>
+	<SubTexture name="die0012" x="1321" y="688" width="263" height="228"/>
+	<SubTexture name="die0013" x="1585" y="688" width="263" height="228"/>
+	<SubTexture name="die0014" x="1" y="917" width="263" height="228"/>
+	<SubTexture name="die0015" x="265" y="917" width="263" height="228"/>
+	<SubTexture name="die0016" x="529" y="917" width="263" height="228"/>
+	<SubTexture name="die0017" x="793" y="917" width="263" height="228"/>
+	<SubTexture name="die0018" x="1057" y="917" width="263" height="228"/>
+	<SubTexture name="die0019" x="1321" y="917" width="263" height="228"/>
+	<SubTexture name="die0020" x="1585" y="917" width="263" height="228"/>
+	<SubTexture name="die0021" x="1" y="1146" width="263" height="228"/>
+	<SubTexture name="die0022" x="265" y="1146" width="263" height="228"/>
+	<SubTexture name="die0023" x="529" y="1146" width="263" height="228"/>
+	<SubTexture name="loop0000" x="529" y="1146" width="263" height="228"/>
+</TextureAtlas>

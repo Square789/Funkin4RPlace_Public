@@ -13,7 +13,7 @@ class TendrilOverlay extends FarpSprite {
 
     public var currentBeep:Int = 0;
     public var totalBeeps:Int = 2;
-    public var extraBeeps:Int = 1;
+    public var currentAnimationCount:Int = 0;
 
 	private var colorSwap:ColorSwap;
     public var noteTracker:Note;
@@ -113,16 +113,18 @@ class TendrilOverlay extends FarpSprite {
                 return;
             }
 
-            // da beeps
-            if (currentBeep < totalBeeps + 1 && Conductor.songPosition > (noteTracker.strumTime - crochet * (totalBeeps - currentBeep))) {
-                // the beep animations
+            var animationTime = noteTracker.strumTime - crochet * (totalBeeps - currentAnimationCount);
+            var soundTime = (noteTracker.strumTime - crochet * (totalBeeps - currentBeep)) - ClientPrefs.noteOffset;
+            if (currentBeep < totalBeeps + 1 && Conductor.songPosition > soundTime) {
                 currentBeep += 1;
                 playBeep = beepSounds[currentBeep - 1];
-                if (currentBeep <= totalBeeps) {
-                    animation.play('beep', true, false, currentBeep - 1);
+            }
+            if (currentAnimationCount < totalBeeps + 1 && Conductor.songPosition > animationTime) {
+                currentAnimationCount += 1;
+                if (currentAnimationCount <= totalBeeps) {
+                    animation.play('beep', true, false, currentAnimationCount - 1);
                     visible = true;
                 }
-                return;
             }
 
             if (!hasAttacked && Conductor.songPosition > (noteTracker.strumTime - attackDuration)) {

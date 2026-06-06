@@ -26,8 +26,6 @@ typedef SwagSong =
 	 * Needs to be added manually cause i'm not coding a field into the chart editor for that.
 	 */
 	var ?charterNames:Array<String>;
-	var ?hasVoidNotes:Bool;
-	var ?hasTendrils:Bool;
 
 	var player1:String;
 	var player2:String;
@@ -119,7 +117,7 @@ class Song
 		}
 		songJson.displayName = songJson.song;
 		
-		for (secNum in 0...songJson.notes.length) {
+		for (secNum in 0...(songJson.notes?.length ?? 0)) {
 			var sec:SwagSection = songJson.notes[secNum];
 			if (sec.gfSection == null) sec.gfSection = false;
 			if (sec.bpm == null) sec.bpm = songJson.bpm;
@@ -146,8 +144,6 @@ class Song
 				}
 				if (note[3] != null && Std.isOfType(note[3], Int)) note[3] = editors.ChartingState.noteTypeList[note[3]];
 				if (note[3] != null && note[3] == true) note[3] = 'Alt Animation';
-				if (note[3] != null && note[3] == "Void Note") songJson.hasVoidNotes = true;
-				if (note[3] != null && note[3] == "Void Tendril") songJson.hasTendrils = true;
 				if (note[3] == null) note[3] = '';
 				if (note[4] == null || note[4].length < 1) note[4] = [0];
 				notes[i] = [note[0], note[1], note[2], note[3], note[4]];
@@ -252,7 +248,7 @@ class Song
 			}
 		}
 
-		for (i in 0...tempSong.notes.length) {
+		for (i in 0...(tempSong.notes?.length ?? 0)) {
 			var sec = tempSong.notes[i];
 			var numerator:Null<Int> = sec.numerator;
 			var denominator:Null<Int> = sec.denominator;

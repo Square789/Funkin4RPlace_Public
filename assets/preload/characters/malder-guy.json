@@ -1,0 +1,89 @@
+{
+	"animations": [
+		{
+			"offsets": [
+				80,
+				-7
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singLEFT",
+			"indices": [],
+			"name": "singLEFT"
+		},
+		{
+			"offsets": [
+				-18,
+				-124
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singRIGHT",
+			"indices": [],
+			"name": "singRIGHT"
+		},
+		{
+			"offsets": [
+				14,
+				74
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "singUP"
+		},
+		{
+			"offsets": [
+				16,
+				-193
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singDOWN",
+			"indices": [],
+			"name": "singDOWN"
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "danceLeft",
+			"fps": 24,
+			"name": "danceLEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-12,
+				-1
+			],
+			"anim": "danceRight",
+			"fps": 24,
+			"name": "danceRIGHT",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/malderguy",
+	"position": [
+		-160,
+		-370
+	],
+	"healthicon": "xqc-pixel",
+	"flip_x": false,
+	"healthbar_colors": [
+		54,
+		57,
+		62
+	],
+	"camera_position": [
+		180,
+		530
+	],
+	"sing_duration": 6.1,
+	"scale": 0.3
+}

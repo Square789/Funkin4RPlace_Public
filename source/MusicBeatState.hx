@@ -56,12 +56,14 @@ class MusicBeatState extends FlxUIState
 			FlxG.cameras.add(achievementNotificationCamera, false);
 		} else {
 			achievementNotificationBox.cameras = [camera];
-			if (FlxG.cameras.list.contains(achievementNotificationCamera)) {
-				FlxG.cameras.remove(achievementNotificationCamera, true);
-			} else {
-				achievementNotificationCamera.destroy();
+			if (achievementNotificationCamera != camera) {
+				if (FlxG.cameras.list.contains(achievementNotificationCamera)) {
+					FlxG.cameras.remove(achievementNotificationCamera, true);
+				} else {
+					achievementNotificationCamera.destroy();
+				}
+				achievementNotificationCamera = null;
 			}
-			achievementNotificationCamera = null;
 		}
 	}
 

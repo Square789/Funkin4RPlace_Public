@@ -1,0 +1,29 @@
+{
+	"characters": [
+		{
+			"name": "voidking-core",
+			"position": [180, 1000]
+		},
+		{
+
+			"name": "voidking-head",
+			"position": [0, 0]
+		},
+		{
+			"name": "voidking-hand",
+			"position": [0, 0]
+		},
+
+
+		{
+			"name": "voidking-body",
+			"position": [10, 50]
+		}
+		
+	],
+	"position": [0, 0],
+	"camera_position": [-1200, -162],
+	"healthicon": "voidphantom-pixel",
+	"healthbar_colors": [3, 3, 3],
+	"reversed_layers": true
+}

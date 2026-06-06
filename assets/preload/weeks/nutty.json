@@ -1,0 +1,17 @@
+{
+	"songs": [
+		["Malder", "xqc", [129, 30, 159], [1652, 248, 6], ["Gold"]],
+		["bubbo", "bubbo-pixel", [255, 214, 53], [775, 515, 8]],
+		["Boundary", "anoo", [255, 110, 0], [0, -2, 64]]
+	],
+
+	"weekCharacters": ["pico", "pico", "pico"],
+	"weekBackground": "philly",
+
+	"storyName": "bonkers",
+	"weekName": "nutty",
+	"startUnlocked": true,
+
+	"hideStoryMode": true,
+	"hideFreeplay": false
+}

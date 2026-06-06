@@ -26,3 +26,5 @@ _ignore/
 # @Square789: I've been having this for some time now and got tired of filtering it out of commits
 compile.sh
 run.sh
+lime
+setlocal

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextureAtlas imagePath="spritesheet.png">
+	<SubTexture name="tank_enter0000" x="0" y="0" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_enter0001" x="49" y="0" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_enter0002" x="98" y="0" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0000" x="147" y="0" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0001" x="196" y="0" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0002" x="0" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0003" x="0" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0004" x="0" y="0" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0005" x="49" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_stop0006" x="98" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_bop0000" x="147" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_bop0001" x="196" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_bop0002" x="0" y="76" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_bop0003" x="49" y="76" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_bop0004" x="98" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_bop0005" x="98" y="38" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_man_exit0000" x="98" y="76" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_man_exit0001" x="147" y="76" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_man_exit0002" x="196" y="76" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_leave0000" x="0" y="114" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_leave0001" x="49" y="114" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+	<SubTexture name="tank_leave0002" x="98" y="114" width="49" height="38" frameX="-1" frameY="-7" frameWidth="50" frameHeight="50" />
+</TextureAtlas>

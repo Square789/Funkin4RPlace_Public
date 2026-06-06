@@ -1,0 +1,18 @@
+{
+	"songs": [
+		["Swarm", "voidcluster-pixel", [255, 255, 255], [389, 305, 3]],
+		["Consume", "voidphantom-pixel", [255, 255, 255], [1393, 400, 2], ["Platinum", "Pico"]],
+		["Enough", "voidking-pixel", [255, 255, 255], [1090, 1218, 4], ["Platinum", "Pico"]]
+	],
+
+	"weekCharacters": ["pico", "pico", "pico"],
+	"weekBackground": "philly",
+	"placePostThumbnail": "week_void",
+
+	"storyName": "Void",
+	"weekName": "Void",
+	"startUnlocked": true,
+
+	"hideStoryMode": false,
+	"hideFreeplay": false
+}

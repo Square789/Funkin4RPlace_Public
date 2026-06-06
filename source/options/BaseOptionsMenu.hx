@@ -3,7 +3,6 @@ package options;
 #if DISCORD_ALLOWED
 import Discord.DiscordClient;
 #end
-import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -13,8 +12,7 @@ import flixel.util.FlxColor;
 
 using StringTools;
 
-class BaseOptionsMenu extends MusicBeatSubState
-{
+class BaseOptionsMenu extends MusicBeatSubState {
 	private var curOption:Option = null;
 	private var curSelected:Int = 0;
 	private var optionsArray:Array<Option>;
@@ -41,8 +39,11 @@ class BaseOptionsMenu extends MusicBeatSubState
 	var buttonESC:Button;
 	#end
 
-	public function new()
-	{
+	var nextAccept:Int = 5;
+	var holdTime:Float = 0;
+	var holdValue:Float = 0;
+
+	public function new() {
 		super();
 
 		if (title == null) title = 'Options';
@@ -54,8 +55,9 @@ class BaseOptionsMenu extends MusicBeatSubState
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('f4rp_shatter_bg'));
 		bg.antialiasing = false;
-		bg.setGraphicSize(Std.int(bg.width) * 3);
+		bg.setGraphicSize(Std.int(bg.width) * 4);
 		bg.screenCenter();
+		bg.y += 2;
 		add(bg);
 
 		// avoids lagspikes while scrolling through menus!
@@ -72,10 +74,9 @@ class BaseOptionsMenu extends MusicBeatSubState
 		descBox.alpha = 0.6;
 		add(descBox);
 
-		var titleText:TitleCardFont = new TitleCardFont(0, 0, title, true, false, 0, 0.6);
+		var titleText:TitleCardFont = new TitleCardFont(0, 0, title, true, false, 0, 0.5);
 		titleText.x += 60;
 		titleText.y += 40;
-		titleText.alpha = 0.4;
 		add(titleText);
 
 		descText = new FlxText(50, 600, 1180, "", 32);
@@ -84,8 +85,7 @@ class BaseOptionsMenu extends MusicBeatSubState
 		descText.borderSize = 2.4;
 		add(descText);
 
-		for (i in 0...optionsArray.length)
-		{
+		for (i in 0...optionsArray.length) {
 			var optionText:TitleCardFont = new TitleCardFont(0, 70 * i, optionsArray[i].name, true);
 			optionText.isMenuItem = true;
 			optionText.x += 300;
@@ -112,8 +112,7 @@ class BaseOptionsMenu extends MusicBeatSubState
 				optionsArray[i].setChild(valueText);
 			}
 
-			if (optionsArray[i].showBoyfriend && boyfriend == null)
-			{
+			if (optionsArray[i].showBoyfriend && boyfriend == null) {
 				reloadBoyfriend();
 			}
 			updateTextFrom(optionsArray[i]);
@@ -147,11 +146,7 @@ class BaseOptionsMenu extends MusicBeatSubState
 		optionsArray.push(option);
 	}
 
-	var nextAccept:Int = 5;
-	var holdTime:Float = 0;
-	var holdValue:Float = 0;
-	override function update(elapsed:Float)
-	{
+	override function update(elapsed:Float) {
 		if (controls.UI_UP_P #if mobile || buttonUP.justPressed #end)
 		{
 			changeSelection(-1);
@@ -275,17 +270,13 @@ class BaseOptionsMenu extends MusicBeatSubState
 				}
 			}
 
-			if (controls.RESET #if mobile || buttonRESET.justPressed #end)
-			{
-				for (i in 0...optionsArray.length)
-				{
+			if (controls.RESET #if mobile || buttonRESET.justPressed #end) {
+				for (i in 0...optionsArray.length) {
 					var leOption:Option = optionsArray[i];
 					if (leOption.type != 'button') {
 						leOption.setValue(leOption.defaultValue);
-						if (leOption.type != 'bool')
-						{
-							if (leOption.type == 'string')
-							{
+						if (leOption.type != 'bool') {
+							if (leOption.type == 'string') {
 								leOption.curOption = leOption.options.indexOf(leOption.getValue());
 							}
 							updateTextFrom(leOption);
@@ -316,16 +307,14 @@ class BaseOptionsMenu extends MusicBeatSubState
 		option.text = text.replace('%v', val).replace('%d', def);
 	}
 
-	function clearHold()
-	{
+	function clearHold() {
 		if (holdTime > 0.5) {
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 		holdTime = 0;
 	}
 	
-	function changeSelection(change:Int = 0)
-	{
+	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
 			curSelected = optionsArray.length - 1;
@@ -335,13 +324,12 @@ class BaseOptionsMenu extends MusicBeatSubState
 		descText.text = optionsArray[curSelected].description;
 		descText.screenCenter(Y);
 		descText.y += 270;
+		if (descText.height > 138) {
+			descText.y -= (descText.height - 138);
+		}
 
-		var bullShit:Int = 0;
-
-		for (item in grpOptions.members) {
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
+		for (i => item in grpOptions.members) {
+			item.targetY = i - curSelected;
 			item.alpha = 0.6;
 			if (item.targetY == 0) {
 				item.alpha = 1;
@@ -358,16 +346,14 @@ class BaseOptionsMenu extends MusicBeatSubState
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
 
-		if (boyfriend != null)
-		{
+		if (boyfriend != null) {
 			boyfriend.visible = optionsArray[curSelected].showBoyfriend;
 		}
 		curOption = optionsArray[curSelected]; //shorter lol
 		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 	}
 
-	public function reloadBoyfriend()
-	{
+	public function reloadBoyfriend() {
 		var wasVisible:Bool = false;
 		if (boyfriend != null) {
 			wasVisible = boyfriend.visible;

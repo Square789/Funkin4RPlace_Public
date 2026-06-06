@@ -19,7 +19,6 @@ import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
-import flixel.system.FlxAssets.FlxShader;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -27,15 +26,15 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import haxe.ValueException;
 import lime.app.Application;
-import openfl.Assets;
 import openfl.display.BitmapData;
 
 import AchievementManager.AchievementRegistryEntry;
 import CoolUtil.PointStruct;
-import CreditsState.ChainEffects;
+import ChainEffects;
 import OrganicPixelErasureShader.HoleOrganicPixelErasureShader;
 import PixelErasureShader.GradientPixelErasureShader;
-import RoundedCornerShader.ManualTexSizeRoundedCornerShader;
+import RedditColor;
+import RoundedCornerShader.BetterRoundedCornerShader;
 import SelectionWeb;
 
 using CoolUtil.InflatedPixelSpriteExt;
@@ -46,6 +45,18 @@ private final REDDIT_POST_BORDER_INCL_HEIGHT = 114;
 private final SECTION_PADDING = 24;
 private final SIDEBAR_BUTTON_HEIGHT = 42;
 private final ACHIEVEMENT_IPADDING = 16;
+private final ACHIEVEMENT_ICON_SIZE = 75;
+private final REDDIT_POST_BAY_SELECTOR_RECT_DEDENT = 5;
+private final PILL_BUTTON_RADIUS_CORRECTION = 1.0;
+
+/** How many decorative posts to place between top of the post bay and the hidden song's btn.
+ * Good thing we only have a single week.
+ */
+private final HIDDEN_POST_OFFSET = 9;
+
+private final SELECTION_BLINK_INTERVAL = 2.1;
+private final SELECTION_BLINK_SPEED = 3.0;
+
 
 typedef RedditPostOptions = {
 	var title:String;
@@ -64,7 +75,9 @@ class RedditPost extends FlxSpriteGroup {
 	private var regions:Array<RedditPostRegion>;
 
 	private var redditPostHeight:Int;
+	private var backgroundRect:FlxSprite;
 	private var selectorRect:FlxSprite;
+	private var selectorRectOutline:FlxSprite;
 	private var lastSelectorRectIndex:Int;
 
 	private var karmaTextCenterX:Float;
@@ -83,10 +96,10 @@ class RedditPost extends FlxSpriteGroup {
 		this.redditPostHeight = height;
 
 		var unimportant = options.unimportant != null && options.unimportant;
-		var bgColor = unimportant ? 0xFF141415 : 0xFF1A1A1B;
-		var highlitTextColor = unimportant ? 0xFF7B7D7E : 0xFFD7DADC;
+		var bgColor = unimportant ? RedditColor.FADED : RedditColor.BACKGROUND;
+		var highlitTextColor = unimportant ? RedditColor.TEXT_WEAK : RedditColor.TEXT;
 
-		var backgroundRect = new FlxSprite(1, 1).makeGraphic(width - 2, height - 2, bgColor);
+		backgroundRect = new FlxSprite(1, 1).makeGraphic(width - 2, height - 2, bgColor);
 		add(backgroundRect);
 
 		var upvoteArrow = new FlxSprite(12, 12).loadGraphic(Paths.image("mainmenu/place_upvotearrow"));
@@ -104,12 +117,12 @@ class RedditPost extends FlxSpriteGroup {
 		var postImage = new FlxSprite(64, 9).loadGraphic(
 			Paths.image("mainmenu/place_post_thumbnails/" + (options.thumbnail == null ? "default" : options.thumbnail))
 		);
-		postImage.shader = new RoundedCornerShader(8.0);
+		postImage.shader = new BetterRoundedCornerShader(8.0, postImage.width, postImage.height);
 		var titleText = new FlxText(postImage.x + postImage.width + 4, postImage.y, 0, options.title);
 		// "Medium" requires the Paths.font way, for whatever reason
 		titleText.setFormat(Paths.font("IBMPlexSans-Medium.ttf"), 20, highlitTextColor);
 		subtitleText = new FlxText(titleText.x, titleText.y + titleText.height - 2);
-		subtitleText.setFormat("IBM Plex Sans", 14, 0xFF7B7D7E);
+		subtitleText.setFormat("IBM Plex Sans", 14, RedditColor.TEXT_WEAK);
 		subtitleText.text = options.subtitle == null ? "" : options.subtitle;
 
 		var addFlair = options.flairText != null;
@@ -121,7 +134,9 @@ class RedditPost extends FlxSpriteGroup {
 			flairBackground = new FlxSprite(flairText.x - 6, flairText.y - 2).makeGraphic(
 				Std.int(flairText.width) + 12, 24, options.flairColor
 			);
-			flairBackground.shader = new RoundedCornerShader(12.0);
+			flairBackground.shader = new BetterRoundedCornerShader(
+				12.0 - PILL_BUTTON_RADIUS_CORRECTION, flairBackground.width, flairBackground.height
+			);
 		}
 
 		add(postImage);
@@ -132,7 +147,10 @@ class RedditPost extends FlxSpriteGroup {
 			add(flairText);
 		}
 
-		selectorRect = new FlxSprite(0, 0).makeInflatedPixelGraphic(0xFF2D2D2E);
+		selectorRectOutline = new FlxSprite(0, 0).makeInflatedPixelGraphic(0xFFFFFFFF);
+		selectorRectOutline.visible = false;
+		add(selectorRectOutline);
+		selectorRect = new FlxSprite(0, 0).makeInflatedPixelGraphic(RedditColor.HIGHLIGHT_MILD);
 		selectorRect.visible = false;
 		add(selectorRect);
 		lastSelectorRectIndex = 0;
@@ -141,7 +159,7 @@ class RedditPost extends FlxSpriteGroup {
 		for (region in options.regions) {
 			var icon = new FlxSprite().loadGraphic(Paths.image('mainmenu/place_${region.icon}'));
 			var text = new FlxText(0, 0, 0, region.text);
-			text.setFormat("IBM Plex Sans Bold", 14, 0xFF818384);
+			text.setFormat("IBM Plex Sans Bold", 14, RedditColor.TEXT_WEAKER);
 			add(icon);
 			add(text);
 			regions.push({icon: icon, text: text, span: new FlxRect()});
@@ -179,16 +197,20 @@ class RedditPost extends FlxSpriteGroup {
 
 	private function positionSelectorRect() {
 		var span = regions[lastSelectorRectIndex].span;
-		selectorRect.setPosition(this.x + span.x, this.y + span.y);
-		selectorRect.scale.set(span.width, span.height);
+		selectorRectOutline.setPosition(this.x + span.x, this.y + span.y + 1);
+		selectorRectOutline.scale.set(span.width, span.height);
+		selectorRect.setPosition(this.x + span.x + 1, this.y + span.y + 2);
+		selectorRect.scale.set(span.width - 2, span.height - 2);
 	}
 
 	public function select(index:Int) {
 		if (index < 0 || index > 2) {
+			selectorRectOutline.visible = false;
 			selectorRect.visible = false;
 			return;
 		}
 		lastSelectorRectIndex = index;
+		selectorRectOutline.visible = true;
 		selectorRect.visible = true;
 		positionSelectorRect();
 	}
@@ -214,12 +236,20 @@ class RedditPost extends FlxSpriteGroup {
 // Week posts are guaranteed to have three selectable regions: The play button, the difficulty indicator and
 // the gameplay changer menu.
 
+// SWNID for the main post bay, only on top of it.
 private final SWNID_POST_BAY = 0;
+// SWNID for pill-button sidebar
 private final SWNID_SIDEBAR = 1;
+// SWNID for achievement sidebar
 private final SWNID_ACHIEVEMENTS = 2;
+// SWNID for in-post play buttons
 private final SWNID_PLAY_NODE = 3;
+// SWNID for in-post difficulty changer button
 private final SWNID_DIFFICULTY_NODE = 4;
+// SWNID for in-post gameplay changer button
 private final SWNID_GAMEPLAY_CHANGER_NODE = 5;
+// SWNID for the hidden posts super-node.
+private final SWNID_HIDDEN_POSTS = 6;
 
 private enum abstract SelectionAction(Int) to Int from Int {
 	public var NONE;
@@ -232,6 +262,7 @@ private enum abstract SelectionAction(Int) to Int from Int {
 	public var AWARDS;
 	public var CREDITS;
 	public var DISCORD;
+	public var LOREBOOK;
 	public var OPEN_ACHIEVEMENTS_MENU;
 }
 
@@ -267,6 +298,21 @@ class WeekBlob {
 		return diffic == null ? "" : diffic;
 	}
 
+	public function setStaticPlayStateGarbagePrepareWeek() {
+		PlayState.storyPlaylist = [for (s in songs) s.name];
+		PlayState.storyWeek = staticWeekDataIndex;
+		PlayState.isStoryMode = true;
+
+		var formattedDifficulty = setStaticDifficultyGarbage();
+		PlayState.SONG = Song.loadFromJson(
+			PlayState.storyPlaylist[0] + formattedDifficulty,
+			PlayState.storyPlaylist[0]
+		);
+
+		PlayState.campaignScore = 0;
+		PlayState.campaignMisses = 0;
+	}
+
 	// (I shouldn't have to put this comment here like it's some assembler routine, i really shouldn't)
 	/**
 	 * Retrieves the score for this week with the current difficulty.
@@ -297,6 +343,7 @@ class WeekBlob {
 
 typedef PostBayEntry = {
 	var postOptions:RedditPostOptions;
+	var ?dontConfigureSubtitle:Null<Bool>;
 	var ?selectionAction:Null<SelectionAction>;
 	var ?weekBlob:Null<WeekBlob>;
 	var ?post:Null<RedditPost>;
@@ -322,7 +369,7 @@ typedef AchievementDisplayTrio = {
 class MainMenuF4rpState extends MusicBeatState {
 	public static var psychEngineVersion:String = '0.6.2';
 	public static var psychEngineExtraVersion:String = '0.1'; //This is also used for Discord RPC
-	public static var modVersion:String = '0.1.1';
+	public static var modVersion:String = '1.0.0';
 
 	private var virtualState:VirtualMenuState;
 	// Disables user input / the controlling part of `update`.
@@ -360,6 +407,9 @@ class MainMenuF4rpState extends MusicBeatState {
 	private var selectionWebAchievementsSidebarNode:SelectionWebNode;
 	private var selectionWebSidebarNode:SelectionWebNode;
 	private var defaultSelectionNode:SelectionWebNode;
+	private var hiddenPostsNode:SelectionWebNode;
+	private var hiddenPostNodeIdxToPostBayIdx:Array<Int>;
+	private var xxxRemovedxxxWeekBlob:WeekBlob;
 	private var redditPostBaySelectorRect:FlxSprite;
 	private var redditPostBaySelectorRectBase:FlxPoint;
 	private var redditPostBayPosts:Array<PostBayEntry>;
@@ -373,6 +423,8 @@ class MainMenuF4rpState extends MusicBeatState {
 	private var redditPostBayBackground:FlxSprite;
 	private var REDDIT_POST_BAY_WIDTH:Int;
 
+	private var selectionBlinkProgress:Float;
+
 	private var holdTimer:HoldTimer;
 
 	public override function new(skipIntroAndTitle = false) {
@@ -382,23 +434,23 @@ class MainMenuF4rpState extends MusicBeatState {
 		this.allowVirtualStateSwitch = true;
 		this.skipIntroAndTitle = skipIntroAndTitle;
 		this.textIntroBeatCounter = 0;
+		this.selectionBlinkProgress = 0.0;
 		this.debugKeys = ClientPrefs.copyNonNoneKeys('debug_1');
 	}
 
 	public override function create() {
 		super.create();
 
-		var sidebarEntries = [{text: "Credits", action: CREDITS}, {text: "Discord", action: DISCORD}];
+		// @Square789: Sometimes ignored by the game? Add it here again to make it less likely i guess
+		FlxG.mouse.visible = false;
+
+		var sidebarEntries = [{text: "Lorebook", action: LOREBOOK}, {text: "Credits", action: CREDITS}, {text: "Discord", action: DISCORD}];
 
 		final SIDEBAR_WIDTH = Std.int(FlxG.width / 4.0);
 		REDDIT_POST_BAY_WIDTH = FlxG.width - (3 * SECTION_PADDING) - SIDEBAR_WIDTH;
 
 		// @Square789: Collect weeks, hopefully this does it mostly right.
 		redditPostBayPosts = [];
-		// In a fun twist of spaghetti the main menu needs to set this, because despite the
-		// isStoryMode parameter being RIGHT. THERE., PlayState.isStoryMode is of course read
-		// regardless.
-		// @CoolingTool: not anymore hopefully
 		WeekData.reloadWeekFiles(true);
 		for (i => weekName in WeekData.weeksList) {
 			var weekData = WeekData.weeksLoaded[weekName];
@@ -408,6 +460,10 @@ class MainMenuF4rpState extends MusicBeatState {
 				!Highscore.completedWeek(weekData.weekBefore)
 			);
 			if (isLocked) {
+				continue;
+			}
+			// This combination is for hidden songs. Of which there is one.
+			if (weekData.hideFreeplay) {
 				continue;
 			}
 
@@ -433,6 +489,19 @@ class MainMenuF4rpState extends MusicBeatState {
 				selectionAction: SELECT_DOWN,
 				weekBlob: weekBlob,
 			});
+		}
+
+		// Just hardcode I don't care anymore
+		for (i => weekName in WeekData.weeksList) {
+			if (weekName != "XXX") { // as listed in weekList.txt
+				continue;
+			}
+			PlayState.storyWeek = i;
+			xxxRemovedxxxWeekBlob = new WeekBlob(WeekData.weeksLoaded[weekName], i, CoolUtil.getDifficultiesRet());
+			break;
+		}
+		if (xxxRemovedxxxWeekBlob == null) {
+			// trace('Failed finding XXX');
 		}
 
 		var nonWeekEntries:Array<PostBayEntry> = [
@@ -465,6 +534,9 @@ class MainMenuF4rpState extends MusicBeatState {
 			{title: "The four horsemen of the apocalypse", thumb: "deco_horsemen"},
 			{title: "haha... unless?", thumb: "deco_unless"},
 			{title: "r/place as an anime", thumb: "deco_naruto"},
+			{title: "what is he even doing", thumb: "deco_mine"},
+			{title: "do they spell it like r/flace over in the uk?", thumb: "deco_uk"},
+			{title: "goodbye LOL", thumb: "deco_censor"},
 		];
 		FlxG.random.shuffle(decoPostPool);
 
@@ -481,6 +553,8 @@ class MainMenuF4rpState extends MusicBeatState {
 			o.postOptions.karmaText = formatKarma(100000 + FlxG.random.int(-20000, 20000));
 		}
 		redditPostBayPosts = redditPostBayPosts.concat(nonWeekEntries);
+
+		hiddenPostNodeIdxToPostBayIdx = [];
 
 		menuCamera = new FlxCamera();
 		FlxG.cameras.reset(menuCamera);
@@ -500,8 +574,8 @@ class MainMenuF4rpState extends MusicBeatState {
 		this.introTexts = getIntroTexts();
 
 		var stripeBackground = new FlxBackdrop(Paths.image("f4rp_stripe_bg"), X);
-		stripeBackgroundScrollShader = ChainEffects.ChainEffectShaderGenerator.getHardcoded(
-			[new ChainEffects.ScrollEffect({speed: [64.0, 0.0]})]
+		stripeBackgroundScrollShader = ChainEffectShaderGenerator.getHardcoded(
+			[new ScrollEffect({speed: [64.0, 0.0]})]
 		);
 		stripeBackground.shader = stripeBackgroundScrollShader;
 		stripeBackgroundScrollShader.data.time.value = [0.0];
@@ -521,7 +595,7 @@ class MainMenuF4rpState extends MusicBeatState {
 
 		var placeBannerSeparatorBlock = new FlxSprite(mainMenuTopLeft.x, placeBanner.y + placeBanner.height);
 		// It's only minimally smaller than the banner. Same height as the icon may look good, who cares.
-		placeBannerSeparatorBlock.makeGraphic(FlxG.width, 96, 0xFF1A1A1B);
+		placeBannerSeparatorBlock.makeGraphic(FlxG.width, 96, RedditColor.BACKGROUND);
 		add(placeBannerSeparatorBlock);
 
 		var placeIcon = new FlxSprite().loadGraphic(Paths.image("mainmenu/place_icon"));
@@ -535,12 +609,12 @@ class MainMenuF4rpState extends MusicBeatState {
 		var subredditTitle = new FlxText(
 			placeIcon.x + placeIcon.width + 16, placeBannerSeparatorBlock.y + 8, 0, "place"
 		);
-		subredditTitle.setFormat("IBM Plex Sans Bold", 32, 0xFFD7DADC);
+		subredditTitle.setFormat("IBM Plex Sans Bold", 32, RedditColor.TEXT);
 		add(subredditTitle);
 		var subredditSubTitle = new FlxText(
 			subredditTitle.x, subredditTitle.y + subredditTitle.height + 2, 0, "r/place"
 		);
-		subredditSubTitle.setFormat(Paths.font("IBMPlexSans-Medium.ttf"), 16, 0xFF818384);
+		subredditSubTitle.setFormat(Paths.font("IBMPlexSans-Medium.ttf"), 16, RedditColor.TEXT_WEAKER);
 		add(subredditSubTitle);
 
 		redditPostBayBackground = new FlxSprite(
@@ -549,9 +623,13 @@ class MainMenuF4rpState extends MusicBeatState {
 		);
 		add(redditPostBayBackground);
 
-		redditPostBaySelectorRectBase = new FlxPoint(redditPostBayBackground.x, redditPostBayBackground.y);
+		redditPostBaySelectorRectBase = new FlxPoint(
+			redditPostBayBackground.x - REDDIT_POST_BAY_SELECTOR_RECT_DEDENT, redditPostBayBackground.y
+		);
 		redditPostBaySelectorRect = new FlxSprite().makeInflatedPixelGraphic(
-			0xFFFFFFFF, REDDIT_POST_BAY_WIDTH, REDDIT_POST_BORDER_INCL_HEIGHT
+			0xFFFFFFFF,
+			REDDIT_POST_BAY_WIDTH + REDDIT_POST_BAY_SELECTOR_RECT_DEDENT,
+			REDDIT_POST_BORDER_INCL_HEIGHT
 		);
 		redditPostBaySelectorRect.visible = false;
 		add(redditPostBaySelectorRect);
@@ -578,15 +656,21 @@ class MainMenuF4rpState extends MusicBeatState {
 
 		sidebarButtons = [];
 		var sidebarHeight = SECTION_PADDING;
-		for (i => entry in sidebarEntries) {
+		for (entry in sidebarEntries) {
 			var button = new FlxSprite(sidebar.x + SECTION_PADDING, sidebar.y + sidebarHeight);
 			button.makeGraphic(SIDEBAR_WIDTH - 2 * SECTION_PADDING, SIDEBAR_BUTTON_HEIGHT, 0xFFFFFFFF);
-			button.color = 0x1A1A1B;
-			button.shader = new RoundedCornerShader(SIDEBAR_BUTTON_HEIGHT / 2.0, 1.0, 0xFFD7DADC);
+			button.color = RedditColor.BACKGROUND;
+			button.shader = new BetterRoundedCornerShader(
+				SIDEBAR_BUTTON_HEIGHT / 2.0 - PILL_BUTTON_RADIUS_CORRECTION,
+				button.width,
+				button.height,
+				1.0,
+				RedditColor.TEXT_WEAK // entry.action == DISCORD ? RedditColor.TEXT_WEAKER : RedditColor.TEXT_WEAK
+			);
 			add(button);
 
 			var text = new FlxText(0, button.y + 6, 0, entry.text);
-			text.setFormat("IBM Plex Sans", 18, 0xFFD7DADC);
+			text.setFormat("IBM Plex Sans", 18, /*entry.action == DISCORD ? RedditColor.TEXT_WEAK :*/ RedditColor.TEXT);
 			text.x = button.x + (button.width - text.width) / 2.0;
 			add(text);
 
@@ -601,31 +685,33 @@ class MainMenuF4rpState extends MusicBeatState {
 			'Friday Night Funkin\' v${Application.current.meta.get("version")}',
 		];
 		var textUnderlay = new FlxSprite(sidebar.x + SECTION_PADDING * 0.5, sidebar.y + sidebarHeight - 5);
-		textUnderlay.makeInflatedPixelGraphic(0xFF131415, SIDEBAR_WIDTH - SECTION_PADDING, vstrings.length * 20 + 10);
+		textUnderlay.makeInflatedPixelGraphic(RedditColor.INSET, SIDEBAR_WIDTH - SECTION_PADDING, vstrings.length * 20 + 10);
 		add(textUnderlay);
 		for (string in vstrings) {
 			var text = new FlxText(0, sidebar.y + sidebarHeight, 0, string);
-			text.setFormat("Reddit Mono Regular", 14, 0xFFD7DADC);
+			text.setFormat("Reddit Mono Regular", 14, RedditColor.TEXT);
 			text.x = (sidebar.x + SIDEBAR_WIDTH - (SECTION_PADDING * 0.5) - 5) - text.width;
 			add(text);
 			sidebarHeight += 20;
 		}
 		sidebarHeight += SECTION_PADDING;
 
-		sidebar.makeInflatedPixelGraphic(0xFF1A1A1B, SIDEBAR_WIDTH, sidebarHeight);
-		sidebar.shader = new ManualTexSizeRoundedCornerShader(8.0, SIDEBAR_WIDTH, sidebarHeight, 1.0, 0xFF474748);
+		sidebar.makeInflatedPixelGraphic(RedditColor.BACKGROUND, SIDEBAR_WIDTH, sidebarHeight);
+		sidebar.shader = new BetterRoundedCornerShader(8.0, SIDEBAR_WIDTH, sidebarHeight, 1.0, RedditColor.SIDEBAR_BORDER);
 
 		achievementsSidebar = new FlxSprite(sidebar.x, sidebar.y + sidebar.height + SECTION_PADDING);
 		add(achievementsSidebar);
 
 		achievementsSidebarSelectorRect = new FlxSprite(achievementsSidebar.x + ACHIEVEMENT_IPADDING * 0.5);
 		achievementsSidebarSelectorRect.makeInflatedPixelGraphic(
-			0xFF343536, SIDEBAR_WIDTH - ACHIEVEMENT_IPADDING, 75 + ACHIEVEMENT_IPADDING
+			RedditColor.BACKGROUND_ACTIVE, SIDEBAR_WIDTH - ACHIEVEMENT_IPADDING, ACHIEVEMENT_ICON_SIZE + ACHIEVEMENT_IPADDING
 		);
-		achievementsSidebarSelectorRect.shader = new ManualTexSizeRoundedCornerShader(
+		achievementsSidebarSelectorRect.shader = new BetterRoundedCornerShader(
 			8,
 			achievementsSidebarSelectorRect.width,
-			achievementsSidebarSelectorRect.height
+			achievementsSidebarSelectorRect.height,
+			1.0,
+			0xFFFFFFFF
 		);
 		achievementsSidebarSelectorRect.visible = false;
 		add(achievementsSidebarSelectorRect);
@@ -638,10 +724,10 @@ class MainMenuF4rpState extends MusicBeatState {
 		]) {
 			achievementDisplayTrios.push(createAchievementTrio(entry, i));
 		}
-		var achSidebarHeight = achievementDisplayTrios.length * (75 + ACHIEVEMENT_IPADDING) + ACHIEVEMENT_IPADDING;
-		achievementsSidebar.makeInflatedPixelGraphic(0xFF1A1A1B, SIDEBAR_WIDTH, achSidebarHeight);
-		achievementsSidebar.shader = new ManualTexSizeRoundedCornerShader(
-			8.0, SIDEBAR_WIDTH, achSidebarHeight, 1.0, 0xFF474748
+		var achSidebarHeight = achievementDisplayTrios.length * (ACHIEVEMENT_ICON_SIZE + ACHIEVEMENT_IPADDING) + ACHIEVEMENT_IPADDING;
+		achievementsSidebar.makeInflatedPixelGraphic(RedditColor.BACKGROUND, SIDEBAR_WIDTH, achSidebarHeight);
+		achievementsSidebar.shader = new BetterRoundedCornerShader(
+			8.0, SIDEBAR_WIDTH, achSidebarHeight, 1.0, RedditColor.SIDEBAR_BORDER
 		);
 
 		// === Initialize main menu's selection web
@@ -650,20 +736,13 @@ class MainMenuF4rpState extends MusicBeatState {
 			if (postData.selectionAction == null) {
 				continue;
 			}
-			var bayChild = new SelectionWebNode(postData.selectionAction);
-			if (postData.weekBlob != null) {
-				bayChild.addChild(new SelectionWebNode(START_WEEK,        SWNID_PLAY_NODE));
-				bayChild.addChild(new SelectionWebNode(BUMP_DIFFICULTY,   SWNID_DIFFICULTY_NODE));
-				bayChild.addChild(new SelectionWebNode(GAMEPLAY_CHANGERS, SWNID_GAMEPLAY_CHANGER_NODE));
-				bayChild.linkChildrenHorizontal();
-			}
-			selectionWebPostBayNode.addChild(bayChild);
+			selectionWebPostBayNode.addChild(_createPostSelectionWebNode(postData));
 		}
 		selectionWebPostBayNode.linkChildrenVertical(true);
 
 		selectionWebSidebarNode = new SelectionWebNode(SelectionAction.NONE, SWNID_SIDEBAR, true);
 		for (e in sidebarEntries) {
-			selectionWebSidebarNode.addChild(new SelectionWebNode(e.action));
+			selectionWebSidebarNode.addChild(new SelectionWebNode(e.action, -1, false));
 		}
 		selectionWebSidebarNode.linkChildrenVertical();
 
@@ -672,14 +751,15 @@ class MainMenuF4rpState extends MusicBeatState {
 		for (_ in achievementDisplayTrios) {
 			selectionWebAchievementsSidebarNode.addChild(new SelectionWebNode(OPEN_ACHIEVEMENTS_MENU));
 		}
-		selectionWebAchievementsSidebarNode.linkChildrenVertical();
 		relinkSidebars();
 
 		mainMenuSelectionManager = new SelectionWebManager(selectionWebPostBayNode);
 		defaultSelectionNode = selectionWebPostBayNode;
-		// === Selection web initialization end
+
+		hiddenPostsNode = new SelectionWebNode(SelectionAction.NONE, SWNID_HIDDEN_POSTS, true);
 
 		readjustPostBayAndSelectionWeb();
+		// === Selection web initialization end
 
 		// Title screen stuff below
 
@@ -692,14 +772,14 @@ class MainMenuF4rpState extends MusicBeatState {
 
 		pressToEnterButton = new FlxSprite().loadGraphic(Paths.image('f4rp_title_enter'));
 		pressToEnterButton.screenCenter(X);
-		pressToEnterButton.y = modLogo.y + modLogo.height - 2;
+		pressToEnterButton.y = modLogo.y + modLogo.height + 24;
 		add(pressToEnterButton);
 
 		orangeCoverShader = new GradientPixelErasureShader();
 		orangeCoverShader.palette.input = new BitmapData(1, 1, true, FlxColor.TRANSPARENT);
 		orangeCoverShader.pixel_dimensions.value = [12.0, 12.0];
 
-		orangeCoverSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xFFFF4500);
+		orangeCoverSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, RedditColor.CHUNGERINE);
 		orangeCoverSprite.shader = orangeCoverShader;
 		orangeCoverSprite.visible = false;
 		add(orangeCoverSprite);
@@ -753,7 +833,7 @@ class MainMenuF4rpState extends MusicBeatState {
 		}
 
 		// NOTE: Order of these is important!
-		holdTimer = new HoldTimer(0.5, 0.18, 0.09);
+		holdTimer = new HoldTimer(0.5, 0.18, 0.08);
 		holdTimer.listen(controls.ui_leftP, controls.ui_left);
 		holdTimer.listen(controls.ui_downP, controls.ui_down);
 		holdTimer.listen(controls.ui_rightP, controls.ui_right);
@@ -770,7 +850,18 @@ class MainMenuF4rpState extends MusicBeatState {
 			switchVirtualState(TITLE_TEXT_INTRO);
 		}
 	}
-	
+
+	private inline function _createPostSelectionWebNode(postData:PostBayEntry):SelectionWebNode {
+		var bayChild = new SelectionWebNode(postData.selectionAction);
+		if (postData.weekBlob != null) {
+			bayChild.addChild(new SelectionWebNode(START_WEEK,        SWNID_PLAY_NODE));
+			bayChild.addChild(new SelectionWebNode(BUMP_DIFFICULTY,   SWNID_DIFFICULTY_NODE));
+			bayChild.addChild(new SelectionWebNode(GAMEPLAY_CHANGERS, SWNID_GAMEPLAY_CHANGER_NODE));
+			bayChild.linkChildrenHorizontal();
+		}
+		return bayChild;
+	}
+
 	public override function update(dt:Float) {
 		super.update(dt);
 
@@ -785,6 +876,37 @@ class MainMenuF4rpState extends MusicBeatState {
 			// State is gonna switch by the hands of a timer, don't do anything.
 			// Do not allow the user to interact.
 			return;
+		}
+
+		selectionBlinkProgress += dt;
+		if (selectionBlinkProgress > SELECTION_BLINK_INTERVAL) {
+			selectionBlinkProgress = CoolUtil.wrapModuloFloat(selectionBlinkProgress, SELECTION_BLINK_INTERVAL);
+		}
+		// var selectionBlinkInterp = 1.0 - Math.pow(((Math.sin(selectionBlinkProgress * SELECTION_BLINK_SPEED - 3.0) + 1.0) * 0.39), 2.0);
+		switch (mainMenuSelectionManager.selectionPath[0].id) {
+		// TODO: These just turn the elements black for some reason. Even if they did work, they would probably look awful
+		// Fix later:tm:
+
+		// case SWNID_POST_BAY:
+		// 	if (mainMenuSelectionManager.selectionPath.length == 3) {
+		// 		@:privateAccess
+		// 		redditPostBayPosts[mainMenuSelectionManager.selectionPath[1].index].post.selectorRect.color = (
+		// 			FlxColor.interpolate(RedditColor.HIGHLIGHT_MILD, RedditColor.BACKGROUND_ACTIVE, selectionBlinkInterp)
+		// 		);
+		// 	} else {
+		// 		@:privateAccess
+		// 		redditPostBayPosts[mainMenuSelectionManager.selectionPath[1].index].post.backgroundRect.color = (
+		// 			FlxColor.interpolate(RedditColor.ELEMENT_BACKGROUND, RedditColor.HIGHLIGHT_MILD, selectionBlinkInterp)
+		// 		);
+		// 	}
+		// case SWNID_ACHIEVEMENTS:
+		// 	achievementsSidebarSelectorRect.color = FlxColor.interpolate(RedditColor.BACKGROUND_ACTIVE, 0xFF3A3B3C, selectionBlinkInterp);
+		case SWNID_SIDEBAR:
+			// NOTE: Looks fairly awful, change or delete
+			// sidebarButtons[mainMenuSelectionManager.selectionPath[1].index].color = (
+			// 	FlxColor.interpolate(RedditColor.ELEMENT_BACKGROUND, RedditColor.BACKGROUND_ACTIVE, selectionBlinkInterp)
+			// );
+		default:
 		}
 
 		var accept:Bool = controls.ACCEPT;
@@ -811,13 +933,13 @@ class MainMenuF4rpState extends MusicBeatState {
 			}
 
 		case TITLE:
-			if (FlxG.keys.firstJustPressed() > -1) {
+			if (_isAnyKeyPressed()) {
 				FlxG.sound.play(Paths.sound("confirmMenu"), 0.7);
 				switchVirtualState(TITLE_MAIN_MENU_BETWEEN);
 			}
 
 		case TITLE_MAIN_MENU_BETWEEN:
-			if (FlxG.keys.firstJustPressed() > -1) {
+			if (_isAnyKeyPressed()) {
 				// User is understandably expressing punkett - Impatience (Funkscop OST), so skip
 				// the animation and tween garbage and just instantly throw them into the main menu.
 				switchVirtualState(MAIN_MENU);
@@ -835,13 +957,13 @@ class MainMenuF4rpState extends MusicBeatState {
 					case 1: down = true;
 					case 2: right = true;
 					case 3: up = true;
-					default: // what? ignore.
+					default:
 				}
 			}
 			var prevSelection = mainMenuSelectionManager.selectionPath.copy();
 			var selectionPath = mainMenuSelectionManager.selectionPath;
 			var toplevelSelection = selectionPath.length == 2;
-			var inPost = selectionPath[0].id == SWNID_POST_BAY && selectionPath.length == 3;
+			var inPost = _isSelectionInPost(selectionPath);
 			var difficultyChange = 0;
 			var selectionChanged = false;
 
@@ -875,29 +997,17 @@ class MainMenuF4rpState extends MusicBeatState {
 						// #end
 						return;
 					case DISCORD:
-						CoolUtil.browserLoad("https://discord.gg/MPyqJK2fPp");
+						CoolUtil.browserLoad("https://discord.gg/zwbWabneNa");
+					case LOREBOOK:
+						MusicBeatState.switchState(new LorebookState());
 					case START_WEEK:
 						// Following: code to start the song, best described by the words: Zutiefst ranzig.
 						// Copied from StoryMenuState.
 
-						var weekBlob = redditPostBayPosts[selectionPath[1].index].weekBlob;
-						var weekData = weekBlob.weekData;
-						var songArray:Array<String> = [
-							for (mysteryHack in weekData.songs) cast(mysteryHack[0], String)
-						];
+						var weekBlob = redditPostBayPosts[_selectionToPostIndex(selectionPath)].weekBlob;
 
-						PlayState.storyPlaylist = songArray;
-						PlayState.storyWeek = weekBlob.staticWeekDataIndex;
-						PlayState.isStoryMode = true;
+						weekBlob.setStaticPlayStateGarbagePrepareWeek();
 
-						var formattedDifficulty = weekBlob.setStaticDifficultyGarbage();
-						PlayState.SONG = Song.loadFromJson(
-							PlayState.storyPlaylist[0] + formattedDifficulty,
-							PlayState.storyPlaylist[0]
-						);
-
-						PlayState.campaignScore = 0;
-						PlayState.campaignMisses = 0;
 						LoadingState.loadAndSwitchState(new PlayState(), true);
 						return;
 
@@ -942,19 +1052,28 @@ class MainMenuF4rpState extends MusicBeatState {
 			}
 
 			if (inPost /*extra safety, kinda useless*/ && difficultyChange != 0) {
-				var entry = redditPostBayPosts[selectionPath[1].index];
+				var entry = redditPostBayPosts[_selectionToPostIndex(selectionPath)];
 				entry.weekBlob.changeDifficulty(difficultyChange);
 				entry.post.renameRegion(1, entry.weekBlob.getCurDifficultyDisplayName());
 				#if HIGHSCORE_ALLOWED
 				var score = entry.weekBlob.getScore();
 				entry.post.setKarmaText(formatKarma(score));
-				entry.post.setSubtitleText('Score: $score');
+				if (!(entry.dontConfigureSubtitle ?? false)) {
+					entry.post.setSubtitleText('Score: $score');
+				}
 				#end
 			}
 			if (selectionChanged) {
 				updateSelectionVisuals(prevSelection);
 			}
 		}
+	}
+
+	private inline function _isAnyKeyPressed():Bool {
+		// firstJustPressed takes no exclusion list. Yes, this means if you press a volume key and an acceptable
+		// key in the same frame, maybe it won't be registered. Tough luck man, tough luck.
+		var fjp = FlxG.keys.firstJustPressed();
+		return fjp > -1 && !FlxG.sound.volumeDownKeys.contains(fjp) && !FlxG.sound.volumeUpKeys.contains(fjp);
 	}
 
 	override function destroy() {
@@ -964,30 +1083,48 @@ class MainMenuF4rpState extends MusicBeatState {
 		FlxG.sound.music.volume = 1.0;
 	}
 
+	private inline function _selectionToPostIndex(selection:Array<SelectionWebNode>):Int {
+		if (selection[0].id == SWNID_POST_BAY) {
+			return selection[1].index;
+		}
+		if (selection[0].id == SWNID_HIDDEN_POSTS) {
+			return hiddenPostNodeIdxToPostBayIdx[selection[1].index];
+		}
+		return -1;
+	}
+
+	private inline function _isSelectionInPost(selection:Array<SelectionWebNode>):Bool {
+		return (
+			(selection[0].id == SWNID_POST_BAY || selection[0].id == SWNID_HIDDEN_POSTS) &&
+			selection.length > 2
+		);
+	}
+
 	private function updateSelectionVisuals(prevSelection:Array<SelectionWebNode>, leaveCameraAlone:Bool = false) {
 		var curSelection = mainMenuSelectionManager.selectionPath;
 
 		if (
 			// If the previous selection was in a post
-			(prevSelection[0].id == SWNID_POST_BAY && prevSelection.length > 2) &&
+			_isSelectionInPost(prevSelection) &&
 			// And the new selection is not or in a different one
 			(curSelection.length <= 2 || curSelection[1] != prevSelection[1])
 		) {
 			// Unselect the old post
-			redditPostBayPosts[prevSelection[1].index].post.select(-1);
+			redditPostBayPosts[_selectionToPostIndex(prevSelection)].post.select(-1);
 		}
 
-		if (curSelection[0].id == SWNID_POST_BAY) {
-			var inPost = curSelection.length > 2;
-			var selrcol:FlxColor = inPost ? 0xFFFF4500: 0xFFD7DADC;
+		if (curSelection[0].id == SWNID_POST_BAY || curSelection[0].id == SWNID_HIDDEN_POSTS) {
+			var postIndex = _selectionToPostIndex(curSelection);
+			var inPost = _isSelectionInPost(curSelection);
+			var selrcol:FlxColor = inPost ? RedditColor.CHUNGERINE : RedditColor.TEXT;
 			redditPostBaySelectorRect.visible = true;
 			redditPostBaySelectorRect.setPosition(
 				redditPostBaySelectorRectBase.x,
-				redditPostBaySelectorRectBase.y + (REDDIT_POST_BORDER_INCL_HEIGHT - 1) * curSelection[1].index
+				redditPostBaySelectorRectBase.y + (REDDIT_POST_BORDER_INCL_HEIGHT - 1) * postIndex
 			);
 			redditPostBaySelectorRect.setColorTransform(selrcol.redFloat, selrcol.greenFloat, selrcol.blueFloat);
 
-			var post = redditPostBayPosts[curSelection[1].index].post;
+			var post = redditPostBayPosts[postIndex].post;
 			if (inPost) {
 				post.select(curSelection[2].index);
 			}
@@ -1003,12 +1140,17 @@ class MainMenuF4rpState extends MusicBeatState {
 
 		if (prevSelection[0].id == SWNID_SIDEBAR) {
 			// Selection changed within sidebar (or out of it)
-			sidebarButtons[prevSelection[1].index].color = 0x1A1A1B;
+			var button = sidebarButtons[prevSelection[1].index];
+			button.color = RedditColor.BACKGROUND;
+			cast(button.shader, BetterRoundedCornerShader).inner_border_width.value = [1.0];
+			cast(button.shader, BetterRoundedCornerShader).inner_border_color.value = [RedditColor.TEXT_WEAK.redFloat, RedditColor.TEXT_WEAK.greenFloat, RedditColor.TEXT_WEAK.blueFloat];
 		}
 		if (curSelection[0].id == SWNID_SIDEBAR) {
 			// Selection changed into a sidebar button, so mark it active and make the camera scroll.
 			var button = sidebarButtons[curSelection[1].index];
-			button.color = 0xFF343536;
+			button.color = RedditColor.BACKGROUND_ACTIVE;
+			cast(button.shader, BetterRoundedCornerShader).inner_border_width.value = [2.0];
+			cast(button.shader, BetterRoundedCornerShader).inner_border_color.value = [RedditColor.TEXT.redFloat, RedditColor.TEXT.greenFloat, RedditColor.TEXT.blueFloat];
 			if (!leaveCameraAlone) {
 				tweenScrollCameraToY(button.y + button.height / 2.0);
 			}
@@ -1231,8 +1373,8 @@ class MainMenuF4rpState extends MusicBeatState {
 	private function tweenScrollCameraToY(targetY:Float) {
 		// Utilizes a deadzone-ish thing to not always center the camera on the latter posts
 		var trueTargetY = targetY - (menuCamera.height / 2.0);
-		var lowerBar = menuCamera.scroll.y + 110;
-		var upperBar = menuCamera.scroll.y + 16;
+		var lowerBar = menuCamera.scroll.y + 136;
+		var upperBar = menuCamera.scroll.y - 96;
 		if (trueTargetY >= lowerBar) {
 			trueTargetY = camera.scroll.y - (lowerBar - trueTargetY);
 		} else if (trueTargetY <= upperBar) {
@@ -1246,6 +1388,11 @@ class MainMenuF4rpState extends MusicBeatState {
 
 		// Std.int here cause strange imperfections can otherwise appear on... well, everything.
 		trueTargetY = Std.int(Math.max(trueTargetY, mainMenuFocusPoint.y - (menuCamera.height / 2.0)));
+
+		// Actually don't do anything if the scroll is too small since tiny jumps look weird
+		if (Math.abs(menuCamera.scroll.y - trueTargetY) < 10.0) {
+			return;
+		}
 		FlxTween.cancelTweensOf(menuCamera);
 		FlxTween.tween(menuCamera, {"scroll.y": trueTargetY}, 0.125, {ease: FlxEase.quadOut});
 	}
@@ -1272,86 +1419,140 @@ class MainMenuF4rpState extends MusicBeatState {
 				break;
 			}
 		}
-		var lastSelectablePostIdx = (firstDecoPostIdx == -1 ? redditPostBayPosts.length : firstDecoPostIdx) - 1;
-		var maxScrollableY = Math.max(
-			achievementDisplayTrios[achievementDisplayTrios.length - 1].icon.y + (75.0 * 0.5),
-			redditPostBayPosts[lastSelectablePostIdx].post.y + (REDDIT_POST_BORDER_INCL_HEIGHT / 2.0)
-		);
-		// Formula copypaste from `tweenScrollCameraToY`.
-		// TODO: should really extract some shit to constants/inlines.
-		var maxDisplayableY = maxScrollableY + (FlxG.height / 2.0) - 110.0;
-		var decoPostsRequired = FlxMath.maxInt(
-			0,
-			Math.ceil(
-				(
-					maxDisplayableY -
-					(redditPostBayPosts[lastSelectablePostIdx].post.y + REDDIT_POST_BORDER_INCL_HEIGHT)
-				) /
-				(REDDIT_POST_BORDER_INCL_HEIGHT - 1.0)
-			)
-		);
-		var decoPostsExisting = firstDecoPostIdx == -1 ? 0 : (redditPostBayPosts.length - firstDecoPostIdx);
+		var lastTopPostIdx = (firstDecoPostIdx == -1 ? redditPostBayPosts.length : firstDecoPostIdx) - 1;
+		var lastSelectablePostIdx = hiddenPostNodeIdxToPostBayIdx.length > 0 ?
+			FlxMath.maxInt(lastTopPostIdx, CoolUtil.maxInIntArray(hiddenPostNodeIdxToPostBayIdx)) :
+			lastTopPostIdx;
+		var lastSelectablePostIdxHasChanged = true;
+		while (lastSelectablePostIdxHasChanged) {
+			lastSelectablePostIdxHasChanged = false;
 
-		// create posts
-		if (decoPostsExisting == decoPostsRequired) {
-			return;
-		} else if (decoPostsExisting > decoPostsRequired) {
-			throw new ValueException("Not designed to shrink tbh.");
-		} else {
-			var postOffset = (REDDIT_POST_BORDER_INCL_HEIGHT - 1) * redditPostBayPosts.length;
-			for (i in decoPostsExisting...decoPostsRequired) {
-				var o = i < decoPostPool.length ? decoPostPool[i] : {title: "[unselectable]", thumb: null};
-				var upi = redditPostBayPosts.length - weekPostCount;
-				var user = upi < usernamePool.length ? usernamePool[upi] : "[none]";
-				var postOptions:RedditPostOptions = {
-					title: o.title,
-					subtitle: 'Posted by u/$user ${FlxG.random.int(2, 22)} hours ago',
-					karmaText: formatKarma(100000 + FlxG.random.int(-20000, 20000)),
-					thumbnail: o.thumb,
-					unimportant: true,
-					regions: [],
-				};
-				var post = new RedditPost(
-					redditPostBayBackground.x,
-					redditPostBayBackground.y + postOffset,
-					REDDIT_POST_BAY_WIDTH,
-					REDDIT_POST_BORDER_INCL_HEIGHT,
-					postOptions
-				);
-				add(post);
-				redditPostBayPosts.push({postOptions: postOptions, post: post});
-				postOffset += REDDIT_POST_BORDER_INCL_HEIGHT - 1;
+			var maxScrollableAchY = achievementDisplayTrios[achievementDisplayTrios.length - 1].icon.y + (ACHIEVEMENT_ICON_SIZE * 0.5);
+			var maxScrollablePostBayY = redditPostBayPosts[lastSelectablePostIdx].post.y + (REDDIT_POST_BORDER_INCL_HEIGHT / 2.0);
+			var maxScrollableY = Math.max(maxScrollableAchY, maxScrollablePostBayY);
+			// Formula copypaste from `tweenScrollCameraToY`.
+			// TODO: should really extract some shit to constants/inlines.
+			var maxDisplayableY = maxScrollableY + (FlxG.height / 2.0) - 136.0;
+			var decoPostsRequired = FlxMath.maxInt(
+				0,
+				Math.ceil(
+					(
+						maxDisplayableY -
+						(redditPostBayPosts[lastTopPostIdx].post.y + REDDIT_POST_BORDER_INCL_HEIGHT)
+					) /
+					(REDDIT_POST_BORDER_INCL_HEIGHT - 1.0)
+				)
+			);
+			var decoPostsExisting = redditPostBayPosts.length - lastTopPostIdx - 1;
+
+			// trace(
+			// 	'largest displayable Y is $maxDisplayableY, as max scrollable Y is $maxScrollableY ' +
+			// 	(maxScrollableAchY > maxScrollablePostBayY ? "(last achievement)" : "(last selectable post(including hidden))") + ". " +
+			// 	'From the last non-hidden post, we need $decoPostsRequired decorative posts to stretch there (currently $decoPostsExisting).'
+			// );
+
+			// create posts
+			if (decoPostsExisting == decoPostsRequired) {
+				// return;
+			} else if (decoPostsExisting > decoPostsRequired) {
+				throw new ValueException("Not designed to shrink tbh.");
+			} else {
+				var postOffset = (REDDIT_POST_BORDER_INCL_HEIGHT - 1) * redditPostBayPosts.length;
+				for (i in decoPostsExisting...decoPostsRequired) {
+					var o = i < decoPostPool.length ? decoPostPool[i] : {title: "[unselectable]", thumb: null};
+					var upi = redditPostBayPosts.length - weekPostCount;
+					var user = upi < usernamePool.length ? usernamePool[upi] : "[none]";
+
+					var entry:PostBayEntry;
+					if (i == HIDDEN_POST_OFFSET && xxxRemovedxxxWeekBlob != null) {
+						// Trample over the post with XXX
+						entry = {
+							postOptions: {
+								title: "XXX",
+								subtitle: 'Posted by u/XXX just now',
+								karmaText: formatKarma(xxxRemovedxxxWeekBlob.getScore()),
+								thumbnail: null,
+								unimportant: true,
+								regions: [
+									{icon: "comment", text: "Play"},
+									{icon: "lightning", text: xxxRemovedxxxWeekBlob.getCurDifficultyDisplayName()},
+									{icon: "options", text: "Gameplay Options"}
+								],
+							},
+							dontConfigureSubtitle: true,
+							selectionAction: SELECT_DOWN,
+							weekBlob: xxxRemovedxxxWeekBlob,
+						};
+						if (hiddenPostNodeIdxToPostBayIdx.length != 0) {
+							throw new ValueException("sanity check failed, more than 1 hidden post");
+						}
+						hiddenPostsNode.addChild(_createPostSelectionWebNode(entry));
+						hiddenPostNodeIdxToPostBayIdx.push(redditPostBayPosts.length);
+						lastSelectablePostIdx = redditPostBayPosts.length;
+						lastSelectablePostIdxHasChanged = true;
+					} else {
+						entry = {
+							postOptions: {
+								title: o.title,
+								subtitle: 'Posted by u/$user ${FlxG.random.int(2, 22)} hours ago',
+								karmaText: formatKarma(100000 + FlxG.random.int(-20000, 20000)),
+								thumbnail: o.thumb,
+								unimportant: true,
+								regions: [],
+							},
+						};
+					}
+					entry.post = new RedditPost(
+						redditPostBayBackground.x,
+						redditPostBayBackground.y + postOffset,
+						REDDIT_POST_BAY_WIDTH,
+						REDDIT_POST_BORDER_INCL_HEIGHT,
+						entry.postOptions
+					);
+					add(entry.post);
+					redditPostBayPosts.push(entry);
+					postOffset += REDDIT_POST_BORDER_INCL_HEIGHT - 1;
+				}
 			}
 		}
 
 		// adjust post bay background rect and main ui background rect
 		redditPostBayBackground.makeInflatedPixelGraphic(
-			0xFF343536,
+			RedditColor.BACKGROUND_ACTIVE,
 			REDDIT_POST_BAY_WIDTH,
 			(redditPostBayPosts.length * (REDDIT_POST_BORDER_INCL_HEIGHT - 1)) + 1
 		);
 		redditUiBackground.makeInflatedPixelGraphic(
-			0xFF030303,
+			RedditColor.MIDNIGHT,
 			FlxG.width,
 			redditPostBayBackground.y + redditPostBayBackground.height - redditUiBackground.y
 		);
 
 		// un-and relink all postbay/sidebar nodes based on y positions
 		// Involves really ugly interweave of the selector web and actual on-screen location.
-		var nextUnlinkedSidebarNode = 0;
 		var sidebarNodes:Array<{node:SelectionWebNode, y:Float}> = [];
 		for (i => n in selectionWebSidebarNode.children) {
 			sidebarNodes.push({node: n, y: sidebarButtons[i].y + (SIDEBAR_BUTTON_HEIGHT / 2.0)});
 		}
 		for (i => n in selectionWebAchievementsSidebarNode.children) {
-			sidebarNodes.push({node: n, y: achievementDisplayTrios[i].icon.y + (75.0 / 2.0)});
+			sidebarNodes.push({node: n, y: achievementDisplayTrios[i].icon.y + (ACHIEVEMENT_ICON_SIZE / 2.0)});
 		}
 		for (x in sidebarNodes) {
 			x.node.left = null;
 		}
 		for (n in selectionWebPostBayNode.children) {
 			n.right = null;
+			if (n.children.length > 0) {
+				n.lastChild.right = null;
+			}
 		}
+		for (n in hiddenPostsNode.children) {
+			n.right = null;
+			if (n.children.length > 0) {
+				n.lastChild.right = null;
+			}
+		}
+		var nextUnlinkedSidebarNode = 0;
 		for (i in 0...(selectionWebPostBayNode.children.length - 1)) {
 			var stretchEnd = nextUnlinkedSidebarNode;
 			while (stretchEnd < sidebarNodes.length) {
@@ -1359,30 +1560,75 @@ class MainMenuF4rpState extends MusicBeatState {
 				if (
 					Math.abs(redditPostBayPosts[i].post.y + (REDDIT_POST_BORDER_INCL_HEIGHT / 2.0) - candidateY) >
 					Math.abs(redditPostBayPosts[i + 1].post.y + (REDDIT_POST_BORDER_INCL_HEIGHT / 2.0) - candidateY)
-				) { // Next post is closer to this one
+				) { // Next post is closer to this sidebar entry.
 					break;
 				}
 				stretchEnd += 1;
 			}
 			var postNode = selectionWebPostBayNode.children[i];
-			if (stretchEnd == nextUnlinkedSidebarNode) { // No sidebar nodes for this post, so assign its right to one.
+			if (stretchEnd == nextUnlinkedSidebarNode) { // No sidebar nodes for this post, so assign its right to the most recent one.
 				if (nextUnlinkedSidebarNode != 0) {
-					postNode.right = sidebarNodes[nextUnlinkedSidebarNode - 1].node;
+					linkPostNode(postNode, sidebarNodes[nextUnlinkedSidebarNode - 1].node, false);
 				}
 			} else {
 				for (j in nextUnlinkedSidebarNode...stretchEnd) {
-					postNode.linkRight(sidebarNodes[j].node, true);
+					linkPostNode(postNode, sidebarNodes[j].node, true);
 				}
 			}
 			nextUnlinkedSidebarNode = stretchEnd;
 		}
-		// Either give the last post a right one like above if it's run out or link any remaining ones.
+
+		// Ruin this logic some more by explicitly linking the hidden posts.
+		for (i in 0...hiddenPostsNode.children.length) {
+			var postIdx = hiddenPostNodeIdxToPostBayIdx[i];
+			var postY = redditPostBayPosts[postIdx].post.y;
+			// If the post's rect expanded once in each direction overlaps a sidebar entry, consider it a candidate.
+			var hpInfluenceYMin = postY - REDDIT_POST_BORDER_INCL_HEIGHT + 1;
+			var hpInfluenceYMax = postY + REDDIT_POST_BORDER_INCL_HEIGHT * 2 - 2;
+			var nextPostYMin = i == hiddenPostsNode.children.length - 1 ?
+				99999999.0 :
+				Math.max(postY, redditPostBayPosts[hiddenPostNodeIdxToPostBayIdx[i + 1]].post.y - REDDIT_POST_BORDER_INCL_HEIGHT + 1);
+			var hpCandidates = [
+				for (sn in sidebarNodes)
+					if (hpInfluenceYMin <= sn.y && hpInfluenceYMax > sn.y && nextPostYMin > sn.y)
+						{node: sn.node, y: sn.y, yDiff: Math.abs(postY + (REDDIT_POST_BORDER_INCL_HEIGHT / 2.0) - sn.y)}];
+			hpCandidates.sort((a, b) -> Std.int(a.yDiff * 100.0 - b.yDiff * 100.0));
+			var closestCandidate = hpCandidates.length == 0 ? null : hpCandidates[0];
+			for (c in hpCandidates) {
+				if (c.node.left == null) {
+					if (c == closestCandidate) {
+						linkPostNode(hiddenPostsNode.children[i], c.node, true);
+					} else {
+						c.node.left = hiddenPostsNode.children[i];
+					}
+				}
+			}
+		}
+
+		// Either give the last regular post a right one-way connection like above if it's run out
+		// (not realistic), else link all remaining sidebar nodes, skipping the hidden ones (.left != null).
 		if (nextUnlinkedSidebarNode >= sidebarNodes.length) {
-			selectionWebPostBayNode.lastChild.right = sidebarNodes[sidebarNodes.length - 1].node;
+			linkPostNode(selectionWebPostBayNode.lastChild, sidebarNodes[sidebarNodes.length - 1].node, false);
 		} else {
-			selectionWebPostBayNode.lastChild.right = sidebarNodes[nextUnlinkedSidebarNode].node;
+			linkPostNode(selectionWebPostBayNode.lastChild, sidebarNodes[nextUnlinkedSidebarNode].node, false);
 			for (i in nextUnlinkedSidebarNode...(sidebarNodes.length)) {
-				sidebarNodes[i].node.left = selectionWebPostBayNode.lastChild;
+				if (sidebarNodes[i].node.left == null) {
+					sidebarNodes[i].node.left = selectionWebPostBayNode.lastChild;
+				}
+			}
+		}
+	}
+
+	private function linkPostNode(postNode:SelectionWebNode, targetNode:SelectionWebNode, bidirectional:Bool) {
+		if (bidirectional) {
+			postNode.linkRight(targetNode, true);
+			if (postNode.children.length > 0) {
+				postNode.lastChild.right = targetNode;
+			}
+		} else {
+			postNode.right = targetNode;
+			if (postNode.children.length > 0) {
+				postNode.lastChild.right = targetNode;
 			}
 		}
 	}
@@ -1452,8 +1698,8 @@ class MainMenuF4rpState extends MusicBeatState {
 			}
 			// Push following achievement listings away
 			for (i in insertionIdx...(achievementDisplayTrios.length)) {
-				achievementDisplayTrios[i].icon.y += 75 + ACHIEVEMENT_IPADDING;
-				achievementDisplayTrios[i].name.y += 75 + ACHIEVEMENT_IPADDING;
+				achievementDisplayTrios[i].icon.y += ACHIEVEMENT_ICON_SIZE + ACHIEVEMENT_IPADDING;
+				achievementDisplayTrios[i].name.y += ACHIEVEMENT_ICON_SIZE + ACHIEVEMENT_IPADDING;
 			}
 
 			// NOTE: this is technically causing a crappy layering job, probably does not matter.
@@ -1461,14 +1707,15 @@ class MainMenuF4rpState extends MusicBeatState {
 
 			achievementDisplayTrios.insert(insertionIdx, newTrio);
 			selectionWebAchievementsSidebarNode.insertChild(new SelectionWebNode(OPEN_ACHIEVEMENTS_MENU), insertionIdx);
-			selectionWebAchievementsSidebarNode.linkChildrenVertical();
 			// NOTE: garbage codewall it's 4:53AM whatever
-			var achSidebarHeight = achievementDisplayTrios.length * (75 + ACHIEVEMENT_IPADDING) + ACHIEVEMENT_IPADDING;
+			var achSidebarHeight = achievementDisplayTrios.length * (ACHIEVEMENT_ICON_SIZE + ACHIEVEMENT_IPADDING) + ACHIEVEMENT_IPADDING;
 			achievementsSidebar.scale.y = achievementsSidebar.height = achSidebarHeight;
-			cast(achievementsSidebar.shader, ManualTexSizeRoundedCornerShader).texture_size.value[1] = achSidebarHeight;
+			cast(achievementsSidebar.shader, BetterRoundedCornerShader).texture_size.value[1] = achSidebarHeight;
+			relinkSidebars();
 			readjustPostBayAndSelectionWeb();
 		} else {
 			achievementDisplayTrios[trioIdx].name.text = newEntry.getLayerInfo().name;
+			configureAchievementTrioIconSprite(achievementDisplayTrios[trioIdx].icon, newEntry);
 		}
 
 		return newEntry;
@@ -1477,16 +1724,10 @@ class MainMenuF4rpState extends MusicBeatState {
 	private function createAchievementTrio(entry:AchievementRegistryEntry, pos:Int):AchievementDisplayTrio {
 		var icon = new FlxSprite(
 			achievementsSidebar.x + ACHIEVEMENT_IPADDING,
-			achievementsSidebar.y + ACHIEVEMENT_IPADDING + (75 + ACHIEVEMENT_IPADDING) * pos
+			achievementsSidebar.y + ACHIEVEMENT_IPADDING + (ACHIEVEMENT_ICON_SIZE + ACHIEVEMENT_IPADDING) * pos
 		);
-		if (entry.isLocked() && entry.achievement.shouldHideIconWhenLocked()) {
-			icon.loadGraphic(Paths.image('achievement_locked'));
-		} else {
-			icon.loadGraphic(Paths.image('achievements/${entry.achievement.id}'));
-		}
-		icon.setGraphicSize(75, 75);
-		icon.updateHitbox();
-		icon.shader = new ManualTexSizeRoundedCornerShader(8, 75, 75);
+		configureAchievementTrioIconSprite(icon, entry);
+		icon.shader = new BetterRoundedCornerShader(8, ACHIEVEMENT_ICON_SIZE, ACHIEVEMENT_ICON_SIZE);
 
 		var nameText = new FlxText(
 			icon.x + icon.width + 10,
@@ -1494,14 +1735,25 @@ class MainMenuF4rpState extends MusicBeatState {
 			0,
 			(entry.isLocked() && entry.achievement.shouldHideNameWhenLocked()) ? "?" : entry.getLayerInfo().name
 		);
-		nameText.setFormat("IBM Plex Sans Bold", 16, 0xFFD7DADC);
+		nameText.setFormat("IBM Plex Sans Bold", 16, RedditColor.TEXT);
 		add(icon);
 		add(nameText);
 
 		return {icon: icon, name: nameText, entry: entry};
 	}
 
+	private function configureAchievementTrioIconSprite(sprite:FlxSprite, entry:AchievementRegistryEntry) {
+		if (entry.isLocked() && entry.achievement.shouldHideIconWhenLocked()) {
+			sprite.loadGraphic(Paths.image('achievement_locked'));
+		} else {
+			sprite.loadGraphic(Paths.image('achievements/${entry.achievement.id}'));
+		}
+		sprite.setGraphicSize(ACHIEVEMENT_ICON_SIZE, ACHIEVEMENT_ICON_SIZE);
+		sprite.updateHitbox();
+	}
+
 	private function relinkSidebars() {
+		selectionWebAchievementsSidebarNode.linkChildrenVertical();
 		if (selectionWebAchievementsSidebarNode.children.length == 0) {
 			selectionWebSidebarNode.firstChild.linkUp(selectionWebSidebarNode.lastChild);
 		} else {

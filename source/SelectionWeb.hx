@@ -22,13 +22,14 @@ class SelectionWebNode {
 	public var children:Array<SelectionWebNode>;
 	public var index:Int;
 	public var permeate:Bool;
+	public var rollover:Bool;
 	public var action:Int;
 	public var id:Int;
 
 	public var lastChild(get, never):Null<SelectionWebNode>;
 	public var firstChild(get, never):Null<SelectionWebNode>;
 
-	public function new(action:Int = -1, id:Int = -1, permeate:Bool = false) {
+	public function new(action:Int = -1, id:Int = -1, permeate:Bool = false, rollover:Bool = false) {
 		this.left = null;
 		this.right = null;
 		this.up = null;
@@ -37,7 +38,13 @@ class SelectionWebNode {
 		this.parent = null;
 		this.children = [];
 		this.index = -1;
+		// Permeating nodes are unselectable and will always select downwards when targeted
 		this.permeate = permeate;
+		// Rollover nodes are unselectable and will:
+		// if going laterally, have the selection directed past themselves or
+		// when targeted absolutely, select their left node instead.
+		// Rollover takes precedence to permeation. Usable for inactive elements.
+		this.rollover = rollover;
 		this.id = id;
 	}
 
@@ -118,6 +125,40 @@ class SelectionWebNode {
 	public inline function get_lastChild() {
 		return children[children.length - 1];
 	}
+
+	public function getLateralNodeAt(direction:SelectionWebNodeDirection):Null<SelectionWebNode> {
+		return switch(direction) {
+			case SWND_LEFT : left;
+			case SWND_DOWN : down;
+			case SWND_RIGHT: right;
+			case SWND_UP:    up;
+		};
+
+	}
+	public function getFirstLinkedDirection():Null<SelectionWebNodeDirection> {
+		if (up != null) {
+			return SWND_UP;
+		}
+		if (left != null) {
+			return SWND_LEFT;
+		}
+		if (down != null) {
+			return SWND_DOWN;
+		}
+		if (right != null) {
+			return SWND_RIGHT;
+		}
+		return null;
+	}
+
+	public function isDirectionLinked(dir:SelectionWebNodeDirection) {
+		return switch (dir) {
+			case SWND_LEFT : left != null;
+			case SWND_DOWN : down != null;
+			case SWND_RIGHT: right != null;
+			case SWND_UP:    up != null;
+		}
+	}
 }
 
 // Hmmm
@@ -132,6 +173,13 @@ class SelectionWebManager {
 	}
 
 	private function tryPermeate():Void {
+		if (selectedNode.rollover) {
+			var d = selectedNode.getFirstLinkedDirection();
+			if (d != null) {
+				selectLateral(d);
+			}
+			throw new ValueException("Rollover node had nowhere to roll over to.");
+		}
 		while (selectedNode.permeate) {
 			if (!selectChild()) {
 				throw new ValueException("Permeating node at end of selection web.");
@@ -160,14 +208,16 @@ class SelectionWebManager {
 	}
 
 	public function selectLateral(direction:SelectionWebNodeDirection):Bool {
-		var newSelectedNode = switch(direction) {
-			case SWND_LEFT : selectedNode.left;
-			case SWND_DOWN : selectedNode.down;
-			case SWND_RIGHT: selectedNode.right;
-			case SWND_UP:    selectedNode.up;
-		};
+		var newSelectedNode = selectedNode.getLateralNodeAt(direction);
 		if (newSelectedNode == null) {
 			return false;
+		}
+		while (newSelectedNode.rollover) {
+			var d = newSelectedNode.isDirectionLinked(direction) ? direction : newSelectedNode.getFirstLinkedDirection();
+			if (d == null) {
+				return false;
+			}
+			newSelectedNode = newSelectedNode.getLateralNodeAt(d);
 		}
 		if (newSelectedNode.parent != selectedNode.parent) {
 			return selectAbsolute(newSelectedNode);

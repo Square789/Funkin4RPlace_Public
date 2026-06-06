@@ -1,0 +1,17 @@
+{
+    "characters": [
+        {
+            "name": "ross-bf",
+            "position": [0, 0]
+        },
+        {
+            "name": "RossTankman",
+            "position": [150, -48]
+        }
+    ],
+    "position": [0, 0],
+    "camera_position": [0, 0],
+    "healthicon": "rossbf-pixel",
+    "healthbar_colors": [81, 233, 244],
+    "reversed_layers": true
+}

@@ -131,6 +131,7 @@ class Main extends Sprite
 
 		// @Square789: FlxG.save should be good here, init achievements.
 		AchievementManager.initialize();
+		AchievementManager.removeUnknownAchievements();
 		AchievementManager.notify(GAME_STARTED);
 
 		#if DISCORD_ALLOWED

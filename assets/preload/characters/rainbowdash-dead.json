@@ -1,0 +1,67 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "firstDeath",
+			"fps": 24,
+			"name": "die",
+			"indices": []
+		},
+		{
+			"loop": true,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "deathLoop",
+			"fps": 24,
+			"name": "loop",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "deathConfirm",
+			"fps": 24,
+			"name": "confirm",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "deathCancel",
+			"fps": 24,
+			"name": "confirm",
+			"indices": []
+		}
+	],
+	"no_antialiasing": true,
+	"image": "characters/rainbowdash-dead",
+	"position": [
+		0,
+		350
+	],
+	"healthicon": "rd-pixel",
+	"flip_x": true,
+	"healthbar_colors": [
+		81,
+		233,
+		244
+	],
+	"camera_position": [
+		50,
+		-60
+	],
+	"sing_duration": 6,
+	"scale": 1
+}

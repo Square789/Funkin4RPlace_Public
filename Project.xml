@@ -79,6 +79,7 @@
 	<section if="PRELOAD_ALL">
 		<library name="songs"           preload="true" />
 		<library name="shared"          preload="true" />
+		<library name="week6"           preload="true" />
 		<library name="edge"            preload="true" />
 		<library name="chile"           preload="true" />
 		<library name="void"            preload="true" />
@@ -87,6 +88,7 @@
 	<section if="NO_PRELOAD_ALL">
 		<library name="songs"           preload="false" />
 		<library name="shared"          preload="false" />
+		<library name="week6"           preload="false" />
 		<library name="edge"            preload="false" />
 		<library name="chile"           preload="false" />
 		<library name="void"            preload="false" />
@@ -95,6 +97,7 @@
 	<assets path="assets/videos"        library="videos"        if="VIDEOS_ALLOWED"/>
 	<assets path="assets/songs"         library="songs"         exclude="*.mp3|*.wav"/>
 	<assets path="assets/shared"        library="shared"        exclude="*.mp3|*.wav"/>
+	<assets path="assets/week6"         library="week6"         exclude="*.mp3|*.wav"/>
 	<assets path="assets/edge"         	library="edge"         	exclude="*.mp3|*.wav"/>
 	<assets path="assets/chile"         library="chile"         exclude="*.mp3|*.wav"/>
 	<assets path="assets/void"          library="void"          exclude="*.mp3|*.wav"/>
@@ -109,6 +112,7 @@
 	<assets path='LICENSE-POKEMON-DP-PRO-FONTSTRUCT' rename='LICENSEPOKEMON-DP-PRO-FONTSTRUCT.txt' />
 	<assets path='LICENSE-REDDITMONO.md' />
 	<assets path='.disable_gb1click_filedaddy' rename='' />
+	<assets path='READMEAFTERPLAYING.txt'/>
 	<!-- <template path='mods' /> -->
 	
 	<!-- assets path="CHANGELOG.md" rename='changelog.txt' -->

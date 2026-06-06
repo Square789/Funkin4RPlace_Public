@@ -1,0 +1,153 @@
+var time = 0.0;
+var floaters = [];
+var otto = null;
+var ottoStatus = false;
+var ottoIdleTimer = -1.0;
+
+var skyOrigin = {x: -285, y: -160};
+var skySF = {x: 0.1, y: 0.1};
+
+
+//I'm keeping this because I don't know if setting this to null will break anything
+//and at this point, I'm too scared to even try
+var luigiArea = new BGSprite('swarm/images/nothing', skyOrigin.x, skyOrigin.y, 1, 1);
+var luigiAreaVisibility = false;
+
+
+function onCreate() {
+    //background
+    // sky is 570 x 320
+    var sky = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, skySF.x, skySF.y, ['Sky']);
+    var skylineFar = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.5, 0.5, ['Skylinefarthest']);
+    var skylineReg = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.7, 0.7, ['Skyline']);
+    var bsFloaters = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.7, 0.7, ['BeatSaber floaters']);
+    var bigOne = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y - 2, 0.85, 0.85, ['[The Big One]']);
+    var eldenRing = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.85, 0.85, ['Elden Ring']);
+    var anarchyChess = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Anarchy Chess']);
+    var ripMichi = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['R.I.P. Michi']);
+    var lego = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['LEGO']);
+    var benchy = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Benchy']);
+    
+    //lattice boppers
+
+    var gengarBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Gengar'], false, 10);
+    var linkBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Link'], false, 10);
+    var meganBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Mega Man'], false, 10);
+    var basilBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Basil'], false, 10);
+    var linkBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Link'], false, 10);
+    var leaBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Lea (Crosscode)'], false, 10);
+    var piplupBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Piplup'], false, 10);
+    var skBopper = new BGSprite('swarm/images/LatticeBoppers', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Shovel Knight'], false, 10);  
+
+    //foreskin
+
+    var lattice = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Lattice']);
+    var latticeDeco = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 0.9, 0.9, ['Lattice front-decoration']);
+    var mainArea = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 1, 1, ['Main Area']);
+    var fuckCars = new BGSprite('swarm/images/SwarmSheet', skyOrigin.x, skyOrigin.y, 1.1, 1.1, ['r/FUCKCARS']);
+
+    //bopper boppers
+
+    var bulletBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['The Bullet'], false, 10);
+    var mikuBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Miku'], false, 10);
+    var keroBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Flipnote Frog'], false, 10);
+    var grubBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x + 112, skyOrigin.y + 14, 1, 1, ['Grub'], false, 10);
+    var hornetBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x + 50, skyOrigin.y + 9, 1, 1, ['Hornet'], false, 10);
+    var madelineBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x + 25, skyOrigin.y + 2, 1, 1, ['Madeline'], false, 10);
+    var omoriBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Omori'], false, 10);
+    var stoatBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Stoat'], false, 10);
+    var isaacBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Isaac'], false, 10);
+
+    //the guys
+    var ottoBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Otto'], ottoStatus, 10);
+    var somethingBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Something'], true, 10);
+    var sansBopper = new BGSprite('swarm/images/Boppers', skyOrigin.x, skyOrigin.y, 1, 1, ['Sans'], true, 10);
+
+    //kid named copied from rooftop
+    var finalsetup = [sky];
+    for (x in [
+        skylineFar, skylineReg, bsFloaters, bigOne, eldenRing, anarchyChess, ripMichi, lego, benchy, lattice, latticeDeco,
+        gengarBopper, linkBopper, meganBopper, basilBopper, linkBopper, leaBopper, piplupBopper, skBopper, mainArea, fuckCars,
+        somethingBopper, bulletBopper, mikuBopper, sansBopper, ottoBopper, keroBopper, grubBopper, hornetBopper, madelineBopper,
+        omoriBopper, stoatBopper, isaacBopper
+    ]) finalsetup.push(x);
+    for (x in finalsetup) {
+        x.pixelSetup();
+        addBehindChars(x);
+    }
+
+    for (booper in [
+        gengarBopper, linkBopper, meganBopper, basilBopper, linkBopper, leaBopper, piplupBopper, skBopper, bulletBopper,
+        mikuBopper, keroBopper, grubBopper, hornetBopper, madelineBopper, omoriBopper, stoatBopper, isaacBopper
+    ]) instance.boppers.push(booper);
+
+    // Otto0: base
+    // Otto1: ldown
+    // Otto2: rdown
+    // Otto3: both down, looks up, heart?
+    // Otto4: both down, sparks or something
+    otto = ottoBopper;
+    otto.animation.pause();
+    otto.animation.curAnim.curFrame = 0;
+    if (!botPlay) {
+        // // Looks weird, idk.
+        // // ottoBopper.animation.stop();
+        // // ottoBopper.animation.remove("Otto");
+        // // ottoBopper.animation.addByNames("Otto", ["Otto4", "Otto4", "Otto3", "Otto3", "Otto0"], 10, false);
+        // // ottoBopper.animation.play("Otto");
+        // instance.boppers.push(ottoBopper);
+    }
+}
+
+function onUpdate(dt) {
+    if (ottoIdleTimer > 0.0) {
+        ottoIdleTimer -= dt;
+        if (ottoIdleTimer <= 0.0) {
+            otto.animation.curAnim.curFrame = 0;
+            ottoStatus = false;
+            ottoIdleTimer = -1.0;
+        }
+    }
+}
+
+function onBeatHit() {
+    if (!botPlay) {
+        if (curBeat % 2 == 0) {
+            otto.animation.curAnim.curFrame = 4;
+            ottoIdleTimer = 20.0 / curBpm;
+        }
+    }
+}
+
+function goodNoteHit(noteMemberIdx, noteData, noteType, isSustain, characters) {
+    if (botPlay) {
+        if (!isSustain) {
+            otto.animation.curAnim.curFrame = ottoStatus ? 2 : 1;
+            ottoStatus = !ottoStatus;
+        }
+        ottoIdleTimer = 60.0 / curBpm;
+    }
+}
+
+ function onCreatePost() {
+	if (["flag-bf", "8BF", "ross-bf"].contains(boyfriend.curCharacter)) {
+		PlayState.instance.setupPixelErasureShader();
+	}
+
+    if (isStoryMode) {
+         return;
+      } else {
+          var luigiAreaVisibility = FlxG.random.bool(12);
+        luigiArea = new BGSprite('swarm/images/luigiArea', skyOrigin.x, skyOrigin.y  + 81, 1, 1);
+
+        luigiArea.pixelSetup();
+        addBehindChars(luigiArea);
+        luigiArea.visible = luigiAreaVisibility;
+        //debugPrint(luigiArea);
+
+        if (luigiAreaVisibility) {
+            AchievementManager.advanceAchievement("l_statue", 1);
+        }
+        
+     }
+}

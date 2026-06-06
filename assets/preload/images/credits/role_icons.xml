@@ -9,4 +9,5 @@
 	<SubTexture name="animator"       x="64"  y="32"  width="32" height="32" />
 	<SubTexture name="voice_actor"    x="96"  y="32"  width="32" height="32" />
 	<SubTexture name="miscellaneous"  x="0"   y="64"  width="32" height="32" />
+	<SubTexture name="ex_director"    x="32"  y="64"  width="32" height="32" />
 </TextureAtlas>

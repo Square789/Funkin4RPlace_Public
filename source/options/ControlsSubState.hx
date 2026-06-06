@@ -77,8 +77,9 @@ class ControlsSubState extends MusicBeatSubState {
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('f4rp_shatter_bg'));
 		bg.antialiasing = false;
-		bg.setGraphicSize(Std.int(bg.width) * 3);
+		bg.setGraphicSize(Std.int(bg.width) * 4);
 		bg.screenCenter();
+		bg.y += 2;
 		add(bg);
 
 		grpOptions = new FlxTypedGroup<TitleCardFont>();

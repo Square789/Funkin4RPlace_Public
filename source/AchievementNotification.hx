@@ -111,7 +111,7 @@ class AchievementNotificationBox extends FlxSpriteGroup {
 			return;
 		}
 
-		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+		FlxG.sound.play(Paths.sound(entry.getLayerInfo().sound), 0.7);
 
 		onDisplayFinish = onFinish;
 
@@ -150,7 +150,7 @@ class AchievementNotificationBox extends FlxSpriteGroup {
 
 	// Rewrite tweens in update so the thing properly stops when its state does.
 	// Pause menus and other substates may reveal epic software design fails (of which
-	// this codebase has more than enough.
+	// this codebase has more than enough. (wtf Funkin' 4 r/place OST - Enough reference))
 	public override function update(elapsed:Float) {
 		// This manages three pseudo-tweens:
 		// opening, closing and scrolling.
@@ -159,7 +159,7 @@ class AchievementNotificationBox extends FlxSpriteGroup {
 			tweenTime += elapsed;
 			if (tweenTime > tweenDuration) {
 				state = OPEN;
-				displayTimeLeft = 2.5;
+				displayTimeLeft = 2.2;
 			}
 			y = _calculateTweenY();
 
@@ -174,7 +174,7 @@ class AchievementNotificationBox extends FlxSpriteGroup {
 				tweenTime += elapsed;
 				if (tweenTime > tweenDuration) {
 					_instantlyFinishScroll();
-					displayTimeLeft = 2.5;
+					displayTimeLeft = 2.2;
 				} else {
 					var curNotifAbsoluteY =  y + _calculateTweenY();
 					var nextNotifAbsoluteY = curNotifAbsoluteY + notificationDistance;

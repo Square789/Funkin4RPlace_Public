@@ -235,6 +235,8 @@ class ManualTexSizePixelErasureShader extends PESBase {
  * For these two: Start's value must ALWAYS be lower than stop's. This is not done in the shader to
  * save a min/max swap and out of laziness. (0.0, 0.0) is the top left corner and (1.0, 1.0) should be the
  * bottom right. You're gonna have to figure out the pixel/resolution math for more exact stuff, apologies.
+ * Also, if you want to study the code, I think the names are swapped. You'd expect the gradient progress to
+ * increase from start to stop, but the exact opposite is the case. Oops.
  *
  * *For other uniforms, see documentation of the parent class.*
  */
@@ -322,12 +324,16 @@ class GradientPixelErasureShader extends PESBase {
 /**
  * Pixel erasure shader that operates by creating a hole in the center of a sprite.
  * The shader has the following unique uniforms:
+ * NOTE: THIS SHADER IS INTENTIONALLY HARDCODED TO ALWAYS USE ZERO ALPHA WHEN A PIXEL IS AFFECTED.
+ * BECAUSE OPENFL IS SATAN.
+ * IT'S ONLY USED IN A SINGLE PLACE, SO THIS SHOULD BE FINE.
  * - hole_radius (float): Radius of the hole, in sprite pixels.
  * - hole_border_width (float): Border width of the hole, in sprite pixels.
  *                              The pixel health chance will run from 0 to 1 in this border, which expands
  *                              equally in both directions from the radius.
  * - deform (float): Deforms the hole by multiplying the width and height gained from the radius
  *                   with a two-element vector. Can be used to turn it into an ellipse
+ * - invert (float): Invert the pixel health, for having the hole appear from the outside.
  *
  * *For other uniforms, see documentation of the parent class.*
  */
@@ -340,6 +346,8 @@ class GradientPixelErasureShader extends PESBase {
 
 	public var deform:ShaderParameter<Float>;
 
+	public var invert:ShaderParameter<Bool>;
+
 	public function new(seedChangeThreshold:Float = -1.0) {
 		super(
 			{
@@ -347,6 +355,7 @@ class GradientPixelErasureShader extends PESBase {
 					{decl: "float hole_radius"},
 					{decl: "float hole_border_width"},
 					{decl: "vec2 deform"},
+					{decl: "bool invert"},
 				],
 				randoPixelizationMinimumThresholdExpr: "local_pixel_health",
 				randoMinimumThresholdCalculationSource: "
@@ -358,6 +367,12 @@ class GradientPixelErasureShader extends PESBase {
 						1.0,
 						(d - (hole_radius - hole_border_width)) / (2.0*hole_border_width)
 					);
+					if (invert) {
+						local_pixel_health = 1.0 - local_pixel_health;
+					}
+					// @Square789: Go fuck yourself. This shader is specially broken.
+					// I don't know why alpha behaves so damn weirdly in this engine.
+					alpha = 0.0;
 				",
 			},
 			seedChangeThreshold
@@ -369,8 +384,11 @@ class GradientPixelErasureShader extends PESBase {
 		this.hole_border_width =       data.hole_border_width;
 		this.hole_border_width.value = [1.0, 1.0];
 
-		this.deform =       data.deform;           
+		this.deform =       data.deform;
 		this.deform.value = [1.0, 1.0];
+
+		this.invert = data.invert;
+		this.invert.value = [false];
 	}
 
 	public function get_hole_radius_direct():Float {

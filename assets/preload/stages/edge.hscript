@@ -5,7 +5,6 @@ function onCreate() {
     var sky = new BGSprite('sky', 0, 0, 0.5, 0.5);
     var edge = new BGSprite('edge', pos.x + 610, pos.y + 221, 0.85, 0.85);
     var board = new BGSprite('board', pos.x + 378 , pos.y + 609, 0.95, 0.95);
-    var friend = new BGSprite('characters/virgin_rage_reference', pos.x + 1390, pos.y + 158, 0.75, 0.75, ['idle']);
     var sign = new BGSprite('sign', pos.x + 1202, pos.y + 300, 0.90, 0.90);
     var dog = new BGSprite('characters/dog', pos.x + 1340, pos.y + 510, 0.95, 0.95, ['groove']);
     var guy = new BGSprite('characters/guy', pos.x + 1420, pos.y + 450, 1.00, 1.00, ['shmoove']);
@@ -13,7 +12,6 @@ function onCreate() {
 
     sky.screenCenter();
 
-    instance.boppers.push(friend);
     instance.boppers.push(dog);
     instance.boppers.push(guy);
     instance.boppers.push(scrungJr);
@@ -21,7 +19,6 @@ function onCreate() {
     addBehindChars(sky);
 	addBehindChars(edge);
     addBehindChars(board);
-    addBehindChars(friend);
     addBehindChars(sign);
     addBehindChars(dog);
     addBehindChars(guy);

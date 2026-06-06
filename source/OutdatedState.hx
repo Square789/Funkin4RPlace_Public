@@ -46,7 +46,6 @@ class OutdatedState extends MusicBeatState
 		if (!leftState) {
 			if (controls.ACCEPT) {
 				leftState = true;
-				// @Square789: About the temporary demo branch: I think this bit is unreachable; it will 404/403 for sure though
 				CoolUtil.browserLoad("https://github.com/Funkin4RPlace/Funkin4RPlace/releases");
 			}
 			else if(controls.BACK) {

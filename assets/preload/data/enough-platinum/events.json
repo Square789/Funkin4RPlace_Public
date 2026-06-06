@@ -1,0 +1,266 @@
+{
+	"song": {
+		"events": [
+			[
+				1724.13793103448,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				11810.3448275862,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				32327.5862068966,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				46551.7241379311,
+				[
+					[
+						"Change Scroll Speed",
+						"1.05",
+						"0.25"
+					]
+				]
+			],
+			[
+				57758.6206896552,
+				[
+					[
+						"Change Scroll Speed",
+						"1.1",
+						"0.25"
+					]
+				]
+			],
+			[
+				65086.2068965518,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				77672.4137931034,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				90862.0689655172,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"0.25"
+					]
+				]
+			],
+			[
+				91034.4827586206,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"enter",
+						""
+					]
+				]
+			],
+			[
+				99224.1379310343,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"materialize",
+						""
+					]
+				]
+			],
+			[
+				99310.3448275861,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"join",
+						""
+					]
+				]
+			],
+			[
+				101724.137931034,
+				[
+					[
+						"Modify Healthbar Icons",
+						"!ADD",
+						"1,tankman-pixel,0"
+					]
+				]
+			],
+			[
+				105000,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				107586.206896552,
+				[
+					[
+						"_F4RPSPECIFIC Tankman Enough",
+						"leave",
+						""
+					]
+				]
+			],
+			[
+				112931.034482758,
+				[
+					[
+						"Change Scroll Speed",
+						"1.05",
+						"0.25"
+					]
+				]
+			],
+			[
+				114827.586206896,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"1,1"
+					]
+				]
+			],
+			[
+				115000,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"1,1"
+					]
+				]
+			],
+			[
+				116293.103448276,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				123965.517241379,
+				[
+					[
+						"Change Scroll Speed",
+						"1.1",
+						"0.25"
+					]
+				]
+			],
+			[
+				124913.793103448,
+				[
+					[
+						"Play Animation",
+						"singLEFT",
+						"1,1"
+					]
+				]
+			],
+			[
+				126637.931034483,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				127155.172413793,
+				[
+					[
+						"Play Animation",
+						"singRIGHT",
+						"1,1"
+					]
+				]
+			],
+			[
+				135000,
+				[
+					[
+						"Change Scroll Speed",
+						"1.15",
+						"0.25"
+					]
+				]
+			],
+			[
+				153965.517241379,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			],
+			[
+				157068.965517241,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"0.25"
+					]
+				]
+			],
+			[
+				170000,
+				[
+					[
+						"Play Animation",
+						"blink",
+						"0,2"
+					]
+				]
+			]
+		]
+	}
+}

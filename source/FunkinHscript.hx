@@ -80,6 +80,9 @@ import flixel.FlxG;
 import flixel.text.FlxText;
 import hscript.InterpEx;
 
+import PixelErasureShader.HolePixelErasureShader;
+import OrganicPixelErasureShader.MalderSkyOrganicPixelErasureShader;
+
 using StringTools;
 
 class FunkinHscript extends InterpEx {
@@ -187,9 +190,11 @@ class FunkinHscript extends InterpEx {
         variables.set('FunkinLua', FunkinLua);
         variables.set('GameOverSubState', GameOverSubState);
         variables.set('HealthIcon', HealthIcon);
+		variables.set('HolePixelErasureShader', HolePixelErasureShader);
         variables.set('Highscore', Highscore);
         variables.set('InputFormatter', InputFormatter);
         // variables.set('MainMenuState', MainMenuState);
+		variables.set('MalderSkyOrganicPixelErasureShader', MalderSkyOrganicPixelErasureShader);
         variables.set('MasterEditorMenu', MasterEditorMenu);
         variables.set('MusicBeatState', MusicBeatState);
         variables.set('MusicBeatSubState', MusicBeatSubState);
@@ -209,6 +214,7 @@ class FunkinHscript extends InterpEx {
         variables.set('StrumNote', StrumNote);
 		variables.set('TankmenBG', TankmenBG);
         // variables.set('TitleState', TitleState);
+        variables.set('TransparencyMaskShader', TransparencyMaskShader);
         variables.set('WeekData', WeekData);
         variables.set('WiggleEffect', WiggleEffect);
 		#if DISCORD_ALLOWED

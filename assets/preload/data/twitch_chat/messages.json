@@ -1,0 +1,75 @@
+{
+	"constant": [
+		{"text": "%xqcPls% %6,8%",    "is_template": true},
+		{"text": "%xqcJAM% %6,8%",    "is_template": true},
+		{"text": "%pepeJAM% %6,8%",   "is_template": true},
+		{"text": "%PepePls% %6,8%",   "is_template": true},
+		{"text": "%PepegaPls% %6,8%", "is_template": true},
+		{"text": "%AlienPls3% %6,8%", "is_template": true},
+		{"text": "%forsenPls% %6,8%", "is_template": true},
+		{"text": "%catJAM% %6,8%",    "is_template": true},
+		{"text": "%pepeD% %6,8%",     "is_template": true},
+		{"text": "%Citto% %6,8%",     "is_template": true},
+		{"text": "%xqcDisco% %6,8%",  "is_template": true},
+		{"text": "%batPls% %6,8%",    "is_template": true}
+	],
+	"player_winning": [
+		{"text": "S OMEGALUL BAD"},
+		{"text": "LOSING TO CARTOON OMEGALUL"},
+		{"text": "SO BAD LULW"},
+		{"text": "xqcDespair% THE METEOR INCIDENT%%0,1%",   "is_template": true},
+		{"text": "TrollDespair% THE METEOR INCIDENT%%0,1%", "is_template": true},
+		{"text": "%OMEGALUL% %1,3%",                        "is_template": true}
+	],
+	"player_losing": [
+		{"text": "EZ Clap WARLORD"},
+		{"text": "EZ Clap GAMING GOLEM"},
+		{"text": "EZ Clap"},
+		{"text": "EZ Clap X"}
+	],
+	"rare": [
+		{"text": "Hey paisanos, it's the Super Mario Brothers Super Show PogU"},
+		{"text": "goblinPls P goblinPls A goblinPls I goblinPls N goblinPls"},
+		{"text": "monkaLaugh FRIDAY NIGHT FUNKIN"},
+		{"text": "DinkDonk DinkDonk DinkDonk NEXT GAME"},
+		{"text": "peepoSad RAINBOW DASH"},
+		{"text": "AYAYA MY LITTLE PONY"},
+		{"text": "dickL"},
+		{"text": "rossG"},
+		{"text": "youthinkyoursafe"},
+		{"text": "fijiWater"},
+		{"text": "PagChomp nymnCorn CONTENT"},
+		{"text": "Clueless HE'LL WIN"},
+		{"text": "Pepepains SNIPERS"},
+		{"text": "monkaEyes EL GOBLINO"},
+		{"text": "Copege HE'LL WIN"},
+		{"text": "HIS NAME IS FRIDAY NIGHT PLACIN'!!!1"},
+		{"text": "skHomie smoking dash"}
+	],
+	"highlight": [
+		{"text": "X CAN WE VOID 930 1910 NEXT?", "highlight": true},
+		{"text": "EASTER EGG TOP LEFT PogU",     "highlight": true},
+		{"text": "PUERTO RICO FLAG POGGERS",     "highlight": true}
+	],
+	"before_voices": [
+		{"text": "MEGALUL VOID IT ALL"},
+		{"text": "MEGALUL CONSUME"},
+		{"text": "MEGALUL"},
+		{"text": "PagMan TIME TO THROW POGCHAMP"},
+		{"text": "PepeLaugh HE DOESN'T KNOW"}
+	],
+	"botplay": [
+		{"text": "forsenCD"},
+		{"text": "forsenCD BOTPLAY"},
+		{"text": "forsenCD CHEATING?"},
+		{"text": "%forsenCD% %6,9%", "is_template": true}
+	],
+	"mashing": [
+		{"text": "Chatting Chatting Chatting"},
+		{"text": "PepegaChat"},
+		{"text": "Chatting MASHING"},
+		{"text": "PepegaChat MASHING"},
+		{"text": "%Pepega% %2,4% I'M GOOD AT FNF", "is_template": true},
+		{"text": "%Pepega% %2,4% GHOST TAPPING",   "is_template": true}
+	]
+}

@@ -22572,7 +22572,6 @@
 		"stage": "consume",
 		"needsVoices": true,
 		"uiSkinOpponent": "place",
-		"bpm": 180,
-		"charterNames": ["Parasy"]
+		"bpm": 180
 	}
 }

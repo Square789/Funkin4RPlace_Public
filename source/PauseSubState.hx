@@ -257,7 +257,7 @@ class PauseSubState extends MusicBeatSubState
 		if (back) {
 			closeCurMenu();
 			return;
-		} 
+		}
 
 		if (accepted && (cantUnpause <= 0 || !ClientPrefs.controllerMode))
 		{
@@ -277,27 +277,11 @@ class PauseSubState extends MusicBeatSubState
 					var mixStr = mixChoices[mixDifficultyChoices.indexOf(menuItems)];
 					song.mixId = song.availableMixes.indexOf(mixStr);
 					song.setStaticBullcrap();
-					var actualDiff = song.difficulties.indexOf(daSelected);
-					var name = song.songName;
-					var poop = Highscore.formatSong(name, actualDiff, false);
-					PlayState.SONG = Song.loadFromJson(poop, name);
-					PlayState.storyDifficulty = actualDiff;
-					LoadingState.loadAndResetState();
-					FlxG.sound.music.volume = 0;
-					PlayState.changedDifficulty = false; // staight up different song now so is the difficulty really changed
-					PlayState.chartingMode = false;
+					tormentPlayStateAndLoad(song.songName, false, song.difficulties.indexOf(daSelected));
 				} else if (menuItems == difficultyChoices) {
-					// Difficulty for Change Difficulty selected 
-					var actualDiff = CoolUtil.difficulties.indexOf(daSelected);
-					var name:String = PlayState.SONG.song;
-					var poop = Highscore.formatSong(name, actualDiff, false);
-					PlayState.SONG = Song.loadFromJson(poop, name);
-					PlayState.storyDifficulty = actualDiff;
-					LoadingState.loadAndResetState();
-					FlxG.sound.music.volume = 0;
-					PlayState.changedDifficulty = true;
-					PlayState.chartingMode = false;
-				} 
+					// Difficulty for Change Difficulty selected
+					tormentPlayStateAndLoad(PlayState.SONG.song, true, CoolUtil.difficulties.indexOf(daSelected));
+				}
 				return;
 			}
 
@@ -375,6 +359,21 @@ class PauseSubState extends MusicBeatSubState
 					PlayState.startOnTime = 0;
 			}
 		}
+	}
+
+	function tormentPlayStateAndLoad(name:String, changedDifficulty:Bool, actualDiff:Int) {
+		var poop = Highscore.formatSong(name, actualDiff, false);
+		var goodOldFreeplayData = PlayState.SONG.freeplaySongData;
+		PlayState.SONG = Song.loadFromJson(poop, name);
+		if (goodOldFreeplayData != null) {
+			PlayState.SONG.meta = goodOldFreeplayData.meta;
+			PlayState.SONG.freeplaySongData = goodOldFreeplayData;
+		}
+		PlayState.storyDifficulty = actualDiff;
+		LoadingState.loadAndResetState();
+		FlxG.sound.music.volume = 0;
+		PlayState.changedDifficulty = changedDifficulty;
+		PlayState.chartingMode = false;
 	}
 
 	function deleteSkipTimeText()

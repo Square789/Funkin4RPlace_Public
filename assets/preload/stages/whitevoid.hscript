@@ -1,0 +1,5 @@
+function onCreate() {
+var white = new BGSprite("whitevoid", -100, -100, 0, 0);
+	addBehindChars(white);
+	white.pixelSetup();
+}

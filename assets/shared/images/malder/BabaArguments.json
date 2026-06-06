@@ -1,0 +1,68 @@
+{ "frames": {
+   "BABAARGUMENTS0": {
+    "frame": { "x": 0, "y": 0, "w": 531, "h": 76 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 697, "y": 1004, "w": 531, "h": 76 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "BABAARGUMENTS1": {
+    "frame": { "x": 0, "y": 76, "w": 531, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 698, "y": 1003, "w": 531, "h": 77 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "BABAARGUMENTS2": {
+    "frame": { "x": 0, "y": 153, "w": 532, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 698, "y": 1003, "w": 532, "h": 77 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "BABAARGUMENTS3": {
+    "frame": { "x": 0, "y": 0, "w": 531, "h": 76 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 697, "y": 1004, "w": 531, "h": 76 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "BABAARGUMENTS4": {
+    "frame": { "x": 0, "y": 76, "w": 531, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 698, "y": 1003, "w": 531, "h": 77 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   },
+   "BABAARGUMENTS5": {
+    "frame": { "x": 0, "y": 153, "w": 532, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 698, "y": 1003, "w": 532, "h": 77 },
+    "sourceSize": { "w": 1920, "h": 1080 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.17-x64",
+  "image": "BabaArguments.png",
+  "format": "RGBA8888",
+  "size": { "w": 532, "h": 230 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Everything" },
+   { "name": "Groundrea", "group": "Everything" },
+   { "name": "BABAARGUMENTS", "group": "Groundrea", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

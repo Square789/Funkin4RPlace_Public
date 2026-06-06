@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf8" ?>
+<TextureAtlas imageName="windows.png">
+	<SubTexture name="window_empty0" x="78" y="0"   width="78" height="38" />
+	<SubTexture name="window_empty1" x="78" y="38"  width="78" height="38" />
+	<SubTexture name="window_empty2" x="78" y="76"  width="78" height="38" />
+	<SubTexture name="window_empty3" x="78" y="114" width="78" height="38" />
+	<SubTexture name="window_empty4" x="78" y="152" width="78" height="38" />
+	<SubTexture name="window_niko0"  x="0"  y="0"   width="78" height="38" />
+	<SubTexture name="window_niko1"  x="0"  y="38"  width="78" height="38" />
+	<SubTexture name="window_niko2"  x="0"  y="76"  width="78" height="38" />
+	<SubTexture name="window_niko3"  x="0"  y="114" width="78" height="38" />
+	<SubTexture name="window_niko4"  x="0"  y="152" width="78" height="38" />
+</TextureAtlas>

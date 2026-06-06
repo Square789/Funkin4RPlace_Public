@@ -1,0 +1,17 @@
+{
+    "characters": [
+        {
+            "name": "flagpico",
+            "position": [0, 428]
+        },
+        {
+            "name": "RossTankman",
+            "position": [150, -48]
+        }
+    ],
+    "position": [0, 0],
+    "camera_position": [0, -16],
+    "healthicon": "flagpico-pixel",
+    "healthbar_colors": [126, 237, 86],
+    "reversed_layers": true
+}

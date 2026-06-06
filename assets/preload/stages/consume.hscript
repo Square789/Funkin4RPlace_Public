@@ -73,6 +73,12 @@ function onCreate() {
     }
 }
 
+function onCreatePost() {
+	if (["flag-bf", "8BF", "ross-bf"].contains(boyfriend.curCharacter)) {
+		PlayState.instance.setupPixelErasureShader();
+	}
+}
+
 function onMoveCamera(focus) {
     if (focus == 'dad') {
         special.purp.flipX = false;

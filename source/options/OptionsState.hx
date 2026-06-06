@@ -10,6 +10,7 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.group.FlxGroup.FlxTypedGroup;
 
 using StringTools;
+using CoolUtil.InflatedPixelSpriteExt;
 
 class OptionsState extends MusicBeatState
 {
@@ -26,8 +27,14 @@ class OptionsState extends MusicBeatState
 	var buttonESC:Button;
 	#end
 
-	public function new(?goToPlayState:Bool)
-	{
+	var selectionBackgroundHighlight:FlxSprite;
+
+	var selectorLeft:TitleCardFont;
+	var selectorRight:TitleCardFont;
+
+	var holdTime:Float = 0;
+
+	public function new(?goToPlayState:Bool) {
 		super();
 		if (goToPlayState != null)
 			OptionsState.goToPlayState = goToPlayState;
@@ -58,9 +65,6 @@ class OptionsState extends MusicBeatState
 		}
 	}
 
-	var selectorLeft:TitleCardFont;
-	var selectorRight:TitleCardFont;
-
 	override function create() {
 		#if DISCORD_ALLOWED
 		DiscordClient.changePresence("Options Menu", null);
@@ -68,15 +72,19 @@ class OptionsState extends MusicBeatState
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('f4rp_shatter_bg'));
 		bg.antialiasing = false;
-		bg.setGraphicSize(Std.int(bg.width) * 3);
+		bg.setGraphicSize(Std.int(bg.width) * 4);
 		bg.screenCenter();
+		// bg is 426x240px high, so 1704x960. Centering leaves overrun of 212/70 on each edge; y+2 to get pixel alignment
+		bg.y += 2.0;
 		add(bg);
+
+		selectionBackgroundHighlight = new FlxSprite().makeInflatedPixelGraphic(0x99000000, FlxG.width, 76);
+		add(selectionBackgroundHighlight);
 
 		grpOptions = new FlxTypedGroup<TitleCardFont>();
 		add(grpOptions);
 
-		for (i in 0...options.length)
-		{
+		for (i in 0...options.length) {
 			var optionText:TitleCardFont = new TitleCardFont(0, 0, options[i], true, false);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
@@ -122,7 +130,6 @@ class OptionsState extends MusicBeatState
 		// }
 	}
 
-	var holdTime:Float = 0;
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
@@ -163,7 +170,7 @@ class OptionsState extends MusicBeatState
 			openSelectedSubState(options[curSelected]);
 		}
 	}
-	
+
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)
@@ -171,15 +178,11 @@ class OptionsState extends MusicBeatState
 		if (curSelected >= options.length)
 			curSelected = 0;
 
-		var bullShit:Int = 0;
+		for (i => item in grpOptions.members) {
+			item.targetY = i - curSelected;
 
-		for (item in grpOptions.members) {
-			item.targetY = bullShit - curSelected;
-			bullShit++;
-
-			item.alpha = 0.6;
 			if (item.targetY == 0) {
-				item.alpha = 1;
+				selectionBackgroundHighlight.y = item.y - 4;
 				selectorLeft.x = item.x - 63;
 				selectorLeft.y = item.y;
 				selectorRight.x = item.x + item.width + 15;

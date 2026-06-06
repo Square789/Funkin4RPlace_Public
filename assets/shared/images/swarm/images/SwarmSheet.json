@@ -1,0 +1,591 @@
+{ "frames": {
+   "Sky0": {
+    "frame": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Sky1": {
+    "frame": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Sky2": {
+    "frame": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Sky3": {
+    "frame": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Sky4": {
+    "frame": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 570, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skylinefarthest0": {
+    "frame": { "x": 1140, "y": 0, "w": 570, "h": 303 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 17, "w": 570, "h": 303 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skylinefarthest1": {
+    "frame": { "x": 1140, "y": 0, "w": 570, "h": 303 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 17, "w": 570, "h": 303 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skylinefarthest2": {
+    "frame": { "x": 1140, "y": 0, "w": 570, "h": 303 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 17, "w": 570, "h": 303 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skylinefarthest3": {
+    "frame": { "x": 1140, "y": 0, "w": 570, "h": 303 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 17, "w": 570, "h": 303 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skylinefarthest4": {
+    "frame": { "x": 1140, "y": 0, "w": 570, "h": 303 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 17, "w": 570, "h": 303 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skyline0": {
+    "frame": { "x": 570, "y": 0, "w": 570, "h": 311 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 9, "w": 570, "h": 311 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skyline1": {
+    "frame": { "x": 570, "y": 0, "w": 570, "h": 311 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 9, "w": 570, "h": 311 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skyline2": {
+    "frame": { "x": 570, "y": 0, "w": 570, "h": 311 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 9, "w": 570, "h": 311 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skyline3": {
+    "frame": { "x": 570, "y": 0, "w": 570, "h": 311 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 9, "w": 570, "h": 311 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Skyline4": {
+    "frame": { "x": 570, "y": 0, "w": 570, "h": 311 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 9, "w": 570, "h": 311 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "BeatSaber floaters0": {
+    "frame": { "x": 234, "y": 378, "w": 47, "h": 23 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 262, "y": 149, "w": 47, "h": 23 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "BeatSaber floaters1": {
+    "frame": { "x": 234, "y": 378, "w": 47, "h": 23 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 262, "y": 149, "w": 47, "h": 23 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "BeatSaber floaters2": {
+    "frame": { "x": 234, "y": 378, "w": 47, "h": 23 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 262, "y": 149, "w": 47, "h": 23 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "BeatSaber floaters3": {
+    "frame": { "x": 234, "y": 378, "w": 47, "h": 23 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 262, "y": 149, "w": 47, "h": 23 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "BeatSaber floaters4": {
+    "frame": { "x": 234, "y": 378, "w": 47, "h": 23 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 262, "y": 149, "w": 47, "h": 23 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "[The Big One]0": {
+    "frame": { "x": 797, "y": 311, "w": 151, "h": 305 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 207, "y": 15, "w": 151, "h": 305 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "[The Big One]1": {
+    "frame": { "x": 797, "y": 311, "w": 151, "h": 305 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 207, "y": 15, "w": 151, "h": 305 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "[The Big One]2": {
+    "frame": { "x": 797, "y": 311, "w": 151, "h": 305 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 207, "y": 15, "w": 151, "h": 305 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "[The Big One]3": {
+    "frame": { "x": 797, "y": 311, "w": 151, "h": 305 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 207, "y": 15, "w": 151, "h": 305 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "[The Big One]4": {
+    "frame": { "x": 797, "y": 311, "w": 151, "h": 305 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 207, "y": 15, "w": 151, "h": 305 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Elden Ring0": {
+    "frame": { "x": 948, "y": 311, "w": 54, "h": 295 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 347, "y": 25, "w": 54, "h": 295 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Elden Ring1": {
+    "frame": { "x": 948, "y": 311, "w": 54, "h": 295 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 347, "y": 25, "w": 54, "h": 295 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Elden Ring2": {
+    "frame": { "x": 948, "y": 311, "w": 54, "h": 295 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 347, "y": 25, "w": 54, "h": 295 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Elden Ring3": {
+    "frame": { "x": 948, "y": 311, "w": 54, "h": 295 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 347, "y": 25, "w": 54, "h": 295 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Elden Ring4": {
+    "frame": { "x": 948, "y": 311, "w": 54, "h": 295 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 347, "y": 25, "w": 54, "h": 295 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Anarchy Chess0": {
+    "frame": { "x": 234, "y": 320, "w": 234, "h": 58 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 159, "y": 149, "w": 234, "h": 58 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Anarchy Chess1": {
+    "frame": { "x": 234, "y": 320, "w": 234, "h": 58 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 159, "y": 149, "w": 234, "h": 58 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Anarchy Chess2": {
+    "frame": { "x": 234, "y": 320, "w": 234, "h": 58 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 159, "y": 149, "w": 234, "h": 58 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Anarchy Chess3": {
+    "frame": { "x": 234, "y": 320, "w": 234, "h": 58 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 159, "y": 149, "w": 234, "h": 58 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Anarchy Chess4": {
+    "frame": { "x": 234, "y": 320, "w": 234, "h": 58 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 159, "y": 149, "w": 234, "h": 58 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "R.I.P. Michi0": {
+    "frame": { "x": 1002, "y": 311, "w": 77, "h": 194 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 182, "y": 126, "w": 77, "h": 194 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "R.I.P. Michi1": {
+    "frame": { "x": 1002, "y": 311, "w": 77, "h": 194 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 182, "y": 126, "w": 77, "h": 194 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "R.I.P. Michi2": {
+    "frame": { "x": 1002, "y": 311, "w": 77, "h": 194 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 182, "y": 126, "w": 77, "h": 194 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "R.I.P. Michi3": {
+    "frame": { "x": 1002, "y": 311, "w": 77, "h": 194 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 182, "y": 126, "w": 77, "h": 194 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "R.I.P. Michi4": {
+    "frame": { "x": 1002, "y": 311, "w": 77, "h": 194 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 182, "y": 126, "w": 77, "h": 194 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "LEGO0": {
+    "frame": { "x": 468, "y": 320, "w": 88, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 350, "y": 124, "w": 88, "h": 77 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "LEGO1": {
+    "frame": { "x": 468, "y": 320, "w": 88, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 350, "y": 124, "w": 88, "h": 77 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "LEGO2": {
+    "frame": { "x": 468, "y": 320, "w": 88, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 350, "y": 124, "w": 88, "h": 77 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "LEGO3": {
+    "frame": { "x": 468, "y": 320, "w": 88, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 350, "y": 124, "w": 88, "h": 77 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "LEGO4": {
+    "frame": { "x": 468, "y": 320, "w": 88, "h": 77 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 350, "y": 124, "w": 88, "h": 77 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Benchy0": {
+    "frame": { "x": 1079, "y": 311, "w": 58, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 328, "y": 147, "w": 58, "h": 53 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Benchy1": {
+    "frame": { "x": 1079, "y": 311, "w": 58, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 328, "y": 147, "w": 58, "h": 53 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Benchy2": {
+    "frame": { "x": 1079, "y": 311, "w": 58, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 328, "y": 147, "w": 58, "h": 53 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Benchy3": {
+    "frame": { "x": 1079, "y": 311, "w": 58, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 328, "y": 147, "w": 58, "h": 53 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Benchy4": {
+    "frame": { "x": 1079, "y": 311, "w": 58, "h": 53 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 328, "y": 147, "w": 58, "h": 53 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice0": {
+    "frame": { "x": 570, "y": 311, "w": 227, "h": 320 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 343, "y": 0, "w": 227, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice1": {
+    "frame": { "x": 570, "y": 311, "w": 227, "h": 320 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 343, "y": 0, "w": 227, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice2": {
+    "frame": { "x": 570, "y": 311, "w": 227, "h": 320 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 343, "y": 0, "w": 227, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice3": {
+    "frame": { "x": 570, "y": 311, "w": 227, "h": 320 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 343, "y": 0, "w": 227, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice4": {
+    "frame": { "x": 570, "y": 311, "w": 227, "h": 320 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 343, "y": 0, "w": 227, "h": 320 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice front-decoration0": {
+    "frame": { "x": 0, "y": 320, "w": 234, "h": 110 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 289, "y": 72, "w": 234, "h": 110 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice front-decoration1": {
+    "frame": { "x": 0, "y": 320, "w": 234, "h": 110 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 289, "y": 72, "w": 234, "h": 110 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice front-decoration2": {
+    "frame": { "x": 0, "y": 320, "w": 234, "h": 110 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 289, "y": 72, "w": 234, "h": 110 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice front-decoration3": {
+    "frame": { "x": 0, "y": 320, "w": 234, "h": 110 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 289, "y": 72, "w": 234, "h": 110 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Lattice front-decoration4": {
+    "frame": { "x": 0, "y": 320, "w": 234, "h": 110 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 289, "y": 72, "w": 234, "h": 110 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Main Area0": {
+    "frame": { "x": 1140, "y": 303, "w": 570, "h": 239 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 81, "w": 570, "h": 239 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Main Area1": {
+    "frame": { "x": 1140, "y": 303, "w": 570, "h": 239 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 81, "w": 570, "h": 239 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Main Area2": {
+    "frame": { "x": 1140, "y": 303, "w": 570, "h": 239 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 81, "w": 570, "h": 239 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Main Area3": {
+    "frame": { "x": 1140, "y": 303, "w": 570, "h": 239 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 81, "w": 570, "h": 239 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "Main Area4": {
+    "frame": { "x": 1140, "y": 303, "w": 570, "h": 239 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 0, "y": 81, "w": 570, "h": 239 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "r/FUCKCARS0": {
+    "frame": { "x": 1079, "y": 364, "w": 37, "h": 74 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 479, "y": 246, "w": 37, "h": 74 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "r/FUCKCARS1": {
+    "frame": { "x": 1079, "y": 364, "w": 37, "h": 74 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 479, "y": 246, "w": 37, "h": 74 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "r/FUCKCARS2": {
+    "frame": { "x": 1079, "y": 364, "w": 37, "h": 74 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 479, "y": 246, "w": 37, "h": 74 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "r/FUCKCARS3": {
+    "frame": { "x": 1079, "y": 364, "w": 37, "h": 74 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 479, "y": 246, "w": 37, "h": 74 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   },
+   "r/FUCKCARS4": {
+    "frame": { "x": 1079, "y": 364, "w": 37, "h": 74 },
+    "rotated": false,
+    "trimmed": true,
+    "spriteSourceSize": { "x": 479, "y": 246, "w": 37, "h": 74 },
+    "sourceSize": { "w": 570, "h": 320 },
+    "duration": 100
+   }
+ },
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.17-x64",
+  "image": "SwarmSheet.png",
+  "format": "RGBA8888",
+  "size": { "w": 1710, "h": 631 },
+  "scale": "1",
+  "frameTags": [
+  ],
+  "layers": [
+   { "name": "Sky", "opacity": 255, "blendMode": "normal" },
+   { "name": "Skylinefarthest", "opacity": 255, "blendMode": "normal" },
+   { "name": "Skyline", "opacity": 255, "blendMode": "normal" },
+   { "name": "BeatSaber floaters", "opacity": 255, "blendMode": "normal" },
+   { "name": "[The Big One]", "opacity": 255, "blendMode": "normal" },
+   { "name": "Elden Ring", "opacity": 255, "blendMode": "normal" },
+   { "name": "Anarchy Chess", "opacity": 255, "blendMode": "normal" },
+   { "name": "R.I.P. Michi", "opacity": 255, "blendMode": "normal" },
+   { "name": "LEGO", "opacity": 255, "blendMode": "normal" },
+   { "name": "Benchy", "opacity": 255, "blendMode": "normal" },
+   { "name": "Lattice", "opacity": 255, "blendMode": "normal" },
+   { "name": "Lattice front-decoration", "opacity": 255, "blendMode": "normal" },
+   { "name": "Main Area", "opacity": 255, "blendMode": "normal" },
+   { "name": "r/FUCKCARS", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

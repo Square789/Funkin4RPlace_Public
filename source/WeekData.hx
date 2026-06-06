@@ -30,7 +30,15 @@ typedef WeekFile =
 }
 
 class WeekData {
+	/**
+	 * Global static bullshit field mapping each ID in `weeksList` to respective
+	 * WeekData.
+	 */
 	public static var weeksLoaded:Map<String, WeekData> = new Map();
+	/**
+	 * Global static bullshit field containing each week's ID.
+	 * Modified by WeekData.reloadWeekFiles.
+	 */
 	public static var weeksList:Array<String> = [];
 	public var folder:String = '';
 	

@@ -1,0 +1,230 @@
+
+var windows = [];
+var time = 0.0;
+var floaters = [];
+
+var TANK_STATE_OFFSCREEN = 0;
+var TANK_STATE_ENTERING = 1;
+var TANK_STATE_ENTERING_STOPPING = 2;
+var TANK_STATE_IDLING = 3;
+var TANK_STATE_DEPOSITING = 4;
+var TANK_STATE_IDLING_NO_TANKMAN = 5;
+var TANK_STATE_LEAVING = 6;
+var tankState = TANK_STATE_OFFSCREEN;
+var tankman = null;
+var tank = null;
+
+function onCreate() {
+	var skyOrigin = {x: -220, y: -162};
+	var skySF = {x: 0.1, y: 0.1};
+
+	// @Square789: preload tankman icon into the cache or whatever.
+	// ugly binding it to the stage, but meh. works
+	Paths.image("icons/icon-tankman-pixel");
+
+	// Sky is 720x405.
+	var sky = new BGSprite("rooftop/sky", skyOrigin.x, skyOrigin.y, skySF.x, skySF.y);
+	var skyBeams = new BGSprite("rooftop/sky_beams", skyOrigin.x, skyOrigin.y, skySF.x, skySF.y);
+	var moon = new BGSprite("rooftop/moon", skyOrigin.x + 414, skyOrigin.y + 10, skySF.x, skySF.y);
+	var france = new BGSprite("rooftop/france", skyOrigin.x + 547, skyOrigin.y + 7, skySF.x, skySF.y);
+
+	// For some reason, these things are very unbothered by modifications to their Y (pixel scale is applied?), but not their X
+	// i am at this point so done with fnf code, have a crappy hack on top
+	for (x in [
+		{n: "1",             pos: {x: 582, y: 106 * 6}},
+		{n: "2",             pos: {x: 395, y:   8 * 6}},
+		{n: "3",             pos: {x: 244, y:  73 * 6}},
+		{n: "shroom",        pos: {x: 349, y:  87 * 6}},
+		{n: "star",          pos: {x: 282, y:  10 * 6}},
+		{n: "banana_peel",   pos: {x: 558, y:  29 * 6}},
+		{n: "battlecruiser", pos: {x: 495, y:  96 * 6}},
+	]) {
+		var spr = new BGSprite("rooftop/floater_" + x.n, skyOrigin.x + x.pos.x + 95, skyOrigin.y + x.pos.y - 820, skySF.x, skySF.y);
+		floaters.push({sprite: spr, baseY: spr.y, floatRange: FlxG.random.float(12.0, 20.0), floatSpeed: FlxG.random.float(0.2, 1.2)});
+	}
+
+	var skylineBack = new BGSprite("rooftop/skyline1", -206 + 15, -164 + 100, 0.4, 0.4);
+	var skylineFront = new BGSprite("rooftop/skyline0", -206, -164 + 180, 0.6, 0.6);
+
+	var pyramid = new BGSprite("rooftop/pyramid", 130, -24, 0.7, 0.7);
+	var buildingPeace = new BGSprite("rooftop/building_peace", 120, 76, 0.75, 0.75);
+	var buildingBeatSaber = new BGSprite("rooftop/building_beat_saber", 10, -14, 0.82, 0.82);
+	var dissenter = new BGSprite("rooftop/HANKMAN", 40, -15, 0.82, 0.82, ["Hanky"], true, 10);
+
+	var buildingTower = new BGSprite("rooftop/building_tower", 274, 10, 0.92, 0.92);
+	var buildingSmash = new BGSprite("rooftop/building_smash", 16, 138, 0.9, 0.9);
+
+	var building = new BGSprite("rooftop/building", 78, 111, 1.0, 1.0);
+
+	tank = new BGSprite("rooftop/mini_tank.aseprite", 350, 135, 1, 1, ["tank_bop", "tank_enter", "tank_stop", "tank_man_exit", "tank_leave"], false, 10);
+	tank.animation.getByName("tank_enter").looped = true;
+	tank.animation.getByName("tank_leave").looped = true;
+
+	var windowFrames = Paths.getSparrowAtlas("rooftop/windows");
+	var windowNiko = new BGSprite(null, 78 + 30 + 131, 111 + 146);
+	var windowEmpty = new BGSprite(null, 78 + 30, 111 + 146);
+	var i = 0;
+	for (x in [windowNiko, windowEmpty]) {
+		x.frames = windowFrames;
+		if (i == 0) {
+			x.animation.addByPrefix("main", "window_niko");
+		} else {
+			x.animation.addByPrefix("main", "window_empty");
+		}
+		x.animation.play("main");
+		windows.push(x);
+
+		i++;
+	}
+
+	var finalsetup = [sky, skyBeams, moon, france];
+	for (x in floaters) {
+		finalsetup.push(x.sprite);
+	}
+	for (x in [
+		skylineBack, skylineFront, pyramid, buildingPeace, buildingBeatSaber, dissenter, buildingTower, buildingSmash,
+		building, tank, windowNiko, windowEmpty
+	]) {
+		finalsetup.push(x);
+	}
+
+	for (x in finalsetup) {
+		x.pixelSetup();
+		addBehindChars(x);
+	}
+}
+
+function onCreatePost() {
+	if (["flag-bf", "8BF", "ross-bf"].contains(boyfriend.curCharacter)) {
+		PlayState.instance.setupPixelErasureShader();
+	}
+
+	if (PlayState.instance.boyfriendMembers.length < 2) {
+		return;
+	}
+
+	tankman = PlayState.instance.boyfriendMembers[1];
+	tankman.visible = false;
+	tank.visible = false;
+	var dissolver = new PixelErasureShader();
+	dissolver.pixel_dimensions.value = [1.0, 1.0];
+	dissolver.palette.input = new BitmapData(1, 1, true, 0x00000000);
+	dissolver.pixel_health.value[0] = 0.0;
+	tankman.shader = dissolver;
+}
+
+function startModchartTween(tag, object, propertyMap, duration, options) {
+	options.onComplete = (twn) -> {
+		PlayState.instance.callOnScripts('onTweenCompleted', [tag]);
+		PlayState.instance.modchartTweens.remove(tag);
+	};
+	PlayState.instance.modchartTweens.set(
+		tag,
+		FlxTween.tween(
+			object,
+			propertyMap,
+			duration,
+			options
+		)
+	);
+}
+
+function _tankFinishEntering() {
+	tank.x = 160 * 6;
+	tankState = TANK_STATE_IDLING;
+}
+
+function _tankFinishLeaving() {
+	tank.x = 350 * 6;
+	tankState = TANK_STATE_OFFSCREEN;
+}
+
+function onEvent(eventName, v1, v2) {
+	if (eventName != "_F4RPSPECIFIC Tankman Enough") {
+		return;
+	}
+
+	if (v1 == "enter" && tankState == TANK_STATE_OFFSCREEN) {
+		tankState = TANK_STATE_ENTERING;
+		tank.visible = true;
+		startModchartTween(
+			"tankenter",
+			tank,
+			{x: 160 * 6},
+			5.0,
+			{
+				ease: FlxEase.quadInOut,
+				onUpdate: (twn) -> {
+					if (twn.percent > 0.79 && tankState == TANK_STATE_ENTERING) {
+						tank.animation.play("tank_stop");
+						tankState = TANK_STATE_ENTERING_STOPPING;
+					}
+				},
+			}
+		);
+		tank.animation.play("tank_enter");
+	} else if (v1 == "join") {
+		_tankFinishEntering();
+		tankState = TANK_STATE_DEPOSITING;
+		tank.animation.play("tank_man_exit");
+	} else if (v1 == "materialize") {
+		if (tankman != null) {
+			tankman.visible = true;
+			startModchartTween("tankmanmaterialize", tankman.shader, {pixel_health_direct: 1.0}, 0.8, {});
+		}
+	} else if (v1 == "leave") {
+		tankState = TANK_STATE_LEAVING;
+		startModchartTween(
+			"tankleave",
+			tank,
+			{x: 350 * 6},
+			3.5,
+			{
+				ease: FlxEase.quadIn,
+			}
+		);
+		tank.animation.play("tank_leave");
+	}
+}
+
+function onTweenCompleted(tag) {
+	if (tag == "tankenter") {
+		_tankFinishEntering();
+	}
+	if (tag == "tankleave") {
+		_tankFinishLeaving();
+		tank.visible = false;
+	}
+}
+
+function onStepHit() {
+	if (tankState == TANK_STATE_IDLING && curStep % 4 == 0) {
+		tank.animation.play("tank_bop");
+	}
+}
+
+function onUpdate(dt) {
+	time += dt;
+	for (x in floaters) {
+		x.sprite.y = (x.floatRange * Math.sin(time * x.floatSpeed)) + x.baseY;
+	}
+
+	if (tankState == TANK_STATE_DEPOSITING) {
+		if (tank.animation.finished) {
+			tankState = TANK_STATE_IDLING_NO_TANKMAN;
+		}
+	}
+}
+
+function onBeatHit() {
+	for (sprite in windows) {
+		if (sprite != null && sprite.animation != null && sprite.animation.curAnim != null) {
+			var frame = sprite.animation.curAnim.curFrame;
+			if (frame >= 4) {
+				sprite.animation.curAnim.curFrame = 0;
+			} else {
+				sprite.animation.curAnim.curFrame = frame + 1;
+			}
+		}
+	}
+}

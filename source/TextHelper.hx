@@ -54,6 +54,41 @@ class TextMeasurer implements ITextMeasurer {
 	}
 }
 
+
+class TextMeasurerCache implements IFlxDestroyable {
+	// If only haxe had nice-to-use tuples as key or something but hey
+	private var _map:Map<String, Map<Int, ITextMeasurer>>;
+	public function new() {
+		this._map = new Map<String, Map<Int, ITextMeasurer>>();
+	}
+
+	public function get(font:String, size:Int, bold:Bool) {
+		var secondKey:haxe.Int32 = (size & 0xFFFF) | ((bold ? 1 : 0) << 16);
+		_maybeCreateMap(font);
+		if (!_map[font].exists(secondKey)) {
+			_map[font][secondKey] = new TextMeasurer(font, size, bold);
+		}
+		return _map[font][secondKey];
+	}
+
+	private function _maybeCreateMap(font:String) {
+		if (!_map.exists(font)) {
+			_map[font] = new Map<Int, ITextMeasurer>();
+		}
+	}
+
+	public function destroy() {
+		for (m in _map) {
+			for (tm in m) {
+				tm.destroy();
+			}
+			m.clear(); m = null;
+		}
+		_map.clear(); _map = null;
+	}
+}
+
+
 /**
  * Returns whether text is only made up of whitespace.
  * Empty strings are also considered space, so that will result in true.
@@ -207,16 +242,22 @@ function splitTextAndWordIntoRemainingSpace(text:String, space:Float, measurer:I
 		FlxG.log.notice('TextHelper weirdness; word $firstSegment fit into $space px when it previously didn\'t');
 		return {h: firstSegment, t: tail};
 	} else {
-		var head = segments.slice(0, causedOverrun).join("");
+		// causedOverrun is at least 1
 		if (isSpace(segments[causedOverrun])) {
+			var head = segments.slice(0, causedOverrun).join("");
 			if (hasLinebreak(segments[causedOverrun])) {
 				return {h: head, t: stripFirstLinebreak(segments[causedOverrun]) + tail}
 			}
 			// Drop simple space segment
 			return {h: head, t: tail}
 		}
+		// Because the segment prior is space, we include it only if the string would otherwise end up empty.
+		// Arbitrary decision, but it solves the issue of space at the end of linebreaks.
 		// Re-include overrunning segment in tail
-		return {h: head, t: segments[causedOverrun] + tail}
+		return {
+			h: causedOverrun == 1 ? segments[0] : segments.slice(0, causedOverrun - 1).join(""),
+			t: segments[causedOverrun] + tail,
+		}
 	}
 }
 
@@ -230,7 +271,7 @@ function splitTextAndWordIntoLines(
 ):Array<String> {
 	var tail = text;
 	var res:Array<String> = [];
-	while (tail.length > 0 && res.length <= limit) {
+	while (tail.length > 0 && res.length < limit) {
 		var r = splitTextAndWordIntoRemainingSpace(tail, space, measurer);
 		res.push(r.h);
 		tail = r.t;

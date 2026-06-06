@@ -55,7 +55,7 @@ class LoadingState extends MusicBeatState
 
 		if (FlxG.random.bool(5)) {
 			funkayData = cast {name: 'trell'};
-			AchievementManager.advanceAchievement("nick_load", 1);
+			AchievementManager.advanceAchievement("special_load", 1);
 		}
 
 		var bg:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, 0xffcaff4d);

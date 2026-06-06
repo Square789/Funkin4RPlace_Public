@@ -1,0 +1,549 @@
+
+var meteor = null;
+var meteorCloser = null;
+var transparencyImage = null;
+var meteorCloserMask = null;
+var meteorStartValues = {x: 0.0, y: 0.0, scale: 0.0};
+var meteorFinishValues = {x: 0.0, y: 0.0, scale: 1.0};
+var meteorPositionEase = null;
+
+// Rotate the meteor every X steps
+var meteorRotationIntensity = 4;
+var meteorStartTime = -1.0;
+var meteorShakeIntensity = 0.0;
+
+var meteorScaleStartTime = 0.0;
+var meteorScaleFinishTime = 0.0;
+var meteorScaleEase = null;
+
+var meteorCloserAppearing = false;
+var meteorCloserApparitionTween = null;
+
+var chatboxFadeInStartTime = -1.0;
+var chatboxFadeInFinishTime = -1.0;
+var chatboxFadeInEase = null;
+
+// sure we already have events elsewhere but the chart editor scares me.
+// These need to be sorted by `time`.
+var eventQueue = [];
+var nextUncheckedEventIdx = 0;
+
+var rdWings = [];
+var rdBody = null;
+var missAnimationToPlay = '';
+var missExpectedAnimation = '';
+var wingAnimationFrame = 0;
+var wingTimer = 0.0;
+var wingsInMissAnimation = false;
+
+var floaterTime = 0.0;
+var floaters = [];
+
+var skyOrigin = {x: -900, y: -600};
+var skyFix = {x: 380, y: 0};
+var skySF = {x: 0.1, y: 0.1};
+var skyEvil = null;
+
+var evilTint = null;
+
+
+var pinkiesHeadlessBody = null;
+var pidx = null;
+
+function chatboxProgressionAlign(v) {
+    return v * 0.74 + 0.12;
+}
+
+function onCreate() {
+    //background
+    // sky is 1920 x 1080
+    var sky = new BGSprite('malder/Sky', skyOrigin.x + skyFix.x + 50, skyOrigin.y + skyFix.y + 275, skySF.x, 0);
+    skyEvil = new BGSprite('malder/SkyEvil', sky.x, sky.y, sky.scrollFactor.x, sky.scrollFactor.y);
+
+    meteor = new BGSprite('malder/Meteor', skyOrigin.x + skyFix.x + 85, skyOrigin.y + skyFix.y - 80, skySF.x + 0.1, skySF.y + 0.1);
+    meteorStartValues.x = meteor.x;
+    meteorStartValues.y = meteor.y;
+    meteorStartValues.scale = 0.5;
+    meteorFinishValues.x = meteorStartValues.x;
+    meteorFinishValues.y = meteorStartValues.y + 400.0;
+    meteorFinishValues.scale = 1.0;
+
+    meteorCloser = new BGSprite('malder/Closer_Meteor', meteor.x, meteor.y, meteor.scrollFactor.x, meteor.scrollFactor.y);
+
+    if (PlayState.instance.curSong == "malder-gold") {
+        // 1:05.0 snap
+        // 1:24.75 afterdrop
+        // 1:34.4 rd solo section
+        // 1:43.8
+        // 1:53.4 final section
+        // 2:03.1 impact
+        eventQueue.push({time: 9800.0, eventName: "meteor_start", v1: null});
+        eventQueue.push({time: 65000.0, eventName: "meteor_turn_evil", v1: 2.5});
+        eventQueue.push({time: 84750.0, eventName: "meteor_change_rotation_intensity", v1: 16});
+        eventQueue.push({time: 84750.0, eventName: "meteor_change_shake_intensity", v1: 0.5075});
+        eventQueue.push({time: 103800.0, eventName: "meteor_change_rotation_intensity", v1: 2});
+        eventQueue.push({time: 103800.0, eventName: "meteor_change_shake_intensity", v1: 1.6});
+        eventQueue.push({time: 113400.0, eventName: "shake", v1: 0.002});
+        eventQueue.push({time: 123100.0, eventName: "meteor_impact", v1: null});
+        meteorScaleStartTime = 9700.0;
+        meteorScaleFinishTime = 103800.0 + 4000.0;
+        meteorScaleFunc = FlxEase.sineOut;
+        chatboxFadeInStartTime = 6000.0;
+        chatboxFadeInFinishTime = 13000.0;
+        // crappy stitch of a sineOut, linear rise and then quartOut
+        // deduced by analyzing some video footage and attempting to sync it with the riser in the gold variant
+        // this was most certainly no worth it
+        // ^ yup, especially cause a linear tween won out in the end anyways
+        // chatboxFadeInEase = (x) -> (1.0 - Math.cos((x * Math.PI) / 2.0))*0.5 + x*0.5;
+        chatboxFadeInEase = (x) -> chatboxProgressionAlign(FlxEase.linear(x)); // (x) -> (x < 0.5 ? FlxEase.sineOut(x * 2.0) * 0.5 : (0.5 + FlxEase.quartIn((x - 0.5) * 2.0) * 0.5));
+    } else {
+        // 1:09.8 snap
+        // 1:20.7 drop
+        // 2:02.0 buildup to low section
+        // 2:12.4 rd solo section
+        // 2:22.6 buildup out of low section
+        // 2:32.8 2nd drop
+        // 2:43.1 xqc vocals join
+        // 2:53.2 afterdrop/final section
+        // 3:03.5 meteor impact
+        eventQueue.push({time: 0.0, eventName: "meteor_start", v1: null});
+        eventQueue.push({time: 69800.0, eventName: "meteor_turn_evil", v1: 2.5});
+        eventQueue.push({time: 80700.0, eventName: "meteor_change_rotation_intensity", v1: 16});
+        eventQueue.push({time: 80700.0, eventName: "meteor_change_shake_intensity", v1: 0.5075});
+        eventQueue.push({time: 142600.0, eventName: "meteor_change_rotation_intensity", v1: 4});
+        eventQueue.push({time: 152800.0, eventName: "meteor_change_rotation_intensity", v1: 2});
+        eventQueue.push({time: 163100.0, eventName: "meteor_change_shake_intensity", v1: 1.6});
+        eventQueue.push({time: 173200.0, eventName: "shake", v1: 0.002});
+        eventQueue.push({time: 183500.0, eventName: "meteor_impact", v1: null});
+        meteorScaleStartTime = 0.0;
+        meteorScaleFinishTime = 152800.0 + 4000.0;
+        chatboxFadeInStartTime = -1000.0;
+        chatboxFadeInFinishTime = 50.0;
+        // spent faaar too much time on a tiny effect award
+        // chatboxFadeInEase = (x) -> chatboxProgressionAlign((((x-0.5)*1.5874)*((x-0.5)*1.5874)*((x-0.5)*1.5874) + 0.5)*0.75 + x*0.25);
+        // chatboxFadeInEase = (x) -> (
+        //     x < 0.8 ?
+        //         (0.0 + (FlxEase.quadOut((x - 0.0) / 0.8) * 0.8)) :
+        //         (0.8 + (FlxEase.sineIn((x - 0.8) / 0.2) * 0.2))
+        // );
+        // https://graphtoy.com/?f1(x,t)=&v1=false&f2(x,t)=(((x-0.666667)**3*9)+0.666667)*0.5+x*0.5&v2=true&f3(x,t)=clamp((2*x)**1.44,0,1)&v3=false&f4(x,t)=f2(x,t)*(f3(x,t))+x*(1.0-f3(x,t))&v4=false&f5(x,t)=0.206&v5=false&f6(x,t)=f2(x+clamp(f5(x,t)-x*f5(x,t),-3,6),t)&v6=true&grid=1&coords=0.5,0.5,0.6666666666666666
+        // This function is x^3, moved into the top 2/3rds of the 0..1 area, mixed with f(x) = x,
+        // and x being stretched (stretchFac was eyeballed) so that the function actually crosses close to 0, 0
+        chatboxFadeInEase = function (x) {
+            var strechFac = 0.206;
+            var stretchedX = x + FlxMath.bound(strechFac - x*strechFac, 0.0, strechFac);
+            var q = x - 0.666667;
+            return chatboxProgressionAlign(((q*q*q*9) + 0.666667) * 0.5 + stretchedX * 0.5);
+        };
+    }
+    // Scale has a way heavier effect in the beginning, so start out barely moving
+    meteorPositionEase = FlxEase.cubeIn;
+    meteorScaleEase = FlxEase.sineOut;
+
+    meteor.visible = false;
+    meteor.shader = new HolePixelErasureShader();
+    meteor.shader.palette.input = new BitmapData(1, 1, true, FlxColor.TRANSPARENT);
+    meteor.shader.hole_radius_direct = 0.0;
+    meteor.shader.invert.value[0] = true;
+
+    meteorCloser.visible = false;
+    meteorCloserMask = Paths.image("malder/Closer_Meteor_Mask");
+    meteorCloser.shader = new TransparencyMaskShader();
+    meteorCloser.shader.mask.input = meteorCloserMask.bitmap;
+    meteorCloser.shader.obscurance_direct = 1.0;
+
+    skyEvil.shader = new MalderSkyOrganicPixelErasureShader();
+    skyEvil.visible = false;
+    skyEvil.shader.eraser_color.value = [0.0, 0.0, 0.0, 0.0];
+
+    var lights = new BGSprite('malder/Lights', skyOrigin.x + skyFix.x + 92, skyOrigin.y + skyFix.y + 335, skySF.x + 0.2, skySF.y + 0.2);
+    var backBuildings = new BGSprite('malder/Back Buildings', skyOrigin.x + 375 , skyOrigin.y + skyFix.y + 210, skySF.x + 0.3, skySF.y + 0.3);
+    var balloon = new BGSprite('malder/Balloon', skyOrigin.x + skyFix.x - 75, skyOrigin.y + 125, skySF.x + 0.4, skySF.y + 0.4);
+    var errorL = new BGSprite('malder/error_l', skyOrigin.x + skyFix.x + 50, skyOrigin.y + skyFix.y + 228, skySF.x + 0.4, skySF.y + 0.4);
+    var errorR = new BGSprite('malder/error_r', skyOrigin.x + skyFix.x + 1320, skyOrigin.y + skyFix.y + 210, skySF.x + 0.4, skySF.y + 0.4);
+    //foreskin
+    var FrontBuildings = new BGSprite('malder/Front Buildings', skyOrigin.x + 125, skyOrigin.y + 25, 0.8, 0.8);
+    var mainArea = new BGSprite('malder/Groundrea', skyOrigin.x, skyOrigin.y, 1, 1);
+
+    //another to the pile
+    var babaArguments = new BGSprite('malder/BabaArguments', skyOrigin.x, skyOrigin.y, 1, 1, ["BABAARGUMENTS"], true, 10);
+
+    var unityCrystals = new BGSprite('malder/Unity Crystals', skyOrigin.x + skyFix.x + 37, skyOrigin.y + 150, 0.3, 0.3);
+    
+    //stage bopper hell
+
+    var baba = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["Baba"], false, 10);
+    var ori = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["Ori"], false, 10);
+    var metroid = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["Metroid (The guy)"], false, 10);
+
+
+    var knightBopperBody = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["KnightBody"], false, 10);
+    var knightBopperHead = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["KnightHead"], false, 10);
+
+    var birdBopper = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["Bird"], false, 10);
+
+    var twilightBopperBody = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["TwilightBody"], false, 10);
+    var twilightBopperWings = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["TwilightWings"], true, 10);
+    var twilightBopperHead = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["TwilightHead"], false, 10);
+    
+    var fluttershyBopperBody = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["FluttershyBody"], false, 10);
+    var fluttershyBopperHead = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["FluttershyHead"], false, 10);
+
+    var ajBopperBody = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["AJBody"], false, 10);
+    var ajBopperHead = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["AJHead"], false, 10);
+    
+    var pinkiesHeadlessBody = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["PinkieBody"], false, 10);
+    var pinkiesSeveredHead = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["PinkieHead"], false, 10);
+
+    var rarityBopperBody = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["RarityBody"], false, 10);
+    var rarityBopperHead = new BGSprite('malder/StageBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["RarityHead"], false, 10);
+
+    //lower boppers
+    var creeperBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["CreeperBody"], false, 10);
+    var creeperBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["CreeperHead"], false, 10);
+
+    var noelleBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["NoelleBody"], false, 10);
+    var noelleBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["NoelleHead"], false, 10);
+
+    var susieBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["SusieBody"], false, 10);
+    var susieBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["SusieHead"], false, 10);
+
+    var ralseiBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["RalseiBody"], false, 10);
+    var ralseiBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["RalseiHead"], false, 10);
+
+    var krisBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["KrisBody"], false, 10);
+    var krisBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["KrisHead"], false, 10);
+
+    var lukeBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["LukeBody"], false, 10);
+    var lukeBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["LukeHead"], false, 10);
+
+    var laytonBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["LaytonBody"], false, 10);
+    var laytonBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["LaytonHead"], false, 10);
+
+    var dekuBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["DekuBody"], false, 10);
+    var dekuBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["DekuHead"], false, 10);
+
+    var jackfrostBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["JackFrostBody"], false, 10);
+    var jackfrostBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["JackFrostHead"], false, 10);
+
+    var madotsukiBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["MadotsukiBody"], false, 10);
+    var madotsukiBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["MadotsukiHead"], false, 10);
+
+    var parappaBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["ParappaBody"], false, 10);
+    var parappaBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["ParappaHead"], false, 10);
+
+    var nessBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["NessBody"], false, 10);
+    var nessBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["NessHead"], false, 10);
+
+    var greenKBopperBody = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["GreenKBody"], false, 10);
+    var greenKBopperHead = new BGSprite('malder/LowerBoppers', skyOrigin.x, skyOrigin.y, 1, 1, ["GreenKHead"], false, 10);
+
+	for (x in [
+        sky, skyEvil, meteor, meteorCloser, unityCrystals, lights, backBuildings, balloon, errorL, errorR, FrontBuildings, mainArea, babaArguments, baba, ori, metroid,
+        knightBopperBody, knightBopperHead, birdBopper, twilightBopperBody, twilightBopperWings, twilightBopperHead, fluttershyBopperBody, fluttershyBopperHead,
+        ajBopperBody, ajBopperHead, pinkiesHeadlessBody, pinkiesSeveredHead, rarityBopperBody, rarityBopperHead, creeperBopperBody, creeperBopperHead,
+        noelleBopperBody, noelleBopperHead, susieBopperBody, susieBopperHead, ralseiBopperBody, ralseiBopperHead, krisBopperBody, krisBopperHead,
+        laytonBopperBody, laytonBopperHead, lukeBopperBody, lukeBopperHead, dekuBopperBody, dekuBopperHead, jackfrostBopperBody, jackfrostBopperHead,
+        madotsukiBopperBody, madotsukiBopperHead, parappaBopperBody, parappaBopperHead, nessBopperBody, nessBopperHead,
+        greenKBopperBody, greenKBopperHead
+    ]) {
+
+        // finalsetup, who needs it?
+        // finalsetup.push(x);
+        
+        x.antialiasing = false;
+        x.snapToPixelGrid = true;
+        addBehindChars(x);
+    }
+
+    for (booper in [
+        knightBopperBody, knightBopperHead, birdBopper, twilightBopperBody, twilightBopperHead, fluttershyBopperBody, fluttershyBopperHead,
+        ajBopperBody, ajBopperHead, pinkiesHeadlessBody, pinkiesSeveredHead, rarityBopperBody, rarityBopperHead, creeperBopperBody, creeperBopperHead,
+        noelleBopperBody, noelleBopperHead, ralseiBopperBody, susieBopperBody, susieBopperHead, ralseiBopperHead, krisBopperBody, krisBopperHead, laytonBopperBody, laytonBopperHead,
+        lukeBopperBody, lukeBopperHead, dekuBopperBody, dekuBopperHead, jackfrostBopperBody, jackfrostBopperHead, madotsukiBopperBody, madotsukiBopperHead,
+        parappaBopperBody, parappaBopperHead, nessBopperBody, nessBopperHead, greenKBopperBody, greenKBopperHead
+    ]) instance.boppers.push(booper);
+
+    for (f in [twilightBopperBody, twilightBopperWings, twilightBopperHead, metroid]) {
+        floaters.push({floatRange: 20.0, floatSpeed: 0.6, baseY: f.y, sprite: f});
+    }
+    var pidx = getObjectOrder(pinkiesHeadlessBody);
+}
+
+// glorious copypasta
+function startModchartTween(tag, object, propertyMap, duration, options) {
+    options.onComplete = (twn) -> {
+        PlayState.instance.callOnScripts('onTweenCompleted', [tag]);
+        PlayState.instance.modchartTweens.remove(tag);
+    };
+    PlayState.instance.modchartTweens.set(
+        tag,
+        FlxTween.tween(
+            object,
+            propertyMap,
+            duration,
+            options
+        )
+    );
+}
+
+function getProgressFloat(s, f) {
+    return FlxMath.bound((Conductor.songPosition - s) / (f - s), 0.0, 1.0);
+}
+
+function onUpdate(dt) {
+    floaterTime += dt;
+    for (x in floaters) {
+        x.sprite.y = (x.floatRange * Math.sin(floaterTime * x.floatSpeed)) + x.baseY;
+    }
+
+    var cts = PlayState.instance.chatboxTargetSprite;
+    if (cts != null && chatboxFadeInStartTime != chatboxFadeInFinishTime) {
+        if (Conductor.songPosition < chatboxFadeInStartTime) {
+            cts.shader.fadein_progress_direct = 0.0;
+        } else if (Conductor.songPosition > chatboxFadeInFinishTime) {
+            cts.shader.fadein_progress_direct = 1.0;
+        } else {
+            cts.shader.fadein_progress_direct = chatboxFadeInEase(getProgressFloat(chatboxFadeInStartTime, chatboxFadeInFinishTime));
+        }
+    }
+
+    var triggeredEvents = [];
+    while (nextUncheckedEventIdx < eventQueue.length && eventQueue[nextUncheckedEventIdx].time <= Conductor.songPosition) {
+        triggeredEvents.push(eventQueue[nextUncheckedEventIdx]);
+        nextUncheckedEventIdx += 1;
+    }
+
+    for (e in triggeredEvents) {
+        if (e.eventName == "meteor_start") {
+            meteorStartTime = e.time;
+            meteor.visible = true;
+            skyEvil.visible = true;
+            meteorCloser.visible = true;
+            FlxTween.tween(meteor.shader, {hole_radius_direct: 500.0}, 4.2, {ease: FlxEase.quartOut});
+        } else if (e.eventName == "meteor_turn_evil") {
+            meteorCloserAppearing = true;
+            meteorCloser.shader.obscurance_direct = 1.0;
+            meteor.angle = 0.0;
+            meteorCloser.angle = 0.0;
+            meteorCloserApparitionTween = startModchartTween(
+                "meteor_grow_evil",
+                meteorCloser.shader,
+                {obscurance_direct: 0.0},
+                e.v1,
+                {ease: FlxEase.sineOut}
+            );
+        } else if (e.eventName == "meteor_impact") {
+            PlayState.instance.camGame.shake(0.008, 120.0);
+        } else if (e.eventName == "meteor_change_rotation_intensity") {
+            meteorRotationIntensity = e.v1;
+        } else if (e.eventName == "meteor_change_shake_intensity") {
+            meteorShakeIntensity = e.v1;
+        } else if (e.eventName == "shake") {
+            PlayState.instance.camGame.shake(e.v1, 120.0);
+        }
+    }
+
+    if (meteorStartTime != -1.0) {
+        var meteorProgress = getProgressFloat(meteorStartTime, songLength);
+        var easedMeteorProgress = meteorPositionEase(meteorProgress);
+        meteor.x = meteorStartValues.x + (meteorFinishValues.x - meteorStartValues.x) * easedMeteorProgress;
+        meteor.x += Math.round(FlxG.random.float(-1.0, 1.0) * meteorShakeIntensity);
+        meteor.y = meteorStartValues.y + (meteorFinishValues.y - meteorStartValues.y) * easedMeteorProgress;
+
+        // considered to keep it to multiples of 16 to maintain aspect ratio, but jumping was too extreme.
+        // this method leads to noticeable jittering of pixels around the borders
+        var mscale = (
+            meteorStartValues.scale +
+            (
+                (meteorFinishValues.scale - meteorStartValues.scale) *
+                meteorScaleEase(getProgressFloat(meteorScaleStartTime, meteorScaleFinishTime))
+            )
+        );
+        var snappedWidth = Math.round((meteor.frameWidth * mscale) / 2.0) * 2.0;
+        meteor.setGraphicSize(snappedWidth);
+
+        meteorCloser.setPosition(meteor.x, meteor.y);
+        meteorCloser.scale.set(meteor.scale.x, meteor.scale.y);
+
+        // evil sky progression notes:
+        // The evil sky shader is imperfect (as usual) because it already applies to some pixels at 0.0
+        // and doesn't erase the whole sprite at 1.0. we ignore that since the bg is largely
+        // cutoff in-game.
+        // The plan:
+        // keep the sky hidden until the meteor turns evil, at which point it will start sticking to the meteor's
+        // y position, offset additionally by the overall meteor progress.
+
+        // this roughly leads to the line being on top of the meteor. very inaccurate because of scroll factors i assume.
+        var hprogress = FlxMath.bound(((meteor.y + 500) - skyEvil.y) / skyEvil.height, 0.0, 1.0);
+        if (!meteorCloser.visible) {
+            // hide when not yet visible
+            hprogress -= 1.0;
+        }
+        // move the sky down the harder the meteor moves down,
+        // with a heavy rampup towards the end of the song.
+        // anything but sky progress control events breh
+        hprogress += easedMeteorProgress * 0.325;
+        hprogress += Math.pow(easedMeteorProgress, 5.0) * 0.375;
+        skyEvil.shader.horizon_progress_direct = hprogress;
+
+        // waiter, waiter! another progress value dependant on random-ass eyeballed math operations
+        var cAlpha = Math.floor((Math.pow(hprogress, 3.0) - 0.44) * 255.0);
+        var cAlpha = cAlpha > 255 ? 255 : (cAlpha < 0 ? 0 : cAlpha);
+        // camHUD.bgColor &= 0x00ffffff;
+        // camHUD.bgColor |= cAlpha << 24;
+        evilTint.alpha = (cAlpha / 255.0);
+    }
+}
+
+function onStepHit() {
+    if (meteorCloserAppearing) {
+        if (meteorCloser.shader.obscurance_direct <= 0.0) {
+            meteorCloser.shader.obscurance_direct = 0.0;
+            meteorCloserAppearing = false;
+        }
+    }
+    if (meteorRotationIntensity > 0) {
+        if (curStep % meteorRotationIntensity == 0) {
+            if (meteorCloserAppearing) {
+                meteor.flipX = !meteor.flipX;
+                meteorCloser.flipX = meteor.flipX;
+            } else {
+                meteor.angle = (meteor.angle + 90) % 360;
+                if (meteor.angle == 0.0) {
+                    meteor.flipX = !meteor.flipX;
+                }
+                meteorCloser.angle = meteor.angle;
+                meteorCloser.flipX = meteor.flipX;
+            }
+        }
+    }
+}
+
+
+function onCreatePost() {
+    rdBody = PlayState.instance.boyfriendMembers[1];
+    rdWings = [PlayState.instance.boyfriendMembers[0], PlayState.instance.boyfriendMembers[2]];
+    for (char in rdWings) {
+        char.playAnim("idle", true);
+        char.animation.stop();
+        char.skipDance = true;
+    }
+
+    wingsInMissAnimation = false;
+
+    for (f in PlayState.instance.boyfriendMembers) {
+        floaters.push({floatRange: 12.0, floatSpeed: 0.9, baseY: f.y, sprite: f});
+    }
+
+    evilTint = new FlxSprite(0.0, 0.0);
+    makeInflatedPixelGraphic(evilTint, 0xFFFF4500, camHUD.width, camHUD.height);
+    evilTint.scrollFactor.set(0.0, 0.0);
+    evilTint.cameras = [camHUD];
+    evilTint.alpha = 0.0;
+    PlayState.instance.add(evilTint);
+    // camHUD.bgColor = 0x00FF4500;
+}
+
+// Note to self: skipDance is reset to false by Character.playAnim, so be sure to reset it in appropiate places.
+
+// The wings are largely animated by this code and do their best to ignore all dance and bopping instructions.
+// The standard animation logic is running on a 10s timer that hopefully stays well enough in sync with RD's animation controller
+//   On note hit, the timer is rounded up or down to not create subframe inacurracy
+// If the body is idling or in a sing animation, the wings will always copy one of these five states.
+// On miss, they will play a sing animation and then on the first frame of the body's miss animation, play a miss animation.
+// ↑ This is the only instance where they're taken out of the standard animation logic
+
+var WING_CLONE_ANIMS = ["idle", "singRIGHT", "singLEFT", "singUP", "singDOWN"];
+
+function onUpdatePost(dt) {
+    if (rdBody.animation.curAnim != null) {
+        var vidx = WING_CLONE_ANIMS.indexOf(rdBody.animation.curAnim.name);
+        if (vidx != -1) {
+            if (wingsInMissAnimation) {
+                // Make wings return to standard behavior if the body is out of a miss animation
+                wingTimer = 0.0;
+                wingsInMissAnimation = false;
+                for (char in rdWings) {
+                    char.playAnim("idle", true);
+                    char.animation.stop();
+                    char.skipDance = true;
+                }
+            }
+
+            if (!wingsInMissAnimation) {
+                wingTimer += dt;
+                while (wingTimer > 0.1) {
+                    wingTimer -= 0.1;
+                    wingAnimationFrame += 1;
+                    if (wingAnimationFrame == 6) {
+                        wingAnimationFrame = 0;
+                    }
+                }
+                for (char in rdWings) {
+                    char.playAnim(
+                        rdBody.animation.curAnim.name == "idle" ?
+                            rdBody.animation.curAnim.name :
+                            ("wing" + rdBody.animation.curAnim.name),
+                        true,
+                        false,
+                        wingAnimationFrame
+                    );
+                    char.animation.stop();
+                    char.skipDance = true;
+                }
+            }
+        } else if (rdBody.animation.curAnim.name == missExpectedAnimation) {
+            // Play wing miss animations only once body played first frame in which it's still bright
+            if (rdBody.animation.curAnim.curFrame >= 1) {
+                missExpectedAnimation = '';
+                for (char in rdWings) {
+                    _playAnimation(missAnimationToPlay, char);
+                }
+            }
+        }
+    }
+}
+
+function _playAnimation(animToPlay, character) {
+    if (character.animOffsets.exists(animToPlay)) {
+        character.playAnim(animToPlay, true);
+        character.holdTimer = 0.0;
+    }
+}
+
+function _setupMissAnimation(expectedBodyAnimName, animToPlay) {
+    missAnimationToPlay = animToPlay;
+    missExpectedAnimation = expectedBodyAnimName;
+    wingsInMissAnimation = true;
+}
+
+function noteMiss(noteMemberIdx, noteData, noteType, isSustain, characters) {
+    var note = PlayState.instance.notes.members[noteMemberIdx];
+    if (!note.noMissAnimation) {
+        var animToPlay = 'wing' + PlayState.instance.playerSingAnimations[note.noteData] + 'miss' + note.animSuffix;
+        _setupMissAnimation(rdBody.animation.curAnim.name, animToPlay);
+        for (char in rdWings) {
+            // I'm not gonna care about the alt anim suffix stuff here
+            _playAnimation('wing' + PlayState.instance.playerSingAnimations[note.noteData], char);
+        }
+    }
+}
+
+function noteMissPress(direction) {
+    // Won't be called if ghost tapping is on.
+    // Mostly a copypaste from PlayState.hx
+
+    var animToPlay = 'wing' + PlayState.instance.playerSingAnimations[direction] + 'miss';
+    for (char in rdWings) {
+        // char.hasMissAnimations condition dropped; we have those, trust
+        _setupMissAnimation(rdBody.animation.curAnim.name, animToPlay);
+        _playAnimation('wing' + PlayState.instance.playerSingAnimations[direction], char);
+    }
+}
+
+function goodNoteHit(noteMemberIdx, noteData, noteType, isSustain, characters) {
+    var note = PlayState.instance.notes.members[noteMemberIdx];
+
+    missExpectedAnimation = '';
+}

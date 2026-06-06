@@ -23,6 +23,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
+import flixel.system.FlxAssets.FlxShader;
 import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.tweens.FlxEase;
@@ -34,6 +35,8 @@ import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
 import flixel.system.FlxAssets.FlxSoundAsset;
 import openfl.filters.ShaderFilter;
+import openfl.geom.Matrix;
+import openfl.geom.Rectangle;
 import openfl.display.BitmapData;
 import flixel.system.FlxSoundGroup;
 #if HSCRIPT_ALLOWED
@@ -52,10 +55,11 @@ import Note.EventNote;
 import StageData;
 import SkinData;
 import TendrilOverlay;
+import OrganicPixelErasureShader.AnotherFuckingOrganicPixelErasureShader;
 import PlaceTextBG.AttachedPlaceTextBG;
 import PlaceTextBG.AttachedCheapPlaceTextBG;
 import WiggleEffect.WiggleEffectType;
-import FreeplayPlaceState.FreeplaySongData;
+import WorldShakeCamera;
 #if MODS_ALLOWED
 import sys.FileSystem;
 import sys.io.File;
@@ -66,6 +70,11 @@ import vlc.MP4Handler;
 #end
 
 using StringTools;
+
+
+final GC_CONTROL_TIMEOUT = 2000;
+final GC_CONTROL_COOLDOWN_TIMEOUT = 30;
+
 
 // @Square789: actual piece of trash, i am sorry
 private class MultiDissolver {
@@ -82,6 +91,145 @@ private class MultiDissolver {
 			s.pixel_health_direct = v;
 		}
 		return this.pixel_health_direct = v;
+	}
+}
+
+
+/**
+ * Camera subclass which, when drawn to, copies its buffer to the supplied target sprite.
+ * Requires tile rendering mode.
+ * Naturally, for avoiding a 1-frame delay, the camera must be inserted before the camera
+ * the target sprite is rendered on has its `render` method called.
+ * Flixel's update-draw cycle goes something like this (Note: taken from GH dev in 2026
+ * which is probably ahead of the HF version in use by f4rp by 4 years, but who cares):
+ * updateElapsed()
+ * updateInput()
+ * <dispatch preUpdate signals>
+ * sound.update()
+ * cameras.update()
+ * _state.tryUpdate()
+ * <dispatch postUpdate signals>
+ * (done multiple times for fixed timestep)
+ * 
+ * if _state.visible && _state.exists:
+ *   <dispatch preDraw signals>
+ *   cameras.lock()
+ *   _state.draw() >>>
+ *     <for each basic that exists and is not invisible basic.draw(). for sprites, ends up in camera.drawPixels or camera.copyPixels>
+ *     subState.draw()
+ *   <<<
+ *   if renderTile:
+ *     cameras.render() >>>
+ *       <for each camera in FlxG.cameras camera.render()> >>>
+ *         flashSprite.filters = filtersEnabled ? filters : null;
+ *         <go through draw stack LL and call render(this) on each FlxDrawBaseItem>
+ *       <<<
+ *     <<<
+ *   cameras.unlock()
+ *   <dispatch postDraw signals>
+ * Thus: Make sure this camera's `render` runs before the main game's one (it's in front of the
+ * camera in the camera list and uuh it'll work from there trust)
+ */
+private class ChatboxCamera extends FlxCamera {
+	var targetSprite:FlxSprite;
+	var drawMatrix:Matrix;
+	var fillRect:Rectangle;
+
+	public override function new(targetSprite:FlxSprite, x:Int = 0, y:Int = 0, width:Int = 0, height:Int = 0) {
+		super(x, y, width, height);
+		this.targetSprite = targetSprite;
+		drawMatrix = new Matrix();
+		fillRect = new Rectangle(0, 0, this.width, this.height);
+	}
+
+	override function render() {
+		super.render();
+
+		targetSprite.graphic.bitmap.fillRect(fillRect, 0x00000000);
+		targetSprite.graphic.bitmap.draw(canvas, drawMatrix);
+	}
+
+	public override function destroy() {
+		targetSprite = null;
+
+		super.destroy();
+	}
+}
+
+
+// NOTE: This shader is a reduced crappy copypaste hack (probably the 3rd one) of the
+// GradientPixelErasureShader.
+// If you seriously want to study this, check out the Pixel Erasure Shader templates instead!
+private class ChatboxWarpShader extends FlxShader {
+	@:glFragmentSource('
+		#pragma header
+
+		uniform float seed;
+		// uniform vec2 pixel_dimensions;
+		#define pixel_dimensions (vec2(1.0, 1.0))
+		uniform float fadein_progress;
+
+		float random2D(vec2 co) {
+			float a = 12.9898;
+			float b = 78.233;
+			float c = 43758.5453;
+			float dt = dot(co.xy, vec2(a, b));
+			float sn = mod(dt, 3.14);
+			return fract(sin(sn) * c);
+		}
+
+		vec2 do_chatbox_warp(vec2 uv) {
+			float y_horizon = 0.9;
+			float uuuh = y_horizon - 0.05;
+			float incline = (uv.y - y_horizon) * 0.35;
+			// Tiny dent on top, because the slanting logic is actually broken and produces
+			// curves. cant be assed to fix any more tbh
+			incline *= (1.0 + pow(abs(uv.x - uuuh), 2.0)*0.333);
+			return vec2(
+				0.2 + (uv.x - 0.2) * (1.04 - pow(abs(uv.y - uuuh) * 0.4, 2.0)), // bulge "forwards" to the top
+				uv.y + incline*uv.x
+			);
+		}
+
+		void main() {
+			float alpha = flixel_texture2D(bitmap, openfl_TextureCoordv).a;
+			float rando = random2D(openfl_TextureCoordv * seed);
+
+			vec3 gradient_start = vec3(do_chatbox_warp(vec2(0.5, 1.0 - fadein_progress - 0.04)), 0.0);
+			vec3 gradient_stop =  vec3(do_chatbox_warp(vec2(0.5, 1.0 - fadein_progress)),        1.0);
+			vec2 warped_uv = do_chatbox_warp(openfl_TextureCoordv);
+			vec2 diff = gradient_start.xy - gradient_stop.xy;
+			float gradient_progress = (
+				dot(warped_uv - gradient_stop.xy, diff) /
+				dot(diff, diff)
+			);
+			float pixel_health = clamp(
+				mix(gradient_stop.z, gradient_start.z, gradient_progress),
+				gradient_start.z,
+				gradient_stop.z
+			);
+
+			if (rando >= pixel_health) {
+				gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0) * alpha;
+			} else {
+				gl_FragColor = flixel_texture2D(bitmap, warped_uv);
+			}
+		}
+	')
+
+	public var fadein_progress_direct(get, set):Float;
+
+	public function new() {
+		super();
+		seed.value = [382746.298];
+		fadein_progress.value = [1.0];
+	}
+
+	public function get_fadein_progress_direct():Float {
+		return fadein_progress.value[0];
+	}
+	public function set_fadein_progress_direct(v:Float):Float {
+		return fadein_progress.value[0] = v;
 	}
 }
 
@@ -244,8 +392,10 @@ class PlayState extends MusicBeatState
 	public var practiceFailed:Bool = false;
 	public var practiceFailedTxt:FlxText;
 
-	public var iconP1:HealthIcon;
-	public var iconP2:HealthIcon;
+	public var healthIconsP1:FlxTypedGroup<HealthIcon>;
+	public var healthIconsP2:FlxTypedGroup<HealthIcon>;
+	public var iconP1(get, null):HealthIcon;
+	public var iconP2(get, null):HealthIcon;
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
@@ -338,6 +488,10 @@ class PlayState extends MusicBeatState
 	public var detailsGameOverText:String = "";
 	#end
 
+	// @CoolingTool: misses per second (mash detector) for twitch chat
+	// ghost tapping is not ignored
+	public var recentMisses:Array<Float> = [];
+
 	// Lua shit
 	public static var instance:PlayState;
 	public var luaArray:Array<FunkinLua> = [];
@@ -350,12 +504,38 @@ class PlayState extends MusicBeatState
 	// Less laggy controls
 	private var keysArray:Array<Array<FlxKey>>;
 
+	/**
+	 * A special camera whose render method modifies the underlying `BitmapData` of
+	 * `chatboxTargetSprite` just in time for it to contain a simple graphic of the chatbox.
+	 * The entire chatbox effect will not be active in blit render mode.
+	 */
+	var camChatboxes:Null<ChatboxCamera>;
+	var chatboxTargetSprite:Null<FlxSprite>;
+	var twitchChatboxes:Array<TwitchChatbox>;
+	var twitchChatboxStateStorage:Map<String, Int>;
+
 	// @Square789: shader experiments
-	var pixelErasureShaders:Array<PixelErasureShader>;
+	var pixelErasureShaders:Array<AnotherFuckingOrganicPixelErasureShader>;
 
 	// @Square789: Single-handed smackdown. Resurrected from OG psych's "just the two of us" achievement.
-	// I am extremely sorry for bringing this public static garbage in this way.
+	// Sorry for bringing this public static garbage in this way.
 	public static var pressedKeysThisStoryRun:Map<FlxKey, Bool>;
+
+	// @Square789: Same as above, mostly
+	/**
+	 * Records the lowest difficulty that a song has been sucessfully beaten with during a playthrough
+	 * of story mode. WARNING: This requires all songs in story mode weeks to have an equal amount of
+	 * difficulties where logically the difficulties should be somewhat equally difficult and in the
+	 * same order.
+	 * Value undefined in freeplay mode or when a week was not just beaten.
+	 */
+	public static var lowestDifficultyThisStoryRun:Int;
+
+	private var gcControlLastGameplayState:Bool;
+	private var gcControlRequestedState:Bool;
+	private var gcControlTimeout:Int;
+	private var gcControlCooldownActive:Bool;
+	private var gcControlCooldownTimeout:Int;
 
 	public var bfKeys:Int = 4;
 	public var dadKeys:Int = 4;
@@ -423,6 +603,14 @@ class PlayState extends MusicBeatState
 		return !opponentChart ? dadKeys : bfKeys;
 	}
 
+	function get_iconP1():Null<HealthIcon> {
+		return healthIconsP1.length > 0 ? healthIconsP1.members[healthIconsP1.length - 1] : null;
+	}
+
+	function get_iconP2():Null<HealthIcon> {
+		return healthIconsP2.length > 0 ? healthIconsP2.members[healthIconsP2.length - 1] : null;
+	}
+
 	public function new(?inEditor:Bool = false, ?startPos:Float = 0) {
 		this.inEditor = inEditor;
 		if (inEditor) {
@@ -431,6 +619,11 @@ class PlayState extends MusicBeatState
 			timerToStart = Conductor.normalizedCrochet;
 		}
 		super();
+		gcControlLastGameplayState = true;
+		gcControlRequestedState = true;
+		gcControlTimeout = GC_CONTROL_TIMEOUT;
+		gcControlCooldownActive = false;
+		gcControlCooldownTimeout = GC_CONTROL_COOLDOWN_TIMEOUT;
 	}
 
 	var precacheList:Map<String, String> = new Map<String, String>();
@@ -446,6 +639,8 @@ class PlayState extends MusicBeatState
 		instance = this;
 
 		pixelErasureShaders = [];
+		twitchChatboxes = [];
+		twitchChatboxStateStorage = null;
 
 		// @Square789: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 		// Is this infallible? Highly unlikely, but this is what's there and it seems to run the
@@ -462,6 +657,7 @@ class PlayState extends MusicBeatState
 					// Story mode just began; reset this
 					trace("story mode just began");
 					pressedKeysThisStoryRun = new Map<FlxKey, Bool>();
+					lowestDifficultyThisStoryRun = FlxMath.MAX_VALUE_INT;
 				}
 			}
 		}
@@ -488,8 +684,8 @@ class PlayState extends MusicBeatState
 			}
 			Conductor.playbackRate = playbackRate;
 
-			camGame = new FlxCamera();
-			camHUD = new FlxCamera();
+			camGame = new WorldShakeCamera();
+			camHUD = new WorldShakeCamera();
 			camOther = new FlxCamera();
 			camButtons = new FlxCamera();
 			camHUD.bgColor.alpha = 0;
@@ -709,6 +905,89 @@ class PlayState extends MusicBeatState
 						bubboDrugs.waveSpeed = 1;
 						bg.shader = bubboDrugs.shader;
 					}
+				case 'school': //Week 6 - Senpai, Roses
+					if(SkinData.getSkinModifier().endsWith('week6')) introSoundsSuffix = '-pixel';
+
+					var bgSky:BGSprite = new BGSprite('weeb/weebSky', 0, 0, 0.1, 0.1);
+					add(bgSky);
+					bgSky.antialiasing = false;
+
+					var repositionShit = -200;
+
+					var bgSchool:BGSprite = new BGSprite('weeb/weebSchool', repositionShit, 0, 0.6, 0.90);
+					add(bgSchool);
+					bgSchool.antialiasing = false;
+
+					var bgStreet:BGSprite = new BGSprite('weeb/weebStreet', repositionShit, 0, 0.95, 0.95);
+					add(bgStreet);
+					bgStreet.antialiasing = false;
+
+					var widShit = Std.int(bgSky.width * 6);
+					if (ClientPrefs.gameQuality == 'Normal') {
+						var fgTrees:BGSprite = new BGSprite('weeb/weebTreesBack', repositionShit + 170, 130, 0.9, 0.9);
+						fgTrees.setGraphicSize(Std.int(widShit * 0.8));
+						fgTrees.updateHitbox();
+						add(fgTrees);
+						fgTrees.antialiasing = false;
+					}
+
+					var bgTrees:FlxSprite = new FlxSprite(repositionShit - 380, -800);
+					bgTrees.frames = Paths.getPackerAtlas('weeb/weebTrees');
+					bgTrees.animation.add('treeLoop', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18], 12);
+					bgTrees.animation.play('treeLoop');
+					bgTrees.scrollFactor.set(0.85, 0.85);
+					add(bgTrees);
+					bgTrees.antialiasing = false;
+
+					if (ClientPrefs.gameQuality == 'Normal') {
+						var treeLeaves:BGSprite = new BGSprite('weeb/petals', repositionShit, -40, 0.85, 0.85, ['PETALS ALL'], true);
+						treeLeaves.setGraphicSize(widShit);
+						treeLeaves.updateHitbox();
+						add(treeLeaves);
+						treeLeaves.antialiasing = false;
+					}
+
+					bgSky.setGraphicSize(widShit);
+					bgSchool.setGraphicSize(widShit);
+					bgStreet.setGraphicSize(widShit);
+					bgTrees.setGraphicSize(Std.int(widShit * 1.4));
+
+					bgSky.updateHitbox();
+					bgSchool.updateHitbox();
+					bgStreet.updateHitbox();
+					bgTrees.updateHitbox();
+
+					if (ClientPrefs.gameQuality == 'Normal') {
+						bgGirls = new BackgroundGirls(-100, 190);
+						bgGirls.scrollFactor.set(0.9, 0.9);
+
+						bgGirls.setGraphicSize(Std.int(bgGirls.width * daPixelZoom));
+						bgGirls.updateHitbox();
+						add(bgGirls);
+					}
+				case 'schoolEvil': //Week 6 - Thorns
+					if(SkinData.getSkinModifier().endsWith('week6')) introSoundsSuffix = '-pixel';
+
+					var posX = 400;
+					var posY = 200;
+					if (ClientPrefs.gameQuality == 'Normal') {
+						var bg:BGSprite = new BGSprite('weeb/animatedEvilSchool', posX, posY, 0.8, 0.9, ['background 2'], true);
+						bg.scale.set(6, 6);
+						bg.antialiasing = false;
+						add(bg);
+
+						bgGhouls = new BGSprite('weeb/bgGhouls', -100, 190, 0.9, 0.9, ['BG freaks glitch instance'], false);
+						bgGhouls.setGraphicSize(Std.int(bgGhouls.width * daPixelZoom));
+						bgGhouls.updateHitbox();
+						bgGhouls.visible = false;
+						bgGhouls.antialiasing = false;
+						add(bgGhouls);
+					} else {
+						var bg:BGSprite = new BGSprite('weeb/animatedEvilSchool_low', posX, posY, 0.8, 0.9);
+						bg.scale.set(6, 6);
+						bg.antialiasing = false;
+						add(bg);
+					}
 				}
 			}
 
@@ -852,18 +1131,65 @@ class PlayState extends MusicBeatState
 				startCharacterScripts(i.curCharacter);
 			}
 
-			GameOverSubState.selfAssignVariables(boyfriend.curCharacter, voidedHealth);
+			GameOverSubState.selfAssignVariables(SONG.player1, voidedHealth);
 
-			// @Square789: shader stuff
-			if (boyfriend.curCharacter == "flag-bf") {
-				var pes = new PixelErasureShader(0.25);
-				pes.offset.value = [0.0, 0.0];
-				pes.pixel_health.value[0] = 1.0;
-				pes.more_void.value[0] = 0.0;
-				pes.always_pixelate.value[0] = true;
-				pes.pixel_dimensions.value = [1.0, 1.0];
-				boyfriend.shader = pes;
-				pixelErasureShaders.push(pes);
+			if (curSong.startsWith('malder')) {
+				var tx:Float = dad.x - 28;
+				var ty:Float = dad.y + 260;
+				var enableChatboxEffect = FlxG.renderTile && ClientPrefs.gameQuality == "Normal";
+
+				var chatbox:TwitchChatbox;
+				var chatboxInsIdx:Int;
+				if (enableChatboxEffect) {
+					// chatboxTargetSprite = new FlxSprite(tx - 200, ty - 50);
+					chatboxTargetSprite = new FlxSprite(tx + 205, ty + 90);
+					tx = 240;
+					ty = 10;
+
+					// since malder is actually zoomed at a factor of 0.75, add some height, it'll be fiiiiine
+					// https://stackoverflow.com/questions/48075991/is-there-a-way-to-apply-an-alpha-mask-to-a-flxcamera
+					camChatboxes = new ChatboxCamera(chatboxTargetSprite, 0, 0, FlxG.width, FlxG.height + 200);
+					camChatboxes.bgColor.alpha = 0;
+
+					// forward-copypaste CameraFrontEnd.insert from a far later flixel version because what is updating
+					var cgIdx = FlxMath.maxInt(0, FlxG.cameras.list.indexOf(camGame));
+					FlxG.game.addChildAt(camChatboxes.flashSprite, FlxG.game.getChildIndex(FlxG.cameras.list[cgIdx].flashSprite));
+					FlxG.cameras.list.insert(cgIdx, camChatboxes);
+					for (i in cgIdx...FlxG.cameras.list.length) {
+						FlxG.cameras.list[i].ID = i;
+					}
+					FlxG.cameras.cameraAdded.dispatch(camChatboxes);
+					// forward-copypaste end
+
+					chatboxTargetSprite.frames = FlxG.bitmap.create(camChatboxes.width, camChatboxes.height + 200, 0x42FF0000, true).imageFrame;
+					chatboxTargetSprite.shader = new ChatboxWarpShader();
+
+					chatbox = new TwitchChatbox(tx, ty, 460, 720 - 10 + 200);
+					chatbox.cameras = [camChatboxes];
+					// Completely hardcoded to malder stage hscript!
+					chatboxInsIdx = members.indexOf(gfGroup) - 54;
+					insert(chatboxInsIdx, chatboxTargetSprite);
+					chatboxTargetSprite.scrollFactor.set(0.15, 0.2);
+				} else {
+					chatbox = new TwitchChatbox(tx, ty);
+					chatbox.cameras = [camGame];
+					chatboxInsIdx = members.indexOf(gfGroup) - 45;
+				}
+				insert(chatboxInsIdx, chatbox);
+				//dad.alpha = 0.5;
+
+				chatbox.setSpewerChance("player_winning", 0);
+				chatbox.setSpewerChance("player_losing", 0);
+				chatbox.setSpewerChance("rare", 10);
+				chatbox.setSpewerChance("highlight", 5);
+				chatbox.setSpewerChance("before_voices", 1000);
+				chatbox.setSpewerChance("botplay", cpuControlled ? 400 : 0);
+				chatbox.setSpewerChance("mashing", 0);
+
+				for (_ in 0...8) {
+					chatbox.generateMessage();
+				}
+				twitchChatboxes.push(chatbox);
 			}
 
 			camPos = new FlxPoint(girlfriendCameraOffset[0], girlfriendCameraOffset[1]);
@@ -882,6 +1208,15 @@ class PlayState extends MusicBeatState
 				dad.setPosition(GF_X, GF_Y);
 				if(gf != null)
 					gf.visible = false;
+			}
+
+			if (ClientPrefs.gameQuality != 'Crappy') {
+				switch(curStage)
+				{
+					case 'schoolEvil':
+						var evilTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069); //nice
+						addBehindDad(evilTrail);
+				}
 			}
 		}
 
@@ -902,18 +1237,11 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = -5000;
 
 		//PRECACHING UI IMAGES
-		var imagesToCheck = [
-			'combo',
-			'ready',
-			'set',
-			'go'
-		];
-		for (i in ratingsData) {
-			imagesToCheck.push(i.image);
-		}
-		for (i in 0...10) {
-			imagesToCheck.push('num$i');
-		} 
+		var imagesToCheck = ['combo', 'ready', 'set', 'set_alt', 'go'].concat(
+			[for (i in ratingsData) i.image]
+		).concat(
+			[for (i in (0...10)) 'num$i']
+		);
 
 		for (img in imagesToCheck) {
 			precacheList.set(SkinData.getSkinFile(UISkin, img).image, 'image');
@@ -1238,29 +1566,29 @@ class PlayState extends MusicBeatState
 
 			add(minhealthBarFG);
 
+			healthIconsP1 = new FlxTypedGroup<HealthIcon>();
 			if (bfGroupFile != null) {
-				iconP1 = new HealthIcon(bfGroupFile.healthicon, true);
+				healthIconsP1.add(new HealthIcon(bfGroupFile.healthicon, true));
 			} else {
-				iconP1 = new HealthIcon(boyfriend.healthIcon, true);
+				healthIconsP1.add(new HealthIcon(boyfriend.healthIcon, true));
 			}
-			iconP1.y = healthBar.y - 75;
 			iconP1.visible = !ClientPrefs.hideHud;
 			iconP1.alpha = ClientPrefs.healthBarAlpha;
-			add(iconP1);
+			add(healthIconsP1);
 
+			healthIconsP2 = new FlxTypedGroup<HealthIcon>();
 			if (dadGroupFile != null) {
-				iconP2 = new HealthIcon(dadGroupFile.healthicon);
+				healthIconsP2.add(new HealthIcon(dadGroupFile.healthicon));
 			} else {
-				iconP2 = new HealthIcon(dad.healthIcon);
+				healthIconsP2.add(new HealthIcon(dad.healthIcon));
 			}
-			iconP2.y = healthBar.y - 75;
 			iconP2.visible = !ClientPrefs.hideHud;
 			iconP2.alpha = ClientPrefs.healthBarAlpha;
-			add(iconP2);
+			add(healthIconsP2);
 			reloadHealthBarColors();
-			// hideInDemoMode = hideInDemoMode.concat([
-			// 	healthBarBG, maxhealthBarBG, minhealthBarBG, minhealthBarFG, healthBar, iconP1, iconP2
-			// ]);
+			hideInDemoMode = hideInDemoMode.concat([
+				healthBarBG, maxhealthBarBG, minhealthBarBG, minhealthBarFG, healthBar, healthIconsP1, healthIconsP2
+			]);
 		}
 
 		if (!inEditor) {
@@ -1370,8 +1698,8 @@ class PlayState extends MusicBeatState
 			maxhealthBarBG.cameras = [camHUD];
 			minhealthBarBG.cameras = [camHUD];
 			minhealthBarFG.cameras = [camHUD];
-			iconP1.cameras = [camHUD];
-			iconP2.cameras = [camHUD];
+			healthIconsP1.cameras = [camHUD];
+			healthIconsP2.cameras = [camHUD];
 			botplayTxt.cameras = [camHUD];
 			timeBarBG.cameras = [camHUD];
 			timeTxt.cameras = [camHUD];
@@ -1912,6 +2240,15 @@ class PlayState extends MusicBeatState
 				addTextToDebug('$text');
 				trace(text);
 			});
+			interp.variables.set('makeInflatedPixelGraphic', function(s:FlxSprite, color:FlxColor, width:Int, height:Int) {
+				s.makeGraphic(1, 1, color);
+				s.origin.set(0, 0);
+				s.scale.set(width, height);
+				// updateHitbox also screws with offset and origin which i do not want. Set these manually.
+				s.width = width;
+				s.height = height;
+				return s;
+			});
 
 			//EVENTS
 			var funcs = [
@@ -2306,6 +2643,7 @@ class PlayState extends MusicBeatState
 	public var countdownLength:Int = 5;
 
 	public var popup:FlxSprite;
+	public var nonPixelPopups:Array<String> = ["enough-alt"];
 	public static var startOnTime:Float = 0;
 	public static var startOnTimeOffset:Float = 500;
 	public var introSoundsSuffix = '';
@@ -2315,6 +2653,11 @@ class PlayState extends MusicBeatState
 		if (startedCountdown) {
 			callOnScripts('onStartCountdown', []);
 			return;
+		}
+
+		// @Square789: Yeah that's the worst possible location for this
+		if (FlxG.random.int(1, 10) == 10) {
+			countdownImages[2] = "set_alt";
 		}
 
 		inCutscene = false;
@@ -2366,6 +2709,9 @@ class PlayState extends MusicBeatState
 				// popup and composer/charter names etc.
 				var songName = Paths.formatToSongPath(SONG.song);
 				var composers = SONG?.meta?.composers ?? Song.getComposers(SONG.song);
+				if (songName == 'enough' && FlxG.random.bool(1)) {
+					songName = 'enough-alt';
+				}
 
 				var subPopupRows:Array<{icon:String, text:String}> = [];
 				if (composers.length > 0) {
@@ -2374,28 +2720,22 @@ class PlayState extends MusicBeatState
 				if (SONG.charterNames != null && SONG.charterNames.length > 0) {
 					subPopupRows.push({icon: "charter", text: SONG.charterNames.join(", ")});
 				};
-				if (SONG.hasVoidNotes == true) {
-					subPopupRows.push({icon: "void", text: "Avoid Void Notes"});
-				}
-				if (SONG.hasTendrils == true) {
-					subPopupRows.push({icon: "tendril", text: "Hit Tendrils on 3rd beat"});
-				}
 
 				var popupStuff:Array<{o:FlxSprite, s:Float}> = [];
 
 				var popupName:String = 'songPopups/$songName';
 				var stuffYStart:Float = FlxG.height / 2.0;
 				if (Paths.fileExists('images/$popupName.png', IMAGE)) {
-					// var pixel = !nonPixelPopups.contains(songName);
+					var pixel = !nonPixelPopups.contains(songName);
 	
 					popup = new FlxSprite().loadGraphic(Paths.image(popupName));
-					popup.setGraphicSize(Std.int(popup.width * 4.0));
+					popup.setGraphicSize(Std.int(popup.width * (pixel ? 4.0 : 1.0)));
 					popup.updateHitbox();
 					popup.x = CoolUtil.getGameWidth() - popup.width;
 					popup.screenCenter(Y);
-					popup.antialiasing = false; // ClientPrefs.globalAntialiasing && !pixel;
+					popup.antialiasing = ClientPrefs.globalAntialiasing && !pixel;
 					popup.scrollFactor.set();
-					popupStuff.push({o: popup, s: 1.0});
+					popupStuff.push({o: popup, s: pixel ? 1.0 : 4.0});
 
 					showSongText = false;
 					stuffYStart = popup.y + popup.height + 8;
@@ -2817,6 +3157,7 @@ class PlayState extends MusicBeatState
 
 		tendrils = new FlxTypedGroup<TendrilOverlay>();
 		add(tendrils);
+		hideInDemoMode.push(tendrils);
 		
 		if (Paths.fileExists('data/$curSong/events.json', TEXT)) {
 			var eventsData:Array<Dynamic> = Song.loadFromJson('events', curSong).events;
@@ -2985,13 +3326,63 @@ class PlayState extends MusicBeatState
 		}
 
 		unspawnNotes.sort(sortByShit);
-		if (eventNotes.length > 1) { //No need to sort if there's a single one or none at all
-			eventNotes.sort(sortByTime);
+
+		// @Square789: Place GC disabler notes
+		if (ClientPrefs.controlGC && #if cpp true #else false #end) {
+			final GC_CONTROL_SAFEZONE = 420.0; // I am so funny
+			var gci = 0;
+			var gcj = 0;
+			var gcControlEvents:Array<EventNote> = [];
+			var exhausted = false;
+			// back and forth between disabler and enabler notes until song is over
+			while (!exhausted) {
+				// Find where to place disabler note (Just before next note that needs to be played)
+				while (true) {
+					if (unspawnNotes[gci].mustPress) {
+						var disableTime = unspawnNotes[gci].strumTime - GC_CONTROL_SAFEZONE;
+						gcControlEvents.push({strumTime: disableTime, event: "_F4RPEXPERIMENTAL_GC_CONTROL", value1: "0", value2: ""});
+						break;
+					}
+					gci += 1;
+					if (gci > unspawnNotes.length) {
+						exhausted = true;
+						break;
+					}
+				}
+
+				// Find where to place enabler note
+				while (!exhausted) {
+					gcj = -1;
+					var x = gci + 1;
+					while (x < unspawnNotes.length) {
+						if (unspawnNotes[x].mustPress) {
+							gcj = x;
+							break;
+						}
+						x += 1;
+					}
+					if (gcj == -1) {
+						exhausted = true;
+					}
+					var gcsearch_disablets = gcj == -1 ? 99999999.9 : unspawnNotes[gcj].strumTime - GC_CONTROL_SAFEZONE;
+					var gcsearch_enablets = unspawnNotes[gci].strumTime + GC_CONTROL_SAFEZONE;
+
+					gci = gcj;
+					if (exhausted || gcsearch_enablets < gcsearch_disablets) {
+						gcControlEvents.push({strumTime: gcsearch_enablets, event: "_F4RPEXPERIMENTAL_GC_CONTROL", value1: "1", value2: ""});
+						break;
+					}
+				}
+			}
+			for (e in gcControlEvents) {
+				eventNotes.push(e);
+				eventPushed(e);
+			}
 		}
+
+		eventNotes.sort(sortByTime);
 		// @CoolingTool: More tendril stuff scattered all across playstate
-		if (unspawnTendrils.length > 1) {
-			unspawnTendrils.sort(sortByBlahBlah);
-		}
+		unspawnTendrils.sort(sortByBlahBlah);
 
 		checkEventNote();
 		generatedMusic = true;
@@ -3112,10 +3503,6 @@ class PlayState extends MusicBeatState
 	private function generateStaticArrows(player:Int, keys:Int = 4):Void
 	{
 		var strumGroup = new FlxTypedGroup<StrumNote>();
-		var underlay = underlayPlayer;
-		if (player == 0) {
-			underlay = underlayOpponent;
-		}
 
 		var delay = Conductor.normalizedCrochet / (250 * keys);
 
@@ -3289,6 +3676,7 @@ class PlayState extends MusicBeatState
 			for (timer in modchartTimers) {
 				timer.active = false;
 			}
+			changeGarbageCollectorState(true);
 		}
 
 		super.openSubState(SubState);
@@ -3338,6 +3726,8 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
+
+			changeGarbageCollectorState(gcControlLastGameplayState);
 
 			for (tween in modchartTweens) {
 				tween.active = true;
@@ -3536,6 +3926,16 @@ class PlayState extends MusicBeatState
 			shader.update(elapsed);
 		}
 
+		// Twitch chatbox mashing spewer control
+		var prevRecentMissesLength:Int = recentMisses.length;
+		recentMisses = recentMisses.map((v) -> v - elapsed).filter((v) -> v >= 0.0);
+		if (recentMisses.length != prevRecentMissesLength) {
+			var forgottenMisses = prevRecentMissesLength - recentMisses.length;
+			for (chatbox in twitchChatboxes) {
+				chatbox.changeSpewerChance("mashing", -50 * forgottenMisses);
+			}
+		}
+
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene) {
 			AchievementManager.advanceAchievement("reddit_mod", 1);
 			#if CHART_EDITOR_ALLOWED
@@ -3569,8 +3969,12 @@ class PlayState extends MusicBeatState
 			setHealth(maxHealth);
 
 		if (!inEditor) {
-			iconP1.lerp(elapsed);
-			iconP2.lerp(elapsed);
+			for (icon in healthIconsP1) {
+				icon.lerp(elapsed);
+			}
+			for (icon in healthIconsP2) {
+				icon.lerp(elapsed);
+			}
 
 			var iconP1Offset:Int = 26;
 			var iconP2Offset:Int = 24;
@@ -3586,13 +3990,46 @@ class PlayState extends MusicBeatState
 				shownHealth = health;
 			}
 
-			if (!opponentChart) {
-				iconP1.x = healthBar.x + (healthBar.width * (Std.int(FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, healthBar.numDivisions, 0)) * division)) + (150 * iconP1.scale.x - 150) / 2 - iconP1Offset;
-				iconP2.x = healthBar.x + (healthBar.width * (Std.int(FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, healthBar.numDivisions, 0)) * division)) - (150 * iconP2.scale.x) / 2 - iconP2Offset * 2;
-			} else {
-				iconP1.x = healthBar.x + (healthBar.width * (Std.int(FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, 0, healthBar.numDivisions)) * division)) + (150 * iconP1.scale.x - 150) / 2 - iconP1Offset;
-				iconP2.x = healthBar.x + (healthBar.width * (Std.int(FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, 0, healthBar.numDivisions)) * division)) - (150 * iconP2.scale.x) / 2 - iconP2Offset * 2;
+			final HISS = 2;
+			var iconHeightVariance = 60;
+			var iconDiagLineLength = 16;
+			// @Square789: Arrange icons behind each other in stacks of two. Last icon is the first one because draw order.
+			// Yeah code is very dogshit i know
+			// If anyone ever touches this, make some functions out of it
+			var xBase = opponentChart ?
+				healthBar.x + (healthBar.width * (Std.int(FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, 0, healthBar.numDivisions)) * division)):
+				healthBar.x + (healthBar.width * (Std.int(FlxMath.remapToRange(healthBar.value, healthBar.min, healthBar.max, healthBar.numDivisions, 0)) * division));
+			var incompleteStackSize = healthIconsP1.members.length % HISS;
+			for (i => icon in healthIconsP1.members) {
+				var _inIncompleteStack = i < incompleteStackSize;
+				var stackSize = _inIncompleteStack ? incompleteStackSize : HISS;
+				var stackLocalI = _inIncompleteStack ? i : ((i - incompleteStackSize) % HISS);
+				var height:Float = stackSize == 1 ? 0.5 : ((1.0/(stackSize - 1)) * stackLocalI);
+				var addXOffset = (height - 0.5) * iconDiagLineLength;
+				var stackI = Math.floor((i + (HISS - incompleteStackSize)) / HISS);
+				var stackNum = Math.floor(healthIconsP1.members.length / HISS) - stackI;
+
+				// I'm not gonna bother clustering icons with respect to their scale and instead hardcode stack distance
+				icon.x = xBase + (150 * iconP1.scale.x - 150) / 2 - addXOffset + ((150 - iconP1Offset) * stackNum) - (iconP1Offset * (stackNum + 1));
+				icon.y = healthBar.y - 75 + (height - 0.5) * iconHeightVariance;
 			}
+			incompleteStackSize = healthIconsP2.members.length % HISS;
+			for (i => icon in healthIconsP2.members) {
+				var _inIncompleteStack = i < incompleteStackSize;
+				var stackSize = _inIncompleteStack ? incompleteStackSize : HISS;
+				var stackLocalI = _inIncompleteStack ? i : ((i - incompleteStackSize) % HISS);
+				var height:Float = stackSize == 1 ? 0.5 : ((1.0/(stackSize - 1)) * stackLocalI);
+				var addXOffset = (height - 0.5) * iconDiagLineLength;
+				var stackI = Math.floor((i + (HISS - incompleteStackSize)) / HISS);
+				var stackNum = Math.floor(healthIconsP2.members.length / HISS) - stackI;
+
+				// Yes, using the p1 offset here is intentional. No, i don't want to think about it anymore.
+				icon.x = xBase - (150 * iconP1.scale.x) / 2 + addXOffset - ((150 - (iconP1Offset * 2)) * stackNum) - (iconP2Offset * (2));
+				icon.y = healthBar.y - 75 + (height - 0.5) * iconHeightVariance;
+			}
+			// The mess above should resolve to the below for health icon groups of length 1, which is the original code:
+			// iconP1.x = xBase + (150 * iconP1.scale.x - 150) / 2 - iconP1Offset;
+			// iconP2.x = xBase - (150 * iconP2.scale.x) / 2 - iconP2Offset * 2;
 
 			// @CoolingTool: Visualize max health
 			if(maxHealth != 2) {
@@ -3623,17 +4060,14 @@ class PlayState extends MusicBeatState
 				minhealthBarFG.visible = false;
 			}
 
-			var stupidIcons:Array<HealthIcon> = [iconP1, iconP2];
-			if (opponentChart) stupidIcons = [iconP2, iconP1];
-			if (healthBar.percent < 20) {
-				stupidIcons[0].animation.play('losing');
-				stupidIcons[1].animation.play('winning');
-			} else if (healthBar.percent > 80) {
-				stupidIcons[0].animation.play('winning');
-				stupidIcons[1].animation.play('losing');
-			} else {
-				stupidIcons[0].animation.play('normal');
-				stupidIcons[1].animation.play('normal');
+			// @Square789: tesla and einstein posing with comically big heads and lightning.jpeg
+			var _anims = ['losing', 'normal', 'winning'];
+			var hbmul = (healthBar.percent < 20 ? -1 : (healthBar.percent > 80 ? 1 : 0));
+			for (i in healthIconsP1.members) {
+				i.animation.play(_anims[1 + ((opponentChart ? -1 : 1) * hbmul)]);
+			}
+			for (i in healthIconsP2.members) {
+				i.animation.play(_anims[1 + ((opponentChart ? 1 : -1) * hbmul)]);
 			}
 		}
 
@@ -4026,7 +4460,30 @@ class PlayState extends MusicBeatState
 			setOnScripts('cameraY', camFollowPos.y);
 			setOnScripts('botPlay', cpuControlled);
 		}
-		
+
+		// @Square789: Garbage collection control
+		#if cpp
+		if (gcControlRequestedState == false && !gcControlCooldownActive) {
+			gcControlTimeout -= 1;
+			if (gcControlTimeout <= 0) {
+				// trace('Garbage collector was down for too long, triggering cooldown phase.');
+				gcControlTimeout = GC_CONTROL_TIMEOUT;
+				cpp.vm.Gc.enable(true);
+				gcControlCooldownTimeout = GC_CONTROL_COOLDOWN_TIMEOUT + 1;
+				gcControlCooldownActive = true;
+			}
+		}
+		if (gcControlCooldownActive) {
+			gcControlCooldownTimeout -= 1;
+			if (gcControlCooldownTimeout <= 0) {
+				// trace('Garbage collector cooldown expired, switching to requested state: $gcControlRequestedState');
+				gcControlCooldownTimeout = GC_CONTROL_COOLDOWN_TIMEOUT;
+				gcControlCooldownActive = false;
+				changeGarbageCollectorState(gcControlRequestedState);
+			}
+		}
+		#end
+
 		callOnScripts('onUpdatePost', [elapsed]);
 
 		//doing this after every update cause scripts might force them to be visible
@@ -4035,6 +4492,25 @@ class PlayState extends MusicBeatState
 				i.visible = false;
 			}
 		}
+	}
+
+	public function changeGarbageCollectorState(state:Bool) {
+		#if cpp
+		if (!ClientPrefs.controlGC) {
+			return;
+		}
+
+		gcControlRequestedState = state;
+		if (gcControlRequestedState == true) {
+			gcControlTimeout = GC_CONTROL_TIMEOUT;
+		}
+		if (!gcControlCooldownActive) {
+			// trace('Garbage collector state set to $gcControlRequestedState.');
+			cpp.vm.Gc.enable(gcControlRequestedState);
+		} else {
+			// trace('Garbage collector state set to $gcControlRequestedState; not honored due to active cooldown.');
+		}
+		#end
 	}
 
 	public function openPauseMenu(playSound:Bool = true) {
@@ -4084,26 +4560,71 @@ class PlayState extends MusicBeatState
 		health = newHealth;
 
 		var bfHealth = newHealth;
-		if (opponentChart) bfHealth = 2 - bfHealth;
+		if (opponentChart) bfHealth = 2.0 - bfHealth;
 
 		var erosionZoneStart = songMisses > 0 ? 1.8 : 0.95;
 		if (opponentChart) erosionZoneStart = camBop ? 1.8 : 0.95;
 
-		// This should keep pixel health between 0.7 and 1 for values in almost
+		// This should keep pixel health between 0.6 and 1 for values in almost
 		// the entire lower half of the healthbar and clamp them to 1.0 otherwise
 		// If the player missed once, the region where pixel erosion starts is larger.
 		// Division by 2 is necessary since 2 is considered to be the max health;
 		// it starts out at 1.
+		final PIXEL_HEALTH_MIN = 0.6;
 		var stretchedHealth = FlxMath.remapToRange(bfHealth, minHealth, maxHealth, 0.0, 2.0);
-		var pixelHealth = ((0.8 / erosionZoneStart) *  stretchedHealth)/2.0 + 0.6;
-		var moreVoid = voidedHealth / 2.0;
-		pixelHealth = FlxMath.bound(pixelHealth, 0.0, 1.0);
+		// var pixelHealth = FlxMath.bound((((2.0 - (2.0 * PIXEL_HEALTH_MIN)) / erosionZoneStart) * stretchedHealth) * 0.5 + PIXEL_HEALTH_MIN);
+		var pixelHealth = FlxMath.bound(
+			stretchedHealth > erosionZoneStart ?
+				1.0 :
+				Math.sin((stretchedHealth*0.5*Math.PI)/erosionZoneStart) * (1.0 - PIXEL_HEALTH_MIN) + PIXEL_HEALTH_MIN,
+			0.0,
+			1.0
+		);
+
+		var moreVoid = (voidedHealth / 2.0);
 		moreVoid = FlxEase.sineIn(FlxMath.bound(moreVoid, 0.0, 1.0));
+		pixelHealth = FlxMath.bound(pixelHealth - moreVoid * 0.25, 0.0, 1.0);
+
+		// REMINDER: The organic PES works in such a way that a high pixel health (>0.8) makes it extremely unlikely
+		// for a pixel to be affected. 0.5 still causes at most 10% of pixels to be affected.
+		// A very small pixel health (~0.02) highlights issues in the randomness, but works about okay.
+		// For this reason, slap this vibe-based function on top
+		// health  feels like      feels correct nec. exponent    nec. mul
+		// 0.1         0.2             0.06        1.2              0.6
+		// 0.125       0.5             ~0.07       1.2              0.56
+		// 0.5          ??             0.125       3.0              0.25
+		// 0.8:        0.999           0.5         ~3.2             0.625
+		// 0.9:        1.0             0.6         ~4.5             0.6666
+		// 0.999:      1.0             0.8         200.0            0.8008
+		// vibes based table, below is something that works okay-ish
+		// if (pixelHealth > 0.81) {
+		// 	pixelHealth = 1.0;
+		// } else {
+		// 	pixelHealth -= 0.08;
+		// 	pixelHealth *= (0.4 + pixelHealth * 0.6);
+		// }
+		pixelHealth *= (0.4 + pixelHealth * 0.6);
+		if (pixelHealth > 0.9) {
+			pixelHealth = 1.0;
+		}
+
+		// trace('stretchedHealth: $stretchedHealth, moreVoid: $moreVoid, pixelHealth: $pixelHealth');
 		for (s in pixelErasureShaders) {
 			s.pixel_health.value[0] = pixelHealth;
-			// seems like `more_void_direct` was a leftover unused thing but dont mind if i do
-			s.more_void_direct = moreVoid;
+			// seems like `more_void` was a leftover unused thing but dont mind if i do
+			s.more_void.value[0] = moreVoid;
 		}
+
+		if (twitchChatboxes.length > 0) {
+			var normalizedHealth:Float = newHealth / 2.0;
+			var isWinning:Bool = (normalizedHealth >= 0.5) != opponentChart; // Think of this as XOR
+			var extremeness:Int = Std.int(FlxMath.bound(Math.abs(normalizedHealth - 0.5) * 2 * 2000, 0.0, 1400.0));
+			for (chatbox in twitchChatboxes) {
+				chatbox.setSpewerChance("player_winning", isWinning ? extremeness : 0);
+				chatbox.setSpewerChance("player_losing",  isWinning ? 0 : extremeness);
+			}
+		}
+
 	}
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
@@ -4509,6 +5030,112 @@ class PlayState extends MusicBeatState
 					});
 				}
 
+			case 'Chatbox Control':
+				do {
+				var affectedBoxes = (value2 == "" ?
+					twitchChatboxes :
+					value2.split(",")
+						.map(Std.parseInt)
+						.filter((v) -> v != null && v < twitchChatboxes.length)
+						.map((i) -> twitchChatboxes[i]));
+				if (affectedBoxes.length == 0) {
+					break;
+				}
+
+				if (value1.startsWith("!")) {
+					switch (value1) {
+					case "!STORE":
+						twitchChatboxStateStorage = affectedBoxes[0].getSpewerChances();
+					case "!RESTORE":
+						if (twitchChatboxStateStorage == null) {
+							FlxG.log.warn("No chatbox data stored, can not restore.");
+							break;
+						}
+						for (b in affectedBoxes) {
+							b.setSpewerChances(twitchChatboxStateStorage);
+						}
+					case "!CLEAR":
+						var nuller = [for (n in TwitchChatbox.SPEWER_NAMES) n => 0];
+						for (b in affectedBoxes) {
+							b.setSpewerChances(nuller);
+						}
+					case _:
+						FlxG.log.warn('Unknown chatbox control command \"$value1\"".');
+					}
+				} else {
+					var spl = ~/[#:;>]/.split(value1);
+					if (spl.length != 2) {
+						FlxG.log.warn("Malformatted `spewerName:chance` combination.");
+						break;
+					}
+					var spewer = spl[0].trim();
+					var chance = Std.parseInt(spl[1].trim());
+					if (chance == null) {
+						FlxG.log.warn("Bad chance value for 'Chatbox Control' note.");
+						break;
+					}
+					for (b in affectedBoxes) {
+						b.setSpewerChance(spewer, chance);
+					}
+				}
+				} while (false);
+
+			case 'Modify Healthbar Icons':
+				do {
+				var _splitv2 = ~/,/g.split(value2);
+				if (_splitv2.length <= 1) {
+					FlxG.log.warn("Invalid value2. Must contain at least two elements.");
+					break;
+				}
+
+				var healthIconGroup:FlxTypedGroup<HealthIcon>;
+				switch (_splitv2[0]) {
+				case '1':
+					healthIconGroup = healthIconsP1;
+				case '2':
+					healthIconGroup = healthIconsP2;
+				case _:
+					FlxG.log.warn('Invalid health icon array ${_splitv2[0]}');
+					break;
+				}
+
+				switch (value1) {
+				case '!ADD':
+					var insIdx = -1;
+					if (_splitv2.length > 2) {
+						if (Std.parseInt(_splitv2[2]) != null) {
+							insIdx = Std.parseInt(_splitv2[2]);
+						}
+					}
+					if (insIdx < 0) {
+						insIdx = healthIconGroup.length;
+					}
+					var icn = new HealthIcon(_splitv2[1], _splitv2[0] == '1');
+					healthIconGroup.insert(insIdx, icn);
+
+				case '!REMOVE':
+					for (healthIcon in healthIconGroup.members) {
+						if (healthIcon.getCharacter() == _splitv2[1]) {
+							healthIconGroup.remove(healthIcon, true).destroy();
+							break;
+						}
+					}
+
+				case '!REMOVEAT':
+					var idx = Std.parseInt(_splitv2[1]);
+					if (idx == null) {
+						FlxG.log.warn('Bad value for !REMOVEAT.');
+						break;
+					}
+					healthIconGroup.remove(healthIconGroup.members[idx], true).destroy();
+
+				case _:
+					FlxG.log.warn('Unknown chatbox control command \"$value1\"".');
+				}
+				setOnHscripts('iconP1', iconP1);
+				setOnHscripts('iconP2', iconP2);
+				} while (false);
+
 			case 'Set Property':
 				var killMe:Array<String> = value1.split('.');
 				if(killMe.length > 1) {
@@ -4516,6 +5143,19 @@ class PlayState extends MusicBeatState
 				} else {
 					FunkinLua.setVarInArray(this, value1, value2);
 				}
+
+			case '_F4RPEXPERIMENTAL_GC_CONTROL':
+				#if cpp
+				if (ClientPrefs.controlGC) {
+					if (value1 == "1") {
+						changeGarbageCollectorState(true);
+						gcControlLastGameplayState = true;
+					} else if (value1 == "0") {
+						changeGarbageCollectorState(false);
+						gcControlLastGameplayState = false;
+					}
+				}
+				#end
 		}
 		callOnScripts('onEvent', [eventName, value1, value2]);
 	}
@@ -4634,6 +5274,34 @@ class PlayState extends MusicBeatState
 		moveCameraTwn();
 	}
 
+	public function setupPixelErasureShader(group:Int = 0, idx:Int = 0) {
+		// @Square789: shader stuff
+		var charList = switch (group) {
+			case 0: boyfriendMembers;
+			case 1: dadMembers;
+			case 2: gfMembers;
+			case _: null;
+		}
+		if (charList == null || idx >= charList.length || idx < 0) {
+			FlxG.log.warn("Invalid target for pixel erasure shader!");
+			return;
+		}
+
+		var char = charList[idx];
+
+		var pes = new AnotherFuckingOrganicPixelErasureShader();
+		pes.offset.value = [0.0, 0.0];
+		pes.pixel_health.value[0] = 1.0;
+		pes.more_void.value[0] = 0.0;
+		pes.always_pixelate.value[0] = true;
+		pes.pixel_dimensions.value = [1.0, 1.0];
+		char.shader = pes;
+		// This is great and couldn't go wrong. ever. possibly.
+		// especially not if bf is swapped out or anything hahah noooo
+		char.animation.callback = (_name, _fn, fi) -> {pes.uv_base.value = [char.frames.frames[fi].uv.x, char.frames.frames[fi].uv.y];};
+		pixelErasureShaders.push(pes);
+	}
+
 	function snapCamFollowToPos(x:Float, y:Float) {
 		curFollow = '';
 		cancelCameraTwn();
@@ -4708,6 +5376,7 @@ class PlayState extends MusicBeatState
 		FlxG.timeScale = 1;
 
 		if (!practiceMode && !cpuControlled) {
+			lowestDifficultyThisStoryRun = FlxMath.minInt(lowestDifficultyThisStoryRun, PlayState.storyDifficulty);
 			AchievementManager.notify(SONG_WON);
 			if (isStoryMode && storyPlaylist.length == 1) {
 				AchievementManager.notify(WEEK_WON);
@@ -5082,6 +5751,12 @@ class PlayState extends MusicBeatState
 						callOnScripts('onGhostTap', [key]);
 						if (canMiss) {
 							noteMissPress(key, [eventKey]);
+						}
+						if (recentMisses.length < 40) {
+							recentMisses.push(5.0);
+							for (chatbox in twitchChatboxes) {
+								chatbox.changeSpewerChance("mashing", 50);
+							}
 						}
 					}
 
@@ -5482,7 +6157,7 @@ class PlayState extends MusicBeatState
 							if (!inEditor) {
 								maxHealth -= .125;
 								doesGenericHurt = true;
-								GameOverSubState.selfAssignVariables(boyfriend.curCharacter, voidedHealth);
+								GameOverSubState.selfAssignVariables(SONG.player1, voidedHealth);
 							}
 					}
 
@@ -5669,6 +6344,13 @@ class PlayState extends MusicBeatState
 		#end
 
 		super.destroy();
+
+		#if cpp
+		if (ClientPrefs.controlGC) {
+			// trace("PlayState.destroy: reenabling GC");
+			cpp.vm.Gc.enable(true);
+		}
+		#end
 	}
 
 	public static function cancelMusicFadeTween() {
@@ -5706,6 +6388,10 @@ class PlayState extends MusicBeatState
 
 		if (lastBeatHit >= curBeat) {
 			return;
+		}
+
+		for (chatbox in twitchChatboxes) {
+			chatbox.generateMessage();
 		}
 
 		if (generatedMusic)
@@ -5818,7 +6504,7 @@ class PlayState extends MusicBeatState
 			for (i in playerStrums) {
 				strumLineNotes.add(i);
 			}
-			if (!opponentChart || ClientPrefs.opponentStrums) {
+			if (!opponentChart || !ClientPrefs.middleScroll) {
 				resetUnderlay(underlayPlayer, playerStrums);
 			}
 			#if !mobile
@@ -5849,7 +6535,7 @@ class PlayState extends MusicBeatState
 			for (i in playerStrums) {
 				strumLineNotes.add(i);
 			}
-			if (!ClientPrefs.underlayFull && (opponentChart || ClientPrefs.opponentStrums)) {
+			if (!ClientPrefs.underlayFull && (opponentChart || !ClientPrefs.middleScroll)) {
 				resetUnderlay(underlayOpponent, opponentStrums);
 			}
 			#if !mobile
