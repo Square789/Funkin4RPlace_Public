@@ -3,8 +3,12 @@
 An r/place mod for Friday Night Funkin'.
 
 > [!NOTE]
-> The official public repository for F4RP is here: https://github.com/Funkin4RPlace/Funkin4RPlace-Public
-> Due to enthusiastic coordination-minimizing parallel action, this repository (Formerly known as `Funkin4RPlace_Demo`) contains not only the demo, but also v1.0.0 of the mod (1.0.0) and a divergent commit history for auxiliary files on top. **However, it is considered outdated and archived. See above for the latest public version.**
+> **This repository is outdated. See here**: https://github.com/Funkin4RPlace/Funkin4RPlace-Public
+> 
+> Only the demo used to be in this repository (was formerly named `Funkin4RPlace_Demo`), but, due to enthusiastic coordination-minimizing parallel action, it now also contains v1.0.0 of the mod and a divergent commit history for auxiliary files on top. Whoops!
+> 
+> Regardless, it has served well.
+> The full version, the demo and any future versions can be found in the repository above.
 
 > [!NOTE]
 > This repository contains both the demo and the 1.0.0 release version of F4RP, all in a big unwieldy ball of data.
