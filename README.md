@@ -2,11 +2,15 @@
 # Funkin' 4 r/place
 An r/place mod for Friday Night Funkin'.
 
+> [!NOTE]
+> This repository contains both the demo and the release version of F4RP, all in a big unwieldy ball of data.
+> Simply check out the commit history at the relevant version tags to get where you want. (Probably.)
+
+> [!CAUTION]
+> The instructions below are fairly dated. You will likely run into problems if you wanted to follow them.
+
 ## Download & Play
-(there are no downloads yet so if you see this then SHOO)
-* [itch.io](https://funkin4rplace.itch.io/funkin4rplace)
-* [GameBanana](#)
-* [GameJolt](https://gamejolt.com/games/funkin4rplace/707548)
+* [GameBanana](https://gamebanana.com/mods/444552)
 
 ## Building
 You must have [the most up-to-date version of Haxe](https://haxe.org/download/) (*not* Haxe 4.1.5!)
