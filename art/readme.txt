@@ -9,7 +9,7 @@ Play / Donate to Friday Night Funkin' on itch.io: https://ninja-muffin24.itch.io
 Play Funkin' 4 r/place: https://funkin4rplace.github.io
 
 The source code:
-Mod - https://github.com/Funkin4RPlace/Funkin4RPlace
+Mod - https://github.com/Square789/Funkin4RPlace_Public
 Engine fork - https://github.com/Starmapo/FNF-PsychEngine-Extra
 Engine - https://github.com/ShadowMario/FNF-PsychEngine
 Original game - https://github.com/ninjamuffin99/Funkin
